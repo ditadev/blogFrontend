@@ -16,6 +16,7 @@ export class SignInComponent implements OnInit, OnDestroy {
   message?: string;
   toast:boolean=false;
   code?:number;
+  jwt?:string;
 
   constructor(
     private apiService: ApiService,
@@ -28,12 +29,16 @@ export class SignInComponent implements OnInit, OnDestroy {
 
   login():void{
     this.subscription=this.apiService.login(this._login).subscribe(
-      ({ message, code }) => {
-        this.message = message;
-        console.log(message);
-        if (code === 0) {
+      response => {
+        this.message = response.message;
+        this.code = response.code;
+        this.jwt=response.data.accessToken;
+        console.log(this.message);
+        console.log(this.code);
+        console.log(this.jwt);
+        if (this.code == 0) {
           this.toast = !this.toast;
-          this.location.go("/login");
+          this.location.go("/feeds");
         }
       }
     );

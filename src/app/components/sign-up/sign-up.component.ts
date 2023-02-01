@@ -26,19 +26,20 @@ export class SignUpComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.author = {} as Author;
   }
-  
-  register(): void {
+
+  register(): any {
     this.subscription = this.apiService.registerAuthor(this.author).subscribe(
-      ({ message, code }) => {
-        this.message = message;
-        console.log(message);
-        if (code === 0) {
-          this.toast = !this.toast;
-          this.location.go("/login");
-        }
-      }
-    );
+      response => {this.message=response.message;
+        console.log(this.message);
+        this.code=response.code;
+        console.log(this.code);
+        if(this.code==0){
+          this.toast=!this.toast;
+          this.location.go("/verification");
+          }
+      });
   }
+
 
 toaster(){
   this.toast = !this.toast;
