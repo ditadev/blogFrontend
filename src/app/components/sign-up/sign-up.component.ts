@@ -15,6 +15,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   subscription?: Subscription;
   message?: string;
   toast:boolean=false;
+  code?:number;
 
   constructor(
     private apiService: ApiService,
@@ -25,16 +26,19 @@ export class SignUpComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.author = {} as Author;
   }
-
-  register(): any {
+  
+  register(): void {
     this.subscription = this.apiService.registerAuthor(this.author).subscribe(
-      response => {this.message=response.message
-        console.log(this.message)
-      });
-      this.location.go("/verification");
-      this.toast=!this.toast;
+      ({ message, code }) => {
+        this.message = message;
+        console.log(message);
+        if (code === 0) {
+          this.toast = !this.toast;
+          this.location.go("/login");
+        }
+      }
+    );
   }
-
 
 toaster(){
   this.toast = !this.toast;

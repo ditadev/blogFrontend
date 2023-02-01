@@ -15,6 +15,7 @@ _email=this.route.snapshot.paramMap.get('emailAddress')!;
 _token=this.route.snapshot.paramMap.get('token')!;
   subscription?: Subscription;
   message?: string;
+  code?:number;
   toast:boolean=false;
 
   constructor(
@@ -24,11 +25,16 @@ _token=this.route.snapshot.paramMap.get('token')!;
   ) {}
 
   verifyUser():any{
-    this.subscription = this.apiService.verifyAuthor(this._email,this._token).subscribe( response => {this.message=response.message
+    this.subscription = this.apiService.verifyAuthor(this._email,this._token).subscribe( response => {this.message=response.message;
       console.log(this.message);
+      this.code=response.code;
+            console.log(this.code);
+            if(this.code==0){
+              this.toast=!this.toast;
+              this.location.go("/login");
+              }
     });
-    this.toast=!this.toast;
-    this.location.go("");
+
     }
 
     toaster(){
