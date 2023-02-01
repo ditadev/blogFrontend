@@ -9,6 +9,7 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { VerificationComponent } from './components/verification/verification.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
     LoadingComponent,
     LandingPageComponent,
     SignInComponent,
-    SignUpComponent
+    SignUpComponent,
+    VerificationComponent
   ],
   imports: [
     BrowserModule,
