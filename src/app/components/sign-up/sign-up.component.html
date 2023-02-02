@@ -4,12 +4,12 @@
             src="https://images.unsplash.com/photo-1520333789090-1afc82db536a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2102&q=80"
             alt="">
     </div>
-    <div class="flex flex-1 flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
+    <div class="flex flex-1 flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24 -mt-6">
         <div class="mx-auto w-full max-w-sm lg:w-96">
             <div>
                 <img routerLink="" class="mx-auto h-40 w-40"
                     src="./assets/img/Lovepik_com-400262015-green-plants-hand-painted-leaves.png" alt="Your Company">
-                <h2 class="mt-6 text-3xl font-bold tracking-tight text-gray-900">Register for an account</h2>
+                <h2 class="-mt-8 text-3xl font-bold tracking-tight text-gray-900">Register for an account</h2>
                 <p class="mt-2 text-sm text-gray-600">
                     Or
                     <button routerLink="/login" class="font-medium text-indigo-600 hover:text-indigo-500">Sign
@@ -23,47 +23,52 @@
                         <div>
                             <label for="firstname" class="block text-sm font-medium text-gray-700">First Name</label>
                             <div class="mt-1">
-                                <input [(ngModel)]="author.firstName" id="firstname" name="firstName" type="text"  required
+                                <input [(ngModel)]="author.firstName" id="firstname" name="firstName" type="text"
+                                    required
                                     class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                             </div>
                         </div>
                         <div>
                             <label for="lastname" class="block text-sm font-medium text-gray-700">Last Name</label>
                             <div class="mt-1">
-                                <input [(ngModel)]="author.lastName"  id="lastname" name="lastName" type="text"  
+                                <input [(ngModel)]="author.lastName" id="lastname" name="lastName" type="text"
                                     class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                             </div>
                         </div>
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
                             <div class="mt-1">
-                                <input [(ngModel)]="author.emailAddress"  id="email" name="email" type="email" autocomplete="email" required
+                                <input [(ngModel)]="author.emailAddress" id="email" name="email" type="email"
+                                    autocomplete="email" required
                                     class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                             </div>
                         </div>
                         <div>
                             <label for="username" class="block text-sm font-medium text-gray-700">Username </label>
                             <div class="mt-1">
-                                <input [(ngModel)]="author.userName"  id="username" name="userName" type="text"  required
+                                <input [(ngModel)]="author.userName" id="username" name="userName" type="text" required
                                     class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                             </div>
                         </div>
                         <div class="space-y-1">
                             <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                             <div class="mt-1">
-                                <input [(ngModel)]="author.password"  id="password" name="password" type="password" autocomplete="current-password"
-                                    required
+                                <input [(ngModel)]="author.password" id="password" name="password" type="password"
+                                    autocomplete="current-password" required
                                     class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                    <p *ngIf="author.password.length<8" class="text-xs text-red-700 text-right italic font-extralight
+                                    ">(At least 8 characters)</p>
                             </div>
                         </div>
                         <div>
                             <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
                             <div class="mt-1">
-                                <input [(ngModel)]="author.description"  id="description" name="description" type="text" required
-                                    class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-6 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                <textarea [(ngModel)]="author.description" id="description" name="description" type="text"
+                                required class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-4 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"></textarea>
+                                <p *ngIf="author.description.length<100" class="text-xs text-red-700 text-right italic font-extralight
+                                ">(At least 100 characters)</p>
                             </div>
                         </div>
-
                         <div>
                             <button (click)="register()" type="submit"
                                 class="block w-full rounded-md bg-gradient-to-r from-teal-500 to-cyan-600 py-3 px-4 font-medium text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900">Register
@@ -71,17 +76,35 @@
                         </div>
                     </form>
                     <div *ngIf="toast">
-                    <div *ngIf="code==0" id="toast-success" class="flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
-                        <div id="toast-success" class="flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
-                            <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
-                                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                                <span class="sr-only">Check icon</span>
+                        <div *ngIf="code==0" id="toast-success"
+                            class="flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
+                            role="alert">
+                            <div id="toast-success"
+                                class="flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
+                                role="alert">
+                                <div
+                                    class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
+                                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span class="sr-only">Check icon</span>
+                                </div>
+                                <div class="ml-3 text-sm font-normal">{{message}}</div>
+                                <button routerLink="/verification" (click)="toaster()" type="button"
+                                    class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+                                    data-dismiss-target="#toast-success" aria-label="Close">
+                                    <span class="sr-only">Close</span>
+                                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                </button>
                             </div>
-                            <div class="ml-3 text-sm font-normal">{{message}}</div>
-                            <button routerLink="/verification" (click)="toaster()" type="button" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-success" aria-label="Close">
-                                <span class="sr-only">Close</span>
-                                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                            </button>
                         </div>
                     </div>
                 </div>
