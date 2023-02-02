@@ -1,1 +1,4 @@
-<p>feeds works!</p>
+<p *ngIf="isUserAuthenticated()">feeds works!</p>
+<p *ngIf="!isUserAuthenticated()">feeds no works!</p>
+<p *ngIf="isUserAuthenticated()">{{name}}</p>
+<p (click)="isUserAuthenticated()">click me</p>

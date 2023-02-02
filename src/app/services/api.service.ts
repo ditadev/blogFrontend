@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, throwError,retry } from 'rxjs';
+import { AuthorResponse } from '../models/author-response';
 
 
 @Injectable({
@@ -14,9 +15,6 @@ export class ApiService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
   
-
-
-
   constructor(private http:HttpClient) { }
 
   public registerAuthor(author: any): Observable<any> {
@@ -37,6 +35,11 @@ export class ApiService {
 
   public resetPassword(author: any):Observable<any>{
     return this.http.patch(`${this.authorUrl}/ResetPassword`, author, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
+
+  public getUser(id: any):Observable<any>{
+    const url = `${this.authorUrl}/GetAuthorById?id=${id}`;
+    return this.http.get<AuthorResponse>(url).pipe(retry(1), catchError(this.handleError));
   }
 
   handleError(error: any) {
