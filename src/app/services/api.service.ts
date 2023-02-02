@@ -13,6 +13,9 @@ export class ApiService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
+  
+
+
 
   constructor(private http:HttpClient) { }
 
@@ -24,9 +27,18 @@ export class ApiService {
     return this.http.patch(`${this.authorUrl}/VerifyUser?emailAddress=${email}&token=${token}`, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
-    public login(author: any): Observable<any> {
+   public login(author: any): Observable<any> {
     return this.http.post(`${this.authorUrl}/Login`, author, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
+
+  public forgotPassword(email: string): Observable<any> {
+    return this.http.post(`${this.authorUrl}/ForgotPassword?emailAddress=${email}`, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
+
+  public resetPassword(author: any):Observable<any>{
+    return this.http.patch(`${this.authorUrl}/ResetPassword`, author, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
+
   handleError(error: any) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { ResetPassword } from 'src/app/models/resetPassword';
 
@@ -20,8 +20,7 @@ export class ResetpasswordComponent implements  OnDestroy {
 
   constructor(
     private apiService: ApiService,
-    private route: ActivatedRoute,
-    private location: Location,
+    private router: Router
   ) {}
 
 
@@ -36,7 +35,7 @@ export class ResetpasswordComponent implements  OnDestroy {
             console.log(this.code);
             if(this.code==0){
               this.toast=!this.toast;
-              this.location.go("/login");
+              this.router.navigate(["login"]);
               }
     });
   }

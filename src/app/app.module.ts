@@ -10,6 +10,9 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { VerificationComponent } from './components/verification/verification.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { FeedsComponent } from './components/feeds/feeds.component';
+import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { VerificationComponent } from './components/verification/verification.co
     LandingPageComponent,
     SignInComponent,
     SignUpComponent,
-    VerificationComponent
+    VerificationComponent,
+    ForgotPasswordComponent,
+    FeedsComponent,
+    ResetpasswordComponent
   ],
   imports: [
     BrowserModule,
