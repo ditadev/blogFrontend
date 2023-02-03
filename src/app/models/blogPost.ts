@@ -6,8 +6,8 @@ public title!: string;
 public summary!: string;
 public body!: string;
 public tags!: string;
-category!: {
+public category!: {
   categoryName: string
 };
-dateCreated!: Date;
+public dateCreated!: Date;
 }

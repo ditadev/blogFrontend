@@ -11,7 +11,6 @@ import { BlogPost } from 'src/app/models/blogPost';
 export class LandingPageComponent implements OnDestroy  {
 
   subscription?: Subscription;
-
   _article1!:BlogPost;
   _article2!:BlogPost;
   _article3!:BlogPost;
@@ -28,7 +27,6 @@ export class LandingPageComponent implements OnDestroy  {
         this._article1 = response.data[0];
         this._article2 = response.data[1];
         this._article3 = response.data[2];
-        console.log(this._article1,this._article2,this._article3)
     });
   }
 

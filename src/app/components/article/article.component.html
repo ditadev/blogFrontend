@@ -1,6 +1,6 @@
 <app-nav-bar></app-nav-bar>
-<div *ngFor="let article of articles" class="bg-black">
-    <div *ngIf="article.postId==postId" class="relative overflow-hidden">
+<div *ngFor="let article of articles" class="bg-black"  >
+    <div *ngIf="article.postId==postId" class="relative overflow-hidden" >
         <div class="bg-gray-900 pt-10 sm:pt-16 lg:overflow-hidden lg:pt-8 lg:pb-14">
             <div class="mx-auto -mt-20 max-w-7xl lg:px-8">
                 <div  class="relative overflow-hidden rounded-2xl bg-white py-16">
@@ -39,16 +39,17 @@
                             </h1>
                             <figure>
                                 <img class="w-full rounded-lg"
-                                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=facearea&w=1310&h=873&q=80&facepad=3"
+                                src="http://localhost:5259/static/images/{{article.coverImagePath}}"
                                     alt="" width="1310" height="873">
-                                    <figcaption>{{article.authorsName}}</figcaption>
-                                <figcaption>{{article.tags}}</figcaption>
-                                <figcaption>{{article.category.categoryName}}</figcaption>
-                                <time>{{article.dateCreated | date : 'dd/MM/yyyy hh:mm a'}}</time>
+                                    <br/>
+                                    <figcaption class="text-sm font-medium text-black">By: {{article.authorsName}}</figcaption>
+                                    <figcaption class="text-sm font-medium text-black">{{article.category.categoryName}}</figcaption>
+                                    <figcaption class="text-sm italic font-medium text-black">{{article.tags}}</figcaption>
+                                <time class="text-sm font-medium text-black">{{article.dateCreated | date : 'dd/MM/yyyy hh:mm a'}}</time>
                             </figure>
-                            <p class="mt-8 text-xl leading-8 text-gray-500">{{article.summary}}</p>
+                            <p class="mt-8 text-xl font-semibold text-center leading-8 text-black">{{article.summary}}</p>
                         </div>
-                        <div class="prose prose-lg prose-indigo mx-auto mt-6 text-gray-500">
+                        <div class="prose prose-lg prose-indigo mx-auto mt-6 text-gray-800">
                             <p>{{article.body}}</p>
                         </div>
                     </div>
