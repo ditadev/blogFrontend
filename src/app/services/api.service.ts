@@ -44,15 +44,6 @@ export class ApiService {
     return this.http.get<AuthorResponse>(url).pipe(retry(1), catchError(this.handleError));
   }
 
-  // public getArticles(): Observable<Article[]> {
-  //   const url = `${this.articleUrl}/GetAllPosts`;
-  //   return this.http.get<{data: Article[]}>(url).pipe(
-  //     retry(1), 
-  //     catchError(this.handleError),
-  //     map(res => res.data)
-  //   );
-  // }
-
   public getArticles(): Observable<any> {
     const url = `${this.articleUrl}/GetAllPosts`;
     return this.http.get<Article>(url).pipe(retry(1), catchError(this.handleError));
