@@ -1,8 +1,8 @@
 <app-nav-bar></app-nav-bar>
-<div class="bg-black">
+<div *ngIf="isUserAuthenticated()" class="bg-black">
     <div *ngFor="let article of articles" class="bg-black rounded-md pt-2 lg:py-6">
         <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
-            <div
+            <div routerLink="/article/{{article.postId}}"
                 class="relative overflow-hidden rounded-xl bg-gradient-to-r from-teal-500 to-cyan-600 py-3 px-6 font-medium text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900 py-24 px-8 shadow-2xl lg:grid lg:grid-cols-2 lg:gap-x-8 lg:px-16">
                 <div class="absolute inset-0 opacity-50 mix-blend-multiply saturate-0 filter">
                     <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80"
@@ -10,14 +10,14 @@
                 </div>
                 <div class="relative lg:col-span-1">
                     <blockquote class="mt-6 text-white">
-                        <p class="text-xl font-medium sm:text-2xl">{{article.summary}}
+                        <p class=" text-xl font-medium sm:text-2xl">{{article.title}}
                         </p>
                         <footer class="mt-6">
                             <p class="flex flex-col font-medium">
-                                <span>{{article.title}}</span>
+                                <span>{{article.summary}}</span>
                                 <span>{{article.authorsName}}</span>
+                                <span>Tags: {{article.tags}}</span>
                                 <span>Category: {{article.category.categoryName}}</span>
-                                <span class="italics">Tags: {{article.tags}}</span>
                                 <time>{{article.dateCreated | date : 'dd/MM/yyyy hh:mm a'}}</time>
                             </p>
                         </footer>
@@ -27,3 +27,6 @@
         </div>
     </div>
 </div>
+
+
+

@@ -2,15 +2,15 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ApiService } from 'src/app/services/api.service';
 import { Subscription } from 'rxjs';
-import { Article } from 'src/app/models/article';
 import { BlogPost } from 'src/app/models/blogPost';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-feeds',
   templateUrl: './feeds.component.html',
   styleUrls: ['./feeds.component.css']
 })
-export class FeedsComponent implements OnDestroy  {
+export class FeedsComponent implements OnInit, OnDestroy  {
 
   id!:number;
   name!:string;
@@ -19,7 +19,8 @@ export class FeedsComponent implements OnDestroy  {
 
   constructor(
     private jwtHelper: JwtHelperService, 
-    private apiService:ApiService
+    private apiService:ApiService,
+    private router: Router
   ) {}
 
   ngOnInit(){
@@ -37,6 +38,7 @@ export class FeedsComponent implements OnDestroy  {
       return true;
     }
     else {
+      this.router.navigate(["login"]);
       return false;
     }
   }

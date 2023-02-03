@@ -1,4 +1,5 @@
 export class BlogPost {
+public postId!: number;
 public authorsName!: string;
 public coverImagePath!: string;
 public title!: string;

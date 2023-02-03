@@ -49,6 +49,16 @@ export class ApiService {
     return this.http.get<Article>(url).pipe(retry(1), catchError(this.handleError));
     }
 
+    public getRecentArticles(): Observable<any> {
+      const url = `${this.articleUrl}/GetRecentPost`;
+      return this.http.get<Article>(url).pipe(retry(1), catchError(this.handleError));
+      }
+
+    public getArticle(postId:any):Observable<any>{
+      const url = `${this.articleUrl}/GetPostById/${postId}`;
+      return this.http.get<Article>(url).pipe(retry(1), catchError(this.handleError));
+    }
+
   handleError(error: any) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

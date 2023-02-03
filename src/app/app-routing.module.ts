@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ArticleComponent } from './components/article/article.component';
 import { FeedsComponent } from './components/feeds/feeds.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
@@ -17,7 +18,7 @@ const routes: Routes = [
   {path: 'forgotpassword', component: ForgotPasswordComponent },
   {path: 'resetpassword', component: ResetpasswordComponent },
   {path: 'feeds', component: FeedsComponent },
-  {path: 'article', component: FeedsComponent },
+  {path: 'article/:postId', component: ArticleComponent },
   {path: '**', component: NotFoundComponent },
 ];
 
