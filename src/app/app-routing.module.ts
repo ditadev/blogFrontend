@@ -17,6 +17,7 @@ const routes: Routes = [
   {path: 'forgotpassword', component: ForgotPasswordComponent },
   {path: 'resetpassword', component: ResetpasswordComponent },
   {path: 'feeds', component: FeedsComponent },
+  {path: 'article', component: FeedsComponent },
   {path: '**', component: NotFoundComponent },
 ];
 

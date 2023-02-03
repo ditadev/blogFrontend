@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, Observable, throwError,retry } from 'rxjs';
+import { catchError, Observable, throwError,retry, map } from 'rxjs';
 import { AuthorResponse } from '../models/author-response';
+import { Article } from '../models/article';
 
 
 @Injectable({
@@ -10,6 +11,7 @@ import { AuthorResponse } from '../models/author-response';
 export class ApiService {
 
   private authorUrl = `http://localhost:5259/api/Author`;
+  private articleUrl = `http://localhost:5259/api/Blog`;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -41,6 +43,20 @@ export class ApiService {
     const url = `${this.authorUrl}/GetAuthorById?id=${id}`;
     return this.http.get<AuthorResponse>(url).pipe(retry(1), catchError(this.handleError));
   }
+
+  // public getArticles(): Observable<Article[]> {
+  //   const url = `${this.articleUrl}/GetAllPosts`;
+  //   return this.http.get<{data: Article[]}>(url).pipe(
+  //     retry(1), 
+  //     catchError(this.handleError),
+  //     map(res => res.data)
+  //   );
+  // }
+
+  public getArticles(): Observable<any> {
+    const url = `${this.articleUrl}/GetAllPosts`;
+    return this.http.get<Article>(url).pipe(retry(1), catchError(this.handleError));
+    }
 
   handleError(error: any) {
     let errorMessage = '';

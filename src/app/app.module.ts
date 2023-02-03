@@ -17,6 +17,8 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { FeedsComponent } from './components/feeds/feeds.component';
 import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { ArticleComponent } from './components/article/article.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -33,7 +35,9 @@ export function tokenGetter() {
     ForgotPasswordComponent,
     FeedsComponent,
     ResetpasswordComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    NavBarComponent,
+    ArticleComponent
   ],
   imports: [
     BrowserModule,
