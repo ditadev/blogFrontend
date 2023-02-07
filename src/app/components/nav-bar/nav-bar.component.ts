@@ -14,6 +14,7 @@ export class NavBarComponent implements OnInit, OnDestroy{
   subscription?: Subscription;
   id!:number;
   name!:string;
+  _showMore:boolean=false;
 
   constructor(
     private jwtHelper: JwtHelperService, 
@@ -30,12 +31,16 @@ export class NavBarComponent implements OnInit, OnDestroy{
     if (token) {
       this.id = this.jwtHelper.decodeToken(token).sub;
     } else {
-      console.error("No token found in local storage.");
+      this.router.navigate(["login"]);
     }    
     this.subscription=this.apiService.getUser(this.id).subscribe(response=>{
       this.name=response.data.username;
       console.log(this.name);
     });
+  }
+
+  showMore(){
+    this._showMore=!this._showMore;
   }
 
   isUserAuthenticated() {

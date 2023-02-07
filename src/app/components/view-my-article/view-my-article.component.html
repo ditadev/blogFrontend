@@ -1,0 +1,127 @@
+<app-nav-bar></app-nav-bar>
+<div *ngFor="let article of articles" class="bg-black">
+    <div *ngIf="article.postId==postId" class="relative overflow-hidden">
+        <div *ngIf="!_showMore" class="bg-gray-900 h pt-10 sm:pt-16 lg:overflow-hidden lg:pt-8 lg:pb-14">
+            <div class="mx-auto -mt-20 max-w-7xl lg:px-8">
+                <div class="relative overflow-hidden rounded-2xl bg-white py-16">
+                    <div class="hidden lg:absolute lg:inset-y-0 lg:block lg:h-full lg:w-full lg:[overflow-anchor:none]">
+                        <div class="relative mx-auto h-full max-w-prose text-lg" aria-hidden="true">
+                            <svg class="absolute top-12 left-full translate-x-32 transform" width="404" height="384"
+                                fill="none" viewBox="0 0 404 384">
+                                <defs>
+                                    <pattern id="74b3fd99-0a6f-4271-bef2-e80eeafdf357" x="0" y="0" width="20"
+                                        height="20" patternUnits="userSpaceOnUse">
+                                        <rect x="0" y="0" width="4" height="4" class="text-gray-200"
+                                            fill="currentColor" />
+                                    </pattern>
+                                </defs>
+                                <rect width="404" height="384" fill="url(#74b3fd99-0a6f-4271-bef2-e80eeafdf357)" />
+                            </svg>
+                            <svg class="absolute top-1/2 right-full -translate-y-1/2 -translate-x-32 transform"
+                                width="404" height="384" fill="none" viewBox="0 0 404 384">
+                                <defs>
+                                    <pattern id="f210dbf6-a58d-4871-961e-36d5016a0f49" x="0" y="0" width="20"
+                                        height="20" patternUnits="userSpaceOnUse">
+                                        <rect x="0" y="0" width="4" height="4" class="text-gray-200"
+                                            fill="currentColor" />
+                                    </pattern>
+                                </defs>
+                                <rect width="404" height="384" fill="url(#f210dbf6-a58d-4871-961e-36d5016a0f49)" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="relative px-6 lg:px-8">
+                        <div class="mx-auto max-w-prose text-lg">
+                            <h1>
+                                <span
+                                    class="block bg-gradient-to-r from-teal-500 to-indigo-700 bg-clip-text text-transparent sm:pb-5 mt-2 mb-2  text-center text-3xl font-bold leading-8 tracking-tight text-gray-800 sm:text-2xl">Introducing</span>
+                                <span
+                                    class="block bg-gradient-to-r from-teal-500 to-cyan-600 bg-clip-text text-transparent sm:pb-5 mt-2 mb-2  text-center text-3xl font-bold leading-8 tracking-tight text-gray-800 sm:text-4xl">{{article.title}}</span>
+                            </h1>
+                            <figure>
+                                <img class="w-full rounded-lg"
+                                    src="http://localhost:5259/static/images/{{article.coverImagePath}}" alt=""
+                                    width="1310" height="873">
+                                <br />
+                                <figcaption class="text-sm font-medium text-black">By: {{article.authorsName}}
+                                </figcaption>
+                                <figcaption class="text-sm font-medium text-black">{{article.category.categoryName}}
+                                </figcaption>
+                                <figcaption class="text-sm italic font-medium text-black">{{article.tags}}</figcaption>
+                                <time class="text-sm font-medium text-black">{{article.dateCreated | date : 'dd/MM/yyyy
+                                    hh:mm a'}}</time>
+                            </figure>
+                            <p class="mt-8 text-xl font-semibold text-center leading-8 text-black">{{article.summary}}
+                            </p>
+                        </div>
+                        <div class="prose prose-lg prose-indigo mx-auto mt-6 text-gray-800">
+                            <p>{{article.body}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div>
+            <div style="z-index:9;" *ngIf="_showMore" aria-orientation="horizontal" aria-labelledby="confirm-delete"
+                tabindex="-1" class=" flex items-center justify-center h-screen">
+                <div>
+                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <div class="p-6 text-center">
+                            <svg aria-hidden="true" class="mx-auto mb-4 text-gray-400 w-14 h-14 dark:text-gray-200"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you
+                                want to delete this article?</h3>
+                            <button (click)="deleteArticle()" data-modal-hide="popup-modal" type="button"
+                                class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                                Yes
+                            </button>
+                            <button (click)="confirmDelete()" data-modal-hide="popup-modal" type="button"
+                                class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div *ngIf="!_showMore"
+                class="-mt-px mb-4 rounded-lg flex divide-x divide-gray-200 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2  focus:ring-offset-gray-900">
+                <div routerLink="/edit-article/{{article.postId}}" class="flex w-0 flex-1">
+                    <a
+                        class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
+                        <svg class="-ml-1 mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
+                            stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125">
+                            </path>
+                        </svg>
+                        <span class="ml-3">Edit</span>
+                    </a>
+                </div>
+                <div (click)="confirmDelete()" id="confirm-delete" aria-expanded="false" aria-haspopup="true"
+                    class="-ml-px rounded-lg flex w-0 flex-1 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900">
+                    <a
+                        class="relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
+                        <svg class="-ml-1 mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
+                            stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0">
+                            </path>
+                        </svg>
+                        <span class="ml-3">Delete</span>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

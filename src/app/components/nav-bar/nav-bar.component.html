@@ -1,25 +1,96 @@
-<div class="bg-gradient-to-r from-teal-500 to-cyan-900 text-white shadow  focus:outline-none focus:ring-3 focus:ring-cyan-900 focus:ring-offset-4 focus:ring-offset-gray-900 pt-4">
-    <nav class="relative mx-auto flex max-w-7xl items-center justify-between px-6" aria-label="Global">
-        <div class="flex flex-1 items-center">
-            <div class="flex w-full items-center justify-between md:w-auto">
-                <a routerLink="/feeds">
-                    <span class="sr-only">Your Company</span>
-                    <img routerLink="/feeds" class="mx-auto h-20 w-30 "
-                        src="./assets/img/Lovepik_com-400262015-green-plants-hand-painted-leaves.png"
-                        alt="Writer's Meet Logo">
-                </a>
+<div
+    class="lg:flex lg:items-center lg:justify-between bg-gradient-to-r from-teal-500 to-cyan-900 text-white shadow  focus:outline-none focus:ring-3 focus:ring-cyan-900 focus:ring-offset-4 focus:ring-offset-gray-900 -pt-4 pb-2">
+    <div class="min-w-0 flex-1">
+        <div class="px-6 -pb-8 -pt-8 flex w-full items-center justify-between md:w-auto">
+            <a routerLink="/feeds">
+                <span class="sr-only">Writer's Meet</span>
+                <img routerLink="/feeds" class="mx-auto h-30 w-40 "
+                    src="./assets/img/Lovepik_com-400262015-green-plants-hand-painted-leaves.png"
+                    alt="Writer's Meet Logo">
+            </a>
+        </div>
+        <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
+        </div>
+    </div>
+    <div *ngIf="isUserAuthenticated()"  class="-mt-5 flex lg:mt-0 lg:ml-4">
+        <span class="hidden sm:block">
+            <button (click)="logOut()" type="button"
+                class="inline-flex items-center rounded-md border border-gray-300 bg-white mr-2 px-4 py-2 text-sm font-medium text-gray-700 shadow-sm  hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                <!-- Heroicon name: mini/pencil -->
+                <svg class="-ml-1 mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none" stroke="currentColor"
+                    stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1012.728 0M12 3v9">
+                    </path>
+                </svg>
+                LogOut
+            </button>
+        </span>
+
+        <span class="hidden sm:block">
+            <button routerLink="/my-article" type="button"
+                class="inline-flex items-center rounded-md border border-gray-300 bg-white -mr-1 px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                <!-- Heroicon name: mini/pencil -->
+                <svg class="-ml-1 mr-2 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                    fill="currentColor" aria-hidden="true">
+                    <path
+                        d="M2.695 14.763l-1.262 3.154a.5.5 0 00.65.65l3.155-1.262a4 4 0 001.343-.885L17.5 5.5a2.121 2.121 0 00-3-3L3.58 13.42a4 4 0 00-.885 1.343z" />
+                </svg>
+                My Articles
+            </button>
+        </span>
+
+        <span class="ml-3 hidden sm:block">
+            <button type="button"
+                class="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                <!-- Heroicon name: mini/link -->
+                <svg class="-ml-1 mr-2 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                    fill="currentColor" aria-hidden="true">
+                    <path
+                        d="M12.232 4.232a2.5 2.5 0 013.536 3.536l-1.225 1.224a.75.75 0 001.061 1.06l1.224-1.224a4 4 0 00-5.656-5.656l-3 3a4 4 0 00.225 5.865.75.75 0 00.977-1.138 2.5 2.5 0 01-.142-3.667l3-3z" />
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z">
+                    </path>
+                </svg>
+                Profile
+            </button>
+        </span>
+
+        <span class="sm:ml-3">
+            <button type="button"
+                class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 mr-3 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900">
+                <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                    fill="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10">
+                    </path>
+
+                </svg>
+                Publish
+            </button>
+        </span>
+
+        <div class="relative ml-3 sm:hidden">
+            <button (click)="showMore()" type="button"
+                class="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                id="mobile-menu-button" aria-expanded="false" aria-haspopup="true">
+                More
+                <svg class="-mr-1 ml-2 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                    fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd"
+                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                        clip-rule="evenodd" />
+                </svg>
+            </button>
+
+            <div *ngIf="_showMore" class="absolute  right-0 z-10 mt-2 -mr-1 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                role="menu" aria-orientation="vertical" aria-labelledby="mobile-menu-button" tabindex="-1">
+                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                    id="mobile-menu-item-1">Profile</a>
+                <a routerLink="/my-article" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                    id="mobile-menu-item-0">My Articles</a>
+                <a (click)="logOut()" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                    id="mobile-menu-item-1">LogOut</a>
             </div>
         </div>
-        <span class="md:flex md:items-center md:space-x-6 text-white text-center pr-2 text-sm font-semibold text-semibold ">{{name}} </span>
-        <div class=" md:flex md:items-center md:space-x-6">
-            <svg (click)="logOut()" class="h-9 item-center w-9 pt-2 pb-2 rounded-md bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900"
-                data-darkreader-inline-stroke="" fill="none" stroke="currentColor" stroke-width="1.5"
-                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1012.728 0M12 3v9"></path>
-            </svg>
-           
-        </div>
-
-    </nav>
+    </div>
 </div>
-

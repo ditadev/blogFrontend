@@ -54,9 +54,27 @@ export class ApiService {
       return this.http.get<Article>(url).pipe(retry(1), catchError(this.handleError));
       }
 
+      public getArticlesByAuthor(id:any): Observable<any> {
+        const url = `${this.articleUrl}/GetPostByAuthor/${id}`;
+        return this.http.get<Article>(url).pipe(retry(1), catchError(this.handleError));
+        }
+
     public getArticle(postId:any):Observable<any>{
       const url = `${this.articleUrl}/GetPostById/${postId}`;
       return this.http.get<Article>(url).pipe(retry(1), catchError(this.handleError));
+    }
+
+    public updateArticle(postId:any, article:any):Observable<any>{
+      const url = `${this.articleUrl}/UpdatePost?id=${postId}`;
+      return this.http.patch(url,article,this.httpOptions).pipe(retry(1), catchError(this.handleError));
+    }
+
+    deleteArticle(postId: any): Observable<any> {
+      const url = `${this.articleUrl}/DeletePost/${postId}`;
+      return this.http.delete<any>(url).pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
     }
 
   handleError(error: any) {
@@ -68,8 +86,8 @@ export class ApiService {
       // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    window.alert(errorMessage);
     return throwError(() => {
+      console.log(errorMessage);
       return errorMessage;
     });
   }
