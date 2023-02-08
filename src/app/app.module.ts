@@ -22,6 +22,7 @@ import { ArticleComponent } from './components/article/article.component';
 import { MyArticlesComponent } from './components/my-articles/my-articles.component';
 import { ViewMyArticleComponent } from './components/view-my-article/view-my-article.component';
 import { EditArticleComponent } from './components/edit-article/edit-article.component';
+import { NewArticleComponent } from './components/new-article/new-article.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -43,7 +44,8 @@ export function tokenGetter() {
     ArticleComponent,
     MyArticlesComponent,
     ViewMyArticleComponent,
-    EditArticleComponent
+    EditArticleComponent,
+    NewArticleComponent
   ],
   imports: [
     BrowserModule,

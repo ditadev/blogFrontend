@@ -14,10 +14,9 @@ export class EditArticleComponent implements OnInit, OnDestroy{
 
   subscription?: Subscription;
   _postId = this.route.snapshot.paramMap.get('postId')!;
-  articles!: BlogPost[] ;
   postId:number=parseInt(this._postId);
   _showMore:boolean=false;
-_article!:BlogPost;
+ _article!:BlogPost;
 
   constructor(
     private apiService: ApiService,
@@ -27,33 +26,38 @@ _article!:BlogPost;
   ) {}
 
   ngOnInit(): void {
-    this.getArticles(); 
+    this.getArticle(); 
     console.log("This post id "+this.postId);
   }
 
   updateArticle(){
-    this.subscription =this.apiService.updateArticle(this.articles.find((obj)=>{return obj.postId===this.postId}),this._article).subscribe(response => {
+    this.subscription =this.apiService.updateArticle(this.postId,this._article).subscribe(response=>{
       console.log(response);
-})
+      console.log(this._article);
+    })
   }
 
   getArticle(){
     this.subscription = this.apiService
-    .getArticles()
+    .getArticle(this._postId)
     .subscribe(
       response => {
-        this.articles = response.data;
+        this._article = response.data;
     });
   }
 
-  getArticles(): void {
-    this.subscription = this.apiService
-    .getArticles()
-    .subscribe(
-      response => {
-        this.articles = response.data;
-    });
+
+  onFileChange(event:any) {
+    const reader = new FileReader();
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this._article.coverImagePath = reader.result as string;
+      };
+    }
   }
+  
 
   ngOnDestroy(): void {
     if (this.subscription) {

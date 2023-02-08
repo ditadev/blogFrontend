@@ -64,9 +64,49 @@ export class ApiService {
       return this.http.get<Article>(url).pipe(retry(1), catchError(this.handleError));
     }
 
-    public updateArticle(postId:any, article:any):Observable<any>{
+    public updateArticle(postId: any, article: any): Observable<any> {
       const url = `${this.articleUrl}/UpdatePost?id=${postId}`;
-      return this.http.patch(url,article,this.httpOptions).pipe(retry(1), catchError(this.handleError));
+      const headers = new HttpHeaders({
+        'Content-Type': 'multipart/form-data',
+        'accept': 'text/plain'
+      });
+      const formData = new FormData();
+      if (article.CoverImage) {
+        formData.append('CoverImage', article.CoverImage);
+      }
+      if (article.Title) {
+        formData.append('Title', article.Title);
+      }
+      if (article.Summary) {
+        formData.append('Summary', article.Summary);
+      }
+      if (article.Body) {
+        formData.append('Body', article.Body);
+      }
+      if (article.Tags) {
+        formData.append('Tags', article.Tags);
+      }
+      if (article.CategoryName) {
+        formData.append('CategoryName', article.CategoryName);
+      }
+    
+      return this.http.put(url, formData, { headers }).pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+    }
+    
+    createArticle(article:any):Observable<any>{
+      const formData = new FormData();
+      formData.append('CoverImage')
+      // H 'accept: text/plain' \
+      // -H 'Content-Type: multipart/form-data' \
+      // -F 'CoverImage=' \
+      // -F 'Title=dasdasd' \
+      // -F 'Summary=dasdasd' \
+      // -F 'Body=sdasdasd' \
+      // -F 'Tags=dasdasda' \
+      // -F 'CategoryName=dasdasda'      
     }
 
     deleteArticle(postId: any): Observable<any> {

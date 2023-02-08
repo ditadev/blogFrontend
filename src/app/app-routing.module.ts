@@ -6,6 +6,7 @@ import { FeedsComponent } from './components/feeds/feeds.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { MyArticlesComponent } from './components/my-articles/my-articles.component';
+import { NewArticleComponent } from './components/new-article/new-article.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'my-article', component: MyArticlesComponent },
   {path: 'my-article/:postId', component: ViewMyArticleComponent },
   {path: 'edit-article/:postId', component: EditArticleComponent },
+  {path: 'new-article', component: NewArticleComponent },
   {path: '**', component: NotFoundComponent },
 ];
 
