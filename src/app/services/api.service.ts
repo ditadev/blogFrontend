@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpEventType, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { catchError, Observable, throwError,retry, map } from 'rxjs';
 import { AuthorResponse } from '../models/author-response';
 import { Article } from '../models/article';
+import { BlogPost } from '../models/blogPost';
+import { NewBlogPost } from '../models/newBlogPost';
 
 
 @Injectable({
@@ -16,6 +18,7 @@ export class ApiService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
+ 
   
   constructor(private http:HttpClient) { }
 
@@ -64,50 +67,6 @@ export class ApiService {
       return this.http.get<Article>(url).pipe(retry(1), catchError(this.handleError));
     }
 
-    public updateArticle(postId: any, article: any): Observable<any> {
-      const url = `${this.articleUrl}/UpdatePost?id=${postId}`;
-      const headers = new HttpHeaders({
-        'Content-Type': 'multipart/form-data',
-        'accept': 'text/plain'
-      });
-      const formData = new FormData();
-      if (article.CoverImage) {
-        formData.append('CoverImage', article.CoverImage);
-      }
-      if (article.Title) {
-        formData.append('Title', article.Title);
-      }
-      if (article.Summary) {
-        formData.append('Summary', article.Summary);
-      }
-      if (article.Body) {
-        formData.append('Body', article.Body);
-      }
-      if (article.Tags) {
-        formData.append('Tags', article.Tags);
-      }
-      if (article.CategoryName) {
-        formData.append('CategoryName', article.CategoryName);
-      }
-    
-      return this.http.put(url, formData, { headers }).pipe(
-        retry(1),
-        catchError(this.handleError)
-      );
-    }
-    
-    createArticle(article:any):Observable<any>{
-      const formData = new FormData();
-      formData.append('CoverImage')
-      // H 'accept: text/plain' \
-      // -H 'Content-Type: multipart/form-data' \
-      // -F 'CoverImage=' \
-      // -F 'Title=dasdasd' \
-      // -F 'Summary=dasdasd' \
-      // -F 'Body=sdasdasd' \
-      // -F 'Tags=dasdasda' \
-      // -F 'CategoryName=dasdasda'      
-    }
 
     deleteArticle(postId: any): Observable<any> {
       const url = `${this.articleUrl}/DeletePost/${postId}`;
@@ -116,6 +75,67 @@ export class ApiService {
         catchError(this.handleError)
       );
     }
+
+
+    public updateArticle(postId: any, article: BlogPost): Observable<any> {
+      const url = `${this.articleUrl}/UpdatePost?id=${postId}`;
+      const headers = new HttpHeaders({
+        'Content-Type': 'multipart/form-data',
+        'accept': 'text/plain'
+      });
+     
+      const formData = new FormData();
+      formData.append('CoverImage',article.coverImagePath)
+      formData.append('Title',article.title)
+      formData.append('Summary',article.summary)
+      formData.append('Body',article.body)
+      formData.append('Tags',article.tags)
+      formData.append('CategoryName',article.category.categoryName)
+      
+      return this.http.put(url, formData, { headers }).pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+    }
+    
+    postArticle(file:File, article:NewBlogPost):Observable<any>{
+      const url =`${this.articleUrl}/AddPost`;
+      const headers = new HttpHeaders({
+        'Content-Type': 'multipart/form-data',
+        'accept': 'text/plain'
+      });
+     
+      const formData = new FormData();
+      formData.append('CoverImage',file)
+      formData.append('Title',article.title)
+      formData.append('Summary',article.summary)
+      formData.append('Body',article.body)
+      formData.append('Tags',article.tags)
+      formData.append('CategoryName',article.categoryName)
+    
+      return this.http.post(url,formData,{headers}).pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+    }
+
+    // PoostBlog(fileItem:File, extraData?:any){
+    //   const url =`${this.articleUrl}/AddPost`;
+    //   const formData: FormData = new FormData();
+
+    //   formData.append('fileItem', fileItem, fileItem.name);
+    //   if (extraData) {
+    //     for(let key in extraData){
+    //         // iterate and set other form data
+    //       formData.append(key, extraData[key])
+    //     }
+    //   }
+
+    //   const req = new HttpRequest('POST', url, formData, {
+    //     reportProgress: true // for progress data
+    //   });
+    //   return this.http.request(req)
+    // }
 
   handleError(error: any) {
     let errorMessage = '';

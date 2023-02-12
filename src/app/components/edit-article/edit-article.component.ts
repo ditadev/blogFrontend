@@ -15,7 +15,6 @@ export class EditArticleComponent implements OnInit, OnDestroy{
   subscription?: Subscription;
   _postId = this.route.snapshot.paramMap.get('postId')!;
   postId:number=parseInt(this._postId);
-  _showMore:boolean=false;
  _article!:BlogPost;
 
   constructor(

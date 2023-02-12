@@ -25,16 +25,12 @@
                                         <div class="flex text-sm text-gray-600">
                                             <label for="file-upload"
                                                 class="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
-                                                <span>Upload a file</span>
-                                                <input [(ngModel)]="_article.coverImagePath" #fileInput
-                                                type="file"
-                                                accept=".*"
-                                                style="display: none;"
-                                                (change)="chooseFile(fileInput.files)">
+                                                <input  class=" ml-16 pl-16 item-center justify-center" type="file" (change)="NselectFile($event)">
                                             </label>
-                                            <p class="pl-1">or drag and drop</p>
                                         </div>
-                                        <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                                        <span class="pl-1 text-sm text-center text-semibold text-red-700" [innerHtml]='msg'></span>
+                                        <p class="pl-1 text-sm text-center text-semibold">or drag and drop</p>
+                                        <p class="text-xs text-gray-500">JPG, PNG, JPEG up to 10MB</p>
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +76,7 @@
                                     <label for="last-name"
                                         class="block pl-3 pr-3 text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Category</label>
                                     <div class="mt-1 sm:col-span-2 sm:mt-0">
-                                        <input [(ngModel)]="_article.category.categoryName" type="text" name="category" id="last-name"
+                                        <input [(ngModel)]="_article.categoryName" type="text" name="category" id="last-name"
                                             class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 pl-1 pr-1 pt-3 pb-3 sm:text-sm">
                                     </div>
                                 </div>
@@ -104,7 +100,7 @@
             </div>
         </form>
 
-        <div (click)="updateArticle()"
+        <div (click)="postArticle()"
             class=" ml-3 mr-3 block w-96 max-w-lg rounded-lg flex divide-x divide-gray-200 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2  focus:ring-offset-gray-900">
             <div class="flex w-0 flex-1">
                 <a
@@ -115,7 +111,7 @@
                             d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776">
                         </path>
                     </svg>
-                    <span class="ml-3">Save</span>
+                    <span class="ml-3">Publish</span>
                 </a>
             </div>
         </div>
