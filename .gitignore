@@ -51,7 +51,8 @@ ehthumbs.db
 ehthumbs_vista.db
 .angular
 /.angular
-
+./.angular
+*angular
 
 # Dump file
 *.stackdump
