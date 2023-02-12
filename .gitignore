@@ -49,7 +49,9 @@ Temporary Items
 Thumbs.db
 ehthumbs.db
 ehthumbs_vista.db
-.angular/cache/15.1.3
+.angular
+/.angular
+
 
 # Dump file
 *.stackdump
