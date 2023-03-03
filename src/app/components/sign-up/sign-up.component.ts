@@ -13,8 +13,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   
   author!: Author;
   subscription?: Subscription;
-  message?: string;
-  toast:boolean=false;
+  message: string="";
   code?:number;
 
   constructor(
@@ -27,23 +26,24 @@ export class SignUpComponent implements OnInit, OnDestroy {
     this.author = {} as Author;
   }
 
-  register(): any {
+  register(): void {
     this.subscription = this.apiService.registerAuthor(this.author).subscribe(
       response => {this.message=response.message;
         console.log(this.message);
         this.code=response.code;
         console.log(this.code);
         if(this.code==0){
-          this.toast=!this.toast;
           this.router.navigate(["verification"]);
           }
-      });
+      },
+      error => {
+        this.message="Error Message"
+       }
+     );
   }
 
 
-toaster(){
-  this.toast = !this.toast;
-}
+
   ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();

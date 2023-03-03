@@ -79,10 +79,6 @@ export class ApiService {
 
     public updateArticle(file:File, postId: any, article: BlogPost): Observable<any> {
       const url = `${this.articleUrl}/UpdatePost?id=${postId}`;
-      // const headers = new HttpHeaders({
-      //   'Content-Type': 'multipart/form-data',
-      //   'accept': 'text/plain'
-      // });
      
       const formData = new FormData();
       formData.append('CoverImage',file)

@@ -14,10 +14,9 @@ export class SignInComponent implements OnInit, OnDestroy {
 
   _login!:Login;
   subscription?: Subscription;
-  message?: string;
-  toast:boolean=false;
   code?:number;
   jwt!:string;
+  message:string="";
 
   constructor(
     private apiService: ApiService,
@@ -32,17 +31,16 @@ export class SignInComponent implements OnInit, OnDestroy {
   login():void{
     this.subscription=this.apiService.login(this._login).subscribe(
       response => {
-        this.message = response.message;
         this.code = response.code;
         this.jwt=response.data.accessToken;
-        console.log(this.message);
-        console.log(this.code);
-        console.log(this.jwt);
         localStorage.setItem("jwt", this.jwt);
+       
         if (this.code == 0) {
-          this.toast = !this.toast;
           this.router.navigate(["feeds"]);
-        }
+        } 
+      },
+      error => {
+       this.message="Error Message"
       }
     );
   }
