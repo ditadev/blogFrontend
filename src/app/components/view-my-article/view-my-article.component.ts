@@ -11,14 +11,13 @@ import { PageInfo } from 'src/app/models/pageInfo';
   templateUrl: './view-my-article.component.html',
   styleUrls: ['./view-my-article.component.css']
 })
-export class ViewMyArticleComponent implements OnInit, OnDestroy{
-  
+export class ViewMyArticleComponent implements OnInit, OnDestroy {
+
   subscription?: Subscription;
   _postId = this.route.snapshot.paramMap.get('postId')!;
-  articles!: BlogPost[] ;
-  postId:number=parseInt(this._postId);
-  _showMore:boolean=false;
-  pageInfo!:PageInfo;
+  articles!: BlogPost[];
+  postId: number = parseInt(this._postId);
+  _showMore: boolean = false;
   currentPage = 1;
   pageSize = 10;
 
@@ -27,35 +26,36 @@ export class ViewMyArticleComponent implements OnInit, OnDestroy{
     private route: ActivatedRoute,
     private router: Router
 
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.getArticles(); 
-    console.log("This post id "+this.postId);
+    this.getArticles();
+    console.log("This post id " + this.postId);
   }
 
   getArticles(): void {
     this.subscription = this.apiService
-    .getArticles(this.currentPage,this.pageSize)
-    .subscribe(
-      response => {
-        this.pageInfo = response.pageInfo;
-        this.articles = response.data;
-    });
+      .getArticles(this.currentPage, this.pageSize)
+      .subscribe(
+        response => {
+          this.articles = response.data;
+        });
   }
 
-  deleteArticle(){
+  deleteArticle() {
     this.subscription = this.apiService
-    .deleteArticle(this.postId)
-    .subscribe(
-      response => {console.log(response);
-    });
+      .deleteArticle(this.postId)
+      .subscribe(
+        response => {
+          console.log(response);
+        });
     setTimeout(() => {
       this.router.navigate(["my-article"]);
-    }, 500);  }
+    }, 500);
+  }
 
-  confirmDelete(){
-    this._showMore=!this._showMore;
+  confirmDelete() {
+    this._showMore = !this._showMore;
   }
 
   ngOnDestroy(): void {
