@@ -77,22 +77,22 @@ export class ApiService {
     }
 
 
-    public updateArticle(postId: any, article: BlogPost): Observable<any> {
+    public updateArticle(file:File, postId: any, article: BlogPost): Observable<any> {
       const url = `${this.articleUrl}/UpdatePost?id=${postId}`;
-      const headers = new HttpHeaders({
-        'Content-Type': 'multipart/form-data',
-        'accept': 'text/plain'
-      });
+      // const headers = new HttpHeaders({
+      //   'Content-Type': 'multipart/form-data',
+      //   'accept': 'text/plain'
+      // });
      
       const formData = new FormData();
-      formData.append('CoverImage',article.coverImagePath)
+      formData.append('CoverImage',file)
       formData.append('Title',article.title)
       formData.append('Summary',article.summary)
       formData.append('Body',article.body)
       formData.append('Tags',article.tags)
       formData.append('CategoryName',article.category.categoryName)
       
-      return this.http.put(url, formData, { headers }).pipe(
+      return this.http.put(url, formData).pipe(
         retry(1),
         catchError(this.handleError)
       );
@@ -100,10 +100,6 @@ export class ApiService {
     
     postArticle(file:File, article:NewBlogPost):Observable<any>{
       const url =`${this.articleUrl}/AddPost`;
-      const headers = new HttpHeaders({
-        'Content-Type': 'multipart/form-data',
-        'accept': 'text/plain'
-      });
      
       const formData = new FormData();
       formData.append('CoverImage',file)
@@ -113,29 +109,12 @@ export class ApiService {
       formData.append('Tags',article.tags)
       formData.append('CategoryName',article.categoryName)
     
-      return this.http.post(url,formData,{headers}).pipe(
+      return this.http.post(url,formData).pipe(
         retry(1),
         catchError(this.handleError)
       );
     }
 
-    // PoostBlog(fileItem:File, extraData?:any){
-    //   const url =`${this.articleUrl}/AddPost`;
-    //   const formData: FormData = new FormData();
-
-    //   formData.append('fileItem', fileItem, fileItem.name);
-    //   if (extraData) {
-    //     for(let key in extraData){
-    //         // iterate and set other form data
-    //       formData.append(key, extraData[key])
-    //     }
-    //   }
-
-    //   const req = new HttpRequest('POST', url, formData, {
-    //     reportProgress: true // for progress data
-    //   });
-    //   return this.http.request(req)
-    // }
 
   handleError(error: any) {
     let errorMessage = '';

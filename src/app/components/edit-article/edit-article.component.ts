@@ -16,12 +16,15 @@ export class EditArticleComponent implements OnInit, OnDestroy{
   _postId = this.route.snapshot.paramMap.get('postId')!;
   postId:number=parseInt(this._postId);
  _article!:BlogPost;
+ selectedFile!: File;
+ _showMore:boolean=false;
+ msg = "";
+
 
   constructor(
     private apiService: ApiService,
     private route: ActivatedRoute,
     private router: Router
-
   ) {}
 
   ngOnInit(): void {
@@ -29,10 +32,22 @@ export class EditArticleComponent implements OnInit, OnDestroy{
     console.log("This post id "+this.postId);
   }
 
+  closeDialog(){
+    this._showMore=!this._showMore;
+  }
+
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
+
   updateArticle(){
-    this.subscription =this.apiService.updateArticle(this.postId,this._article).subscribe(response=>{
+    this.subscription =this.apiService.updateArticle(this.selectedFile,this.postId,this._article).subscribe(response=>{
       console.log(response);
+      this.msg=response.message;
       console.log(this._article);
+      if(response.code==0){
+        this._showMore=!this._showMore;
+        }
     })
   }
 
@@ -43,18 +58,6 @@ export class EditArticleComponent implements OnInit, OnDestroy{
       response => {
         this._article = response.data;
     });
-  }
-
-
-  onFileChange(event:any) {
-    const reader = new FileReader();
-    if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        this._article.coverImagePath = reader.result as string;
-      };
-    }
   }
   
 
