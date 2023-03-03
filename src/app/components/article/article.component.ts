@@ -3,6 +3,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { BlogPost } from 'src/app/models/blogPost';
+import { PageInfo } from 'src/app/models/pageInfo';
 
 @Component({
   selector: 'app-article',
@@ -14,7 +15,10 @@ export class ArticleComponent implements OnInit, OnDestroy {
   subscription?: Subscription;
   _postId = this.route.snapshot.paramMap.get('postId')!;
   articles!: BlogPost[] ;
+  pageInfo!:PageInfo;
   postId:number=parseInt(this._postId);
+  currentPage = 1;
+  pageSize = 10;
 
   constructor(
     private apiService: ApiService,
@@ -28,9 +32,10 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
   getArticle(): void {
     this.subscription = this.apiService
-    .getArticles()
+    .getArticles(this.currentPage,this.pageSize)
     .subscribe(
       response => {
+        this.pageInfo = response.pageInfo;
         this.articles = response.data;
     });
   }

@@ -4,6 +4,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { Subscription } from 'rxjs';
 import { BlogPost } from 'src/app/models/blogPost';
 import { Router } from '@angular/router';
+import { PageInfo } from 'src/app/models/pageInfo';
 
 @Component({
   selector: 'app-my-articles',
@@ -15,6 +16,12 @@ export class MyArticlesComponent implements OnInit, OnDestroy {
   name!:string;
   subscription?: Subscription;
   articles:BlogPost[]=[];
+  pageInfo!: PageInfo;
+  currentPage = 1;
+  pageSize = 12;
+  totalPages = 0;
+  hasNext!:boolean;
+  hasPrevious!:boolean;
 
   constructor(
     private jwtHelper: JwtHelperService, 
@@ -29,11 +36,20 @@ export class MyArticlesComponent implements OnInit, OnDestroy {
     } else {
       this.router.navigate(["login"]);
     } 
+   this.getArticlesByAuthor();
+  }
+
+  getArticlesByAuthor(){
     this.subscription = this.apiService
-    .getArticlesByAuthor(this.id)
+    .getArticlesByAuthor(this.id,this.currentPage,this.pageSize)
     .subscribe(
       response => {
         this.articles = response.data;
+        this.pageInfo = response.pageInfo;
+        this.totalPages = response.pageInfo.totalPages;
+        this.hasNext = response.pageInfo.hasNext;
+        this.hasPrevious = response.pageInfo.hasPrevious;
+        console.log(this.pageInfo);
     });
   }
 
@@ -45,6 +61,20 @@ export class MyArticlesComponent implements OnInit, OnDestroy {
     else {
       this.router.navigate(["login"]);
       return false;
+    }
+  }
+
+  previousPage() {
+    if (this.pageInfo.currentPage > 1) {
+      this.currentPage--;
+      this.getArticlesByAuthor();
+    }
+  }
+
+  nextPage() {
+    if (this.currentPage < this.pageInfo.totalPages) {
+      this.currentPage++;
+      this.getArticlesByAuthor();
     }
   }
 

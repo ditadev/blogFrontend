@@ -47,8 +47,8 @@ export class ApiService {
     return this.http.get<AuthorResponse>(url).pipe(retry(1), catchError(this.handleError));
   }
 
-  public getArticles(): Observable<any> {
-    const url = `${this.articleUrl}/GetAllPosts`;
+  public getArticles(PageNumber:number, PageSize:number): Observable<any> {
+    const url = `${this.articleUrl}/GetAllPosts?PageNumber=${PageNumber}&PageSize=${PageSize}`;
     return this.http.get<Article>(url).pipe(retry(1), catchError(this.handleError));
     }
 
@@ -57,8 +57,8 @@ export class ApiService {
       return this.http.get<Article>(url).pipe(retry(1), catchError(this.handleError));
       }
 
-      public getArticlesByAuthor(id:any): Observable<any> {
-        const url = `${this.articleUrl}/GetPostByAuthor/${id}`;
+      public getArticlesByAuthor(id:any, PageNumber:number, PageSize:number): Observable<any> {
+        const url = `${this.articleUrl}/GetPostByAuthor/${id}?PageNumber=${PageNumber}&PageSize=${PageSize}`;
         return this.http.get<Article>(url).pipe(retry(1), catchError(this.handleError));
         }
 

@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { Subscription } from 'rxjs';
 import { BlogPost } from 'src/app/models/blogPost';
+import { PageInfo } from 'src/app/models/pageInfo';
 
 @Component({
   selector: 'app-landing-page',
@@ -11,9 +12,12 @@ import { BlogPost } from 'src/app/models/blogPost';
 export class LandingPageComponent implements OnDestroy  {
 
   subscription?: Subscription;
+  pageInfo!:PageInfo;
   _article1!:BlogPost;
   _article2!:BlogPost;
   _article3!:BlogPost;
+  currentPage = 1;
+  pageSize = 3;
 
   constructor(
     private apiService:ApiService,
@@ -21,7 +25,7 @@ export class LandingPageComponent implements OnDestroy  {
 
   ngOnInit(){
     this.subscription = this.apiService
-    .getArticles()
+    .getArticles(this.currentPage,this.pageSize)
     .subscribe(
       response => {
         this._article1 = response.data[0];

@@ -4,32 +4,63 @@ import { ApiService } from 'src/app/services/api.service';
 import { Subscription } from 'rxjs';
 import { BlogPost } from 'src/app/models/blogPost';
 import { Router } from '@angular/router';
+import { PageInfo } from 'src/app/models/pageInfo';
 
 @Component({
   selector: 'app-feeds',
   templateUrl: './feeds.component.html',
   styleUrls: ['./feeds.component.css']
 })
-export class FeedsComponent implements OnInit, OnDestroy  {
+export class FeedsComponent implements OnInit, OnDestroy {
 
-  id!:number;
-  name!:string;
+  id!: number;
+  name!: string;
   subscription?: Subscription;
-  articles:BlogPost[]=[];
+  pageInfo!: PageInfo;
+  articles: BlogPost[] = [];
+  currentPage = 1;
+  pageSize = 10;
+  totalPages = 0;
+  hasNext!:boolean;
+  hasPrevious!:boolean;
+
 
   constructor(
-    private jwtHelper: JwtHelperService, 
-    private apiService:ApiService,
+    private jwtHelper: JwtHelperService,
+    private apiService: ApiService,
     private router: Router
-  ) {}
+  ) { }
 
-  ngOnInit(){
+  ngOnInit() {
+    this.getArticles();
+  }
+
+  getArticles(): void {
     this.subscription = this.apiService
-    .getArticles()
-    .subscribe(
-      response => {
-        this.articles = response.data;
-    });
+      .getArticles(this.currentPage, this.pageSize)
+      .subscribe(
+        response => {
+          this.articles = response.data;
+          this.pageInfo = response.pageInfo;
+          this.totalPages = response.pageInfo.totalPages;
+          this.hasNext = response.pageInfo.hasNext;
+          this.hasPrevious = response.pageInfo.hasPrevious;
+          console.log(this.pageInfo);
+        });
+  }
+
+  previousPage() {
+    if (this.pageInfo.currentPage > 1) {
+      this.currentPage--;
+      this.getArticles();
+    }
+  }
+
+  nextPage() {
+    if (this.currentPage < this.pageInfo.totalPages) {
+      this.currentPage++;
+      this.getArticles();
+    }
   }
 
   isUserAuthenticated() {

@@ -1,12 +1,12 @@
 <app-nav-bar></app-nav-bar>
 <div>
-<div *ngIf="isUserAuthenticated()" class="bg-black" >
-    <div *ngFor="let article of articles" class="bg-black rounded-md pt-2 lg:py-6">
+    <div *ngIf="isUserAuthenticated()" class="bg-black">
+        <div *ngFor="let article of articles" class="bg-black rounded-md pt-2 lg:py-6">
             <div routerLink="/article/{{article.postId}}"
                 class="relative overflow-hidden rounded-xl bg-gradient-to-r from-teal-500 to-cyan-600 py-3 px-6 font-medium text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900 py-24 px-8 shadow-2xl lg:grid lg:grid-cols-2 lg:gap-x-8 lg:px-16">
                 <div class="absolute inset-0 opacity-50 mix-blend-multiply saturate-0 filter">
-                    <img src="http://localhost:5259/static/images/{{article.coverImagePath}}"
-                        alt="" class="h-full w-full object-cover">
+                    <img src="http://localhost:5259/static/images/{{article.coverImagePath}}" alt=""
+                        class="h-full w-full object-cover">
                 </div>
                 <div class="relative lg:col-span-1">
                     <blockquote class="mt-6 text-white">
@@ -14,19 +14,53 @@
                         </p>
                         <footer class="mt-6">
                             <p class="flex flex-col font-medium">
-                                <span class="text-base  text-gray-200 sm:text-xl lg:text-lg xl:text-xl">{{article.summary}}</span>
-                                <br/>
+                                <span
+                                    class="text-base  text-gray-200 sm:text-xl lg:text-lg xl:text-xl">{{article.summary}}</span>
+                                <br />
                                 <span class="text-sm font-medium text-white">Author: {{article.authorsName}}</span>
-                                <span class="text-sm font-medium text-white">Category: {{article.category.categoryName}}</span>
+                                <span class="text-sm font-medium text-white">Category:
+                                    {{article.category.categoryName}}</span>
                                 <span class="text-sm font-medium text-white">Tags: {{article.tags}}</span>
-                                <time class="text-sm font-medium text-white">{{article.dateCreated | date : 'dd/MM/yyyy hh:mm a'}}</time>
+                                <time class="text-sm font-medium text-white">{{article.dateCreated | date : 'dd/MM/yyyy
+                                    hh:mm a'}}</time>
                             </p>
                         </footer>
                     </blockquote>
                 </div>
             </div>
         </div>
+
+
+
+
+        <div class="flex flex-col items-center pb-4">
+            <!-- Help text -->
+            <span class="text-sm text-gray-700 dark:text-gray-400">
+                Page <span class="font-semibold text-gray-900 dark:text-white">{{currentPage}}</span> of <span
+                    class="font-semibold text-gray-900 dark:text-white">{{totalPages}}</span>
+            </span>
+            <div class="inline-flex mt-2 xs:mt-0">
+                <!-- Buttons -->
+                <button (click)="previousPage()" [disabled]="!hasPrevious"
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-l hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                    <svg aria-hidden="true" class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                    Prev
+                </button>
+                <button (click)="nextPage()" [disabled]="!hasNext"
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 border-0 border-l border-gray-700 rounded-r hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                    Next
+                    <svg aria-hidden="true" class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
     </div>
-
-
-

@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { BlogPost } from 'src/app/models/blogPost';
 import { Router } from '@angular/router';
+import { PageInfo } from 'src/app/models/pageInfo';
 
 @Component({
   selector: 'app-view-my-article',
@@ -17,6 +18,8 @@ export class ViewMyArticleComponent implements OnInit, OnDestroy{
   articles!: BlogPost[] ;
   postId:number=parseInt(this._postId);
   _showMore:boolean=false;
+  pageInfo!:PageInfo;
+
 
   constructor(
     private apiService: ApiService,
@@ -32,9 +35,10 @@ export class ViewMyArticleComponent implements OnInit, OnDestroy{
 
   getArticles(): void {
     this.subscription = this.apiService
-    .getArticles()
+    .getArticles(this.pageInfo.currentPage,this.pageInfo.pageSize)
     .subscribe(
       response => {
+        this.pageInfo = response.pageInfo;
         this.articles = response.data;
     });
   }
