@@ -19,7 +19,8 @@ export class ViewMyArticleComponent implements OnInit, OnDestroy{
   postId:number=parseInt(this._postId);
   _showMore:boolean=false;
   pageInfo!:PageInfo;
-
+  currentPage = 1;
+  pageSize = 10;
 
   constructor(
     private apiService: ApiService,
@@ -35,7 +36,7 @@ export class ViewMyArticleComponent implements OnInit, OnDestroy{
 
   getArticles(): void {
     this.subscription = this.apiService
-    .getArticles(this.pageInfo.currentPage,this.pageInfo.pageSize)
+    .getArticles(this.currentPage,this.pageSize)
     .subscribe(
       response => {
         this.pageInfo = response.pageInfo;
