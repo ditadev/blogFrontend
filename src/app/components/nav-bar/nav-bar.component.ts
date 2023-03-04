@@ -35,7 +35,6 @@ export class NavBarComponent implements OnInit, OnDestroy{
     }    
     this.subscription=this.apiService.getUser(this.id).subscribe(response=>{
       this.name=response.data.username;
-      console.log(this.name);
     });
   }
 
