@@ -18,38 +18,39 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     ])
   ]
 })
-export class LandingPageComponent implements OnDestroy  {
+export class LandingPageComponent implements OnDestroy {
 
   subscription?: Subscription;
-  pageInfo!:PageInfo;
-  _article1!:BlogPost;
-  _article2!:BlogPost;
-  _article3!:BlogPost;
+  pageInfo!: PageInfo;
+  _article1!: BlogPost;
+  _article2!: BlogPost;
+  _article3!: BlogPost;
   currentPage = 1;
   pageSize = 3;
 
   constructor(
-    private apiService:ApiService,
+    private apiService: ApiService,
     private spinner: NgxSpinnerService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this._article1={} as BlogPost;
-    this._article1.category={} as Category;
-    this._article2={} as BlogPost;
-    this._article2.category={} as Category;
-    this._article3={} as BlogPost;
-    this._article3.category={} as Category;
-this.getArticles();
+    this._article1 = {} as BlogPost;
+    this._article1.category = {} as Category;
+    this._article2 = {} as BlogPost;
+    this._article2.category = {} as Category;
+    this._article3 = {} as BlogPost;
+    this._article3.category = {} as Category;
+    this.getArticles();
   }
-  
-  getArticles():void{
+
+  getArticles(): void {
     this.spinner.show(); // show the spinner before making API call
     this.subscription = this.apiService.getArticles(this.currentPage, this.pageSize).subscribe({
       next: (response) => {
         this._article1 = response.data[0];
         this._article2 = response.data[1];
         this._article3 = response.data[2];
+        this.spinner.hide(); // hide the spinner on error
       },
       error: (err) => {
         console.log(err);
