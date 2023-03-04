@@ -18,7 +18,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     ])
   ]
 })
-export class VerificationComponent implements  OnDestroy {
+export class VerificationComponent implements  OnDestroy, OnInit {
 
 _email=this.route.snapshot.paramMap.get('emailAddress')!;
 _token=this.route.snapshot.paramMap.get('token')!;
@@ -32,6 +32,10 @@ _token=this.route.snapshot.paramMap.get('token')!;
     private router: Router,
     private spinner: NgxSpinnerService
   ) {}
+
+  ngOnInit(): void {
+  this._token="";
+  }
 
   verifyUser(): void {
     this.spinner.show(); // show the spinner before making API call

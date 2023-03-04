@@ -32,7 +32,15 @@ export class SignUpComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.author = {} as Author;
+    this.author = {
+      firstName: "",
+      lastName: "",
+      emailAddress: "",
+      userName: "",
+      password: "",
+      description: ""
+    };
+    
   }
 
   register(): void {
@@ -40,9 +48,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
     this.subscription = this.apiService.registerAuthor(this.author).subscribe({
       next: (response) => {
         this.message = response.message;
-        console.log(this.message);
         this.code = response.code;
-        console.log(this.code);
         if (this.code == 0) {
           this.router.navigate(["verification"]);
         }

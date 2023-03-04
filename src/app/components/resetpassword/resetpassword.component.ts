@@ -34,7 +34,12 @@ export class ResetpasswordComponent implements  OnDestroy {
 
 
   ngOnInit(): void {
-    this._resetPassword = {} as ResetPassword;
+     this._resetPassword = {
+      emailAddress: "",
+      token: "",
+      password: "",
+      confirmPassword: ""
+    };  
   }
 
   resetPassword(): void {
