@@ -25,19 +25,25 @@ export class LandingPageComponent implements OnDestroy  {
     private spinner: NgxSpinnerService
   ) {}
 
-  ngOnInit(){
+  ngOnInit(): void {
     this.spinner.show(); // show the spinner before making API call
-    this.subscription = this.apiService
-    .getArticles(this.currentPage,this.pageSize)
-    .subscribe(
-      response => {
+    this.subscription = this.apiService.getArticles(this.currentPage, this.pageSize).subscribe({
+      next: (response) => {
         this._article1 = response.data[0];
         this._article2 = response.data[1];
         this._article3 = response.data[2];
-        this.spinner.hide(); // hide the spinner when API call is successful
-    }
-    );
+        console.log(response);
+      },
+      error: (err) => {
+        console.log(err);
+        this.spinner.hide(); // hide the spinner on error
+      },
+      complete: () => {
+        this.spinner.hide(); // hide the spinner when API call is completed
+      }
+    });
   }
+  
 
   ngOnDestroy(): void {
     if (this.subscription) {
