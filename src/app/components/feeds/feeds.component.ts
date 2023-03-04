@@ -13,8 +13,6 @@ import { PageInfo } from 'src/app/models/pageInfo';
 })
 export class FeedsComponent implements OnInit, OnDestroy {
 
-  id!: number;
-  name!: string;
   subscription?: Subscription;
   pageInfo!: PageInfo;
   articles: BlogPost[] = [];

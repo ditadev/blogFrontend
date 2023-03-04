@@ -13,15 +13,15 @@ import { PageInfo } from 'src/app/models/pageInfo';
 })
 export class MyArticlesComponent implements OnInit, OnDestroy {
   id!:number;
-  name!:string;
   subscription?: Subscription;
   articles:BlogPost[]=[];
   pageInfo!: PageInfo;
-  currentPage = 1;
+  currentPage!:number;
   pageSize = 12;
   totalPages = 0;
   hasNext!:boolean;
   hasPrevious!:boolean;
+  selectedArticlePage!:number;
 
   constructor(
     private jwtHelper: JwtHelperService, 
@@ -39,7 +39,7 @@ export class MyArticlesComponent implements OnInit, OnDestroy {
    this.getArticlesByAuthor();
   }
 
-  getArticlesByAuthor(){
+  getArticlesByAuthor():void{
     this.subscription = this.apiService
     .getArticlesByAuthor(this.id,this.currentPage,this.pageSize)
     .subscribe(
@@ -47,6 +47,8 @@ export class MyArticlesComponent implements OnInit, OnDestroy {
         this.articles = response.data;
         this.pageInfo = response.pageInfo;
         this.totalPages = response.pageInfo.totalPages;
+        this.currentPage = response.pageInfo.currentPage;
+        this.pageSize = response.pageInfo.pageSize;
         this.hasNext = response.pageInfo.hasNext;
         this.hasPrevious = response.pageInfo.hasPrevious;
         console.log(this.pageInfo);
@@ -65,18 +67,19 @@ export class MyArticlesComponent implements OnInit, OnDestroy {
   }
 
   previousPage() {
-    if (this.pageInfo.currentPage > 1) {
+    if (this.currentPage > 1) {
       this.currentPage--;
       this.getArticlesByAuthor();
     }
   }
-
+  
   nextPage() {
-    if (this.currentPage < this.pageInfo.totalPages) {
+    if (this.currentPage < this.totalPages) {
       this.currentPage++;
       this.getArticlesByAuthor();
     }
   }
+  
 
   ngOnDestroy(): void {
     if (this.subscription) {

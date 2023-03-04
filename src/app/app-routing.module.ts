@@ -24,7 +24,7 @@ const routes: Routes = [
   {path: 'feeds', component: FeedsComponent },
   {path: 'article/:postId', component: ArticleComponent },
   {path: 'my-article', component: MyArticlesComponent },
-  {path: 'my-article/:postId', component: ViewMyArticleComponent },
+  {path: 'view-my-article/:postId', component: ViewMyArticleComponent },
   {path: 'edit-article/:postId', component: EditArticleComponent },
   {path: 'new-article', component: NewArticleComponent },
   {path: '**', component: NotFoundComponent },

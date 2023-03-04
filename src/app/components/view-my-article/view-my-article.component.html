@@ -1,6 +1,6 @@
 <app-nav-bar></app-nav-bar>
-<div *ngFor="let article of articles" class="bg-black">
-    <div *ngIf="article.postId==postId" class="relative overflow-hidden">
+<div  class="bg-black">
+    <div *ngIf="articles" class="relative overflow-hidden">
         <div *ngIf="!_showMore" class="bg-gray-900 h pt-10 sm:pt-16 lg:overflow-hidden lg:pt-8 lg:pb-14">
             <div class="mx-auto -mt-20 max-w-7xl lg:px-8">
                 <div class="relative overflow-hidden rounded-2xl bg-white py-16">
@@ -36,26 +36,26 @@
                                 <span
                                     class="block bg-gradient-to-r from-teal-500 to-indigo-700 bg-clip-text text-transparent sm:pb-5 mt-2 mb-2  text-center text-3xl font-bold leading-8 tracking-tight text-gray-800 sm:text-2xl">Introducing</span>
                                 <span
-                                    class="block bg-gradient-to-r from-teal-500 to-cyan-600 bg-clip-text text-transparent sm:pb-5 mt-2 mb-2  text-center text-3xl font-bold leading-8 tracking-tight text-gray-800 sm:text-4xl">{{article.title}}</span>
+                                    class="block bg-gradient-to-r from-teal-500 to-cyan-600 bg-clip-text text-transparent sm:pb-5 mt-2 mb-2  text-center text-3xl font-bold leading-8 tracking-tight text-gray-800 sm:text-4xl">{{articles.title}}</span>
                             </h1>
                             <figure>
                                 <img class="w-full rounded-lg"
-                                    src="http://localhost:5259/static/images/{{article.coverImagePath}}" alt=""
+                                    src="http://localhost:5259/static/images/{{articles.coverImagePath}}" alt=""
                                     width="1310" height="873">
                                 <br />
-                                <figcaption class="text-sm font-medium text-black">By: {{article.authorsName}}
+                                <figcaption class="text-sm font-medium text-black">By: {{articles.authorsName}}
                                 </figcaption>
-                                <figcaption class="text-sm font-medium text-black">{{article.category.categoryName}}
+                                <figcaption class="text-sm font-medium text-black">{{articles.category.categoryName}}
                                 </figcaption>
-                                <figcaption class="text-sm italic font-medium text-black">{{article.tags}}</figcaption>
-                                <time class="text-sm font-medium text-black">{{article.dateCreated | date : 'dd/MM/yyyy
+                                <figcaption class="text-sm italic font-medium text-black">{{articles.tags}}</figcaption>
+                                <time class="text-sm font-medium text-black">{{articles.dateCreated | date : 'dd/MM/yyyy
                                     hh:mm a'}}</time>
                             </figure>
-                            <p class="mt-8 text-xl font-semibold text-center leading-8 text-black">{{article.summary}}
+                            <p class="mt-8 text-xl font-semibold text-center leading-8 text-black">{{articles.summary}}
                             </p>
                         </div>
                         <div class="prose prose-lg prose-indigo mx-auto mt-6 text-gray-800">
-                            <p>{{article.body}}</p>
+                            <p>{{articles.body}}</p>
                         </div>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
 
             <div *ngIf="!_showMore"
                 class="-mt-px mb-4 rounded-lg flex divide-x divide-gray-200 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2  focus:ring-offset-gray-900">
-                <div routerLink="/edit-article/{{article.postId}}" class="flex w-0 flex-1">
+                <div routerLink="/edit-article/{{articles.postId}}" class="flex w-0 flex-1">
                     <a
                         class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
                         <svg class="-ml-1 mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"

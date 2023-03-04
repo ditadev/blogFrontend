@@ -14,7 +14,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
   
   subscription?: Subscription;
   _postId = this.route.snapshot.paramMap.get('postId')!;
-  articles!: BlogPost[] ;
+  articles!: BlogPost;
   pageInfo!:PageInfo;
   postId:number=parseInt(this._postId);
   currentPage = 1;
@@ -31,12 +31,10 @@ export class ArticleComponent implements OnInit, OnDestroy {
   }
 
   getArticle(): void {
-    this.subscription = this.apiService
-    .getArticles(this.currentPage,this.pageSize)
-    .subscribe(
-      response => {
+    this.subscription = this.apiService.getArticle(this.postId).subscribe(
+      response=>{
         this.pageInfo = response.pageInfo;
-        this.articles = response.data;
+        this.articles=response.data;
     });
   }
 

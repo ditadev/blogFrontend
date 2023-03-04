@@ -18,7 +18,7 @@ export class NewArticleComponent implements OnInit, OnDestroy {
   selectedFile!: File;
   _article!: NewBlogPost;
   _showMore:boolean=false;
-  msg = "";
+  msg: string = "";
 
   constructor(
     private apiService: ApiService,
@@ -43,7 +43,10 @@ export class NewArticleComponent implements OnInit, OnDestroy {
         if(response.code==0){
           this._showMore=!this._showMore;
           }
-      }
+      },
+      error => {
+        this.msg="Required"
+       }
     )
   }
   

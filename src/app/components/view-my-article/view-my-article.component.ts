@@ -15,7 +15,7 @@ export class ViewMyArticleComponent implements OnInit, OnDestroy {
 
   subscription?: Subscription;
   _postId = this.route.snapshot.paramMap.get('postId')!;
-  articles!: BlogPost[];
+  articles!: BlogPost;
   postId: number = parseInt(this._postId);
   _showMore: boolean = false;
   currentPage = 1;
@@ -34,12 +34,11 @@ export class ViewMyArticleComponent implements OnInit, OnDestroy {
   }
 
   getArticles(): void {
-    this.subscription = this.apiService
-      .getArticles(this.currentPage, this.pageSize)
-      .subscribe(
-        response => {
-          this.articles = response.data;
-        });
+    this.subscription = this.apiService.getArticle(this.postId).subscribe(
+      response=>{
+        this.articles=response.data;
+      }
+    )
   }
 
   deleteArticle() {
