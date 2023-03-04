@@ -3,6 +3,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { Subscription } from 'rxjs';
 import { BlogPost } from 'src/app/models/blogPost';
 import { PageInfo } from 'src/app/models/pageInfo';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-landing-page',
@@ -21,9 +22,11 @@ export class LandingPageComponent implements OnDestroy  {
 
   constructor(
     private apiService:ApiService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(){
+    this.spinner.show(); // show the spinner before making API call
     this.subscription = this.apiService
     .getArticles(this.currentPage,this.pageSize)
     .subscribe(
@@ -31,7 +34,9 @@ export class LandingPageComponent implements OnDestroy  {
         this._article1 = response.data[0];
         this._article2 = response.data[1];
         this._article3 = response.data[2];
-    });
+        this.spinner.hide(); // hide the spinner when API call is successful
+    }
+    );
   }
 
   ngOnDestroy(): void {

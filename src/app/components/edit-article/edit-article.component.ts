@@ -3,7 +3,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { BlogPost } from 'src/app/models/blogPost';
-import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-edit-article',
@@ -18,16 +18,17 @@ export class EditArticleComponent implements OnInit, OnDestroy{
  _article!:BlogPost;
  selectedFile!: File;
  _showMore:boolean=false;
- msg = "";
+ msg: string = "";
 
 
   constructor(
     private apiService: ApiService,
     private route: ActivatedRoute,
-    private router: Router
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
+    this.spinner.show(); // show the spinner before making API call
     this.getArticle(); 
     console.log("This post id "+this.postId);
   }
@@ -40,22 +41,36 @@ export class EditArticleComponent implements OnInit, OnDestroy{
     this.selectedFile = event.target.files[0];
   }
 
-  updateArticle(){
-    this.subscription =this.apiService.updateArticle(this.selectedFile,this.postId,this._article).subscribe(response=>{
-      console.log(response);
-      this.msg=response.message;
-      console.log(this._article);
-      if(response.code==0){
-        this._showMore=!this._showMore;
+  updateArticle(): void {
+    this.spinner.show(); // show the spinner before making API call
+    this.subscription = this.apiService.updateArticle(this.selectedFile, this.postId, this._article).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.msg = response.message;
+        console.log(this._article);
+        if (response.code == 0) {
+          this.spinner.hide(); // hide the spinner when API call is successful
+          this._showMore = !this._showMore;
         }
-    })
+      },
+      error: (error) => {
+        this.msg = "Required";
+        this.spinner.hide(); // hide the spinner when API call is successful
+      },
+      complete: () => {
+        this.spinner.hide(); // hide the spinner when API call is successful
+      }
+    });
   }
+  
 
   getArticle(){
+    this.spinner.show(); // show the spinner before making API call
     this.subscription = this.apiService
     .getArticle(this._postId)
     .subscribe(
       response => {
+        this.spinner.hide(); // hide the spinner when API call is successful
         this._article = response.data;
     });
   }

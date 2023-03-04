@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { BlogPost } from 'src/app/models/blogPost';
 import { Router } from '@angular/router';
 import { PageInfo } from 'src/app/models/pageInfo';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-my-articles',
@@ -26,7 +27,8 @@ export class MyArticlesComponent implements OnInit, OnDestroy {
   constructor(
     private jwtHelper: JwtHelperService, 
     private apiService:ApiService,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(){
@@ -40,6 +42,7 @@ export class MyArticlesComponent implements OnInit, OnDestroy {
   }
 
   getArticlesByAuthor():void{
+    this.spinner.show(); // show the spinner before making API call
     this.subscription = this.apiService
     .getArticlesByAuthor(this.id,this.currentPage,this.pageSize)
     .subscribe(
@@ -52,6 +55,7 @@ export class MyArticlesComponent implements OnInit, OnDestroy {
         this.hasNext = response.pageInfo.hasNext;
         this.hasPrevious = response.pageInfo.hasPrevious;
         console.log(this.pageInfo);
+        this.spinner.hide(); // hide the spinner when API call is successful
     });
   }
 

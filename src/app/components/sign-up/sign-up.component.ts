@@ -3,6 +3,7 @@ import { Author } from 'src/app/models/author';
 import { ApiService } from 'src/app/services/api.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-sign-up',
@@ -18,8 +19,8 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   constructor(
     private apiService: ApiService,
-    private router: Router
-
+    private router: Router,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
@@ -27,20 +28,28 @@ export class SignUpComponent implements OnInit, OnDestroy {
   }
 
   register(): void {
-    this.subscription = this.apiService.registerAuthor(this.author).subscribe(
-      response => {this.message=response.message;
+    this.spinner.show(); // show the spinner before making API call
+    this.subscription = this.apiService.registerAuthor(this.author).subscribe({
+      next: (response) => {
+        this.message = response.message;
         console.log(this.message);
-        this.code=response.code;
+        this.code = response.code;
         console.log(this.code);
-        if(this.code==0){
+        if (this.code == 0) {
           this.router.navigate(["verification"]);
-          }
+        }
+        this.spinner.hide();
       },
-      error => {
-        this.message="Error Message"
-       }
-     );
+      error: (error) => {
+        this.spinner.hide();
+        this.message = "Error Message";
+      },
+      complete: () => {
+        this.spinner.hide();
+      }
+    });
   }
+  
 
   ngOnDestroy(): void {
     if (this.subscription) {

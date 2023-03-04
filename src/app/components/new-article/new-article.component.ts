@@ -1,11 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute, UrlHandlingStrategy } from '@angular/router';
-import { BlogPost } from 'src/app/models/blogPost';
-import { Router } from '@angular/router';
-import { HttpClient, HttpEventType } from '@angular/common/http';
 import { NewBlogPost } from 'src/app/models/newBlogPost';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-new-article',
@@ -22,8 +19,7 @@ export class NewArticleComponent implements OnInit, OnDestroy {
 
   constructor(
     private apiService: ApiService,
-    private route: ActivatedRoute,
-    private router: Router,
+    private spinner: NgxSpinnerService
   ) { }
 
 
@@ -36,6 +32,7 @@ export class NewArticleComponent implements OnInit, OnDestroy {
   }
 
   addPost() {
+    this.spinner.show(); // show the spinner before making API call
     this.subscription=this.apiService.postArticle(this.selectedFile,this._article).subscribe(
       response=>{
         console.log(response);
@@ -43,9 +40,11 @@ export class NewArticleComponent implements OnInit, OnDestroy {
         if(response.code==0){
           this._showMore=!this._showMore;
           }
+          this.spinner.hide(); // show the spinner before making API call
       },
       error => {
-        this.msg="Required"
+        this.msg="Required";
+        this.spinner.hide(); // hide the spinner when API call is successful
        }
     )
   }

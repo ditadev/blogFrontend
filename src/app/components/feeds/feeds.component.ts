@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { BlogPost } from 'src/app/models/blogPost';
 import { Router } from '@angular/router';
 import { PageInfo } from 'src/app/models/pageInfo';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-feeds',
@@ -26,7 +27,8 @@ export class FeedsComponent implements OnInit, OnDestroy {
   constructor(
     private jwtHelper: JwtHelperService,
     private apiService: ApiService,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
@@ -34,18 +36,28 @@ export class FeedsComponent implements OnInit, OnDestroy {
   }
 
   getArticles(): void {
+    this.spinner.show(); // show the spinner before making API call
     this.subscription = this.apiService
       .getArticles(this.currentPage, this.pageSize)
-      .subscribe(
-        response => {
+      .subscribe({
+        next: (response) => {
           this.articles = response.data;
           this.pageInfo = response.pageInfo;
           this.totalPages = response.pageInfo.totalPages;
           this.hasNext = response.pageInfo.hasNext;
           this.hasPrevious = response.pageInfo.hasPrevious;
           console.log(this.pageInfo);
-        });
+          this.spinner.hide(); // hide the spinner when API call is successful
+        },
+        error: (error) => {
+          this.spinner.hide(); // hide the spinner when API call is successful
+        },
+        complete: () => {
+          this.spinner.hide(); // hide the spinner when API call is successful
+        }
+      });
   }
+
 
   previousPage() {
     if (this.pageInfo.currentPage > 1) {

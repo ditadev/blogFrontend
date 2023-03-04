@@ -8,7 +8,6 @@ import { AuthGuard } from './guard/auth-guard.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoadingComponent } from './components/loading/loading.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
@@ -23,6 +22,7 @@ import { MyArticlesComponent } from './components/my-articles/my-articles.compon
 import { ViewMyArticleComponent } from './components/view-my-article/view-my-article.component';
 import { EditArticleComponent } from './components/edit-article/edit-article.component';
 import { NewArticleComponent } from './components/new-article/new-article.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -31,7 +31,6 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    LoadingComponent,
     LandingPageComponent,
     SignInComponent,
     SignUpComponent,
@@ -51,6 +50,7 @@ export function tokenGetter() {
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    NgxSpinnerModule,
     FormsModule,
     JwtModule.forRoot({
       config: {
