@@ -8,6 +8,7 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { MyArticlesComponent } from './components/my-articles/my-articles.component';
 import { NewArticleComponent } from './components/new-article/new-article.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
@@ -27,6 +28,7 @@ const routes: Routes = [
   {path: 'view-my-article/:postId', component: ViewMyArticleComponent },
   {path: 'edit-article/:postId', component: EditArticleComponent },
   {path: 'new-article', component: NewArticleComponent },
+  {path: 'profile', component: ProfileComponent },
   {path: '**', component: NotFoundComponent },
 ];
 

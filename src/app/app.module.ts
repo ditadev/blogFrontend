@@ -23,6 +23,7 @@ import { ViewMyArticleComponent } from './components/view-my-article/view-my-art
 import { EditArticleComponent } from './components/edit-article/edit-article.component';
 import { NewArticleComponent } from './components/new-article/new-article.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ProfileComponent } from './components/profile/profile.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -44,7 +45,8 @@ export function tokenGetter() {
     MyArticlesComponent,
     ViewMyArticleComponent,
     EditArticleComponent,
-    NewArticleComponent
+    NewArticleComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

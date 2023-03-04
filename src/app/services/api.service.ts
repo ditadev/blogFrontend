@@ -5,6 +5,8 @@ import { AuthorResponse } from '../models/author-response';
 import { Article } from '../models/article';
 import { BlogPost } from '../models/blogPost';
 import { NewBlogPost } from '../models/newBlogPost';
+import { UpdateAuthor } from '../models/updateAuthor';
+import { VerifyChangeEmail } from '../models/verifyEmailChange';
 
 
 @Injectable({
@@ -76,6 +78,18 @@ export class ApiService {
       );
     }
 
+    updateAuthur(author:UpdateAuthor): Observable<any>{
+      const url = `${this.authorUrl}`;
+      return this.http.patch(`${url}/UpdateUser`, author, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+    }
+
+    changeEmail(email: string, password:string): Observable<any>{
+      return this.http.patch(`${this.authorUrl}/ChangeEmailAddress?oldEmailAddress=${email}&password=${password}`, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+    }
+
+    verifyChangeEmail(token: string, emailChange:VerifyChangeEmail ): Observable<any>{
+      return this.http.patch(`${this.authorUrl}/VerifyEmailChange?token=${token}`, emailChange, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+    }
 
     public updateArticle(file:File, postId: any, article: BlogPost): Observable<any> {
       const url = `${this.articleUrl}/UpdatePost?id=${postId}`;
