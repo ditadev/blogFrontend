@@ -24,6 +24,7 @@ import { EditArticleComponent } from './components/edit-article/edit-article.com
 import { NewArticleComponent } from './components/new-article/new-article.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ProfileComponent } from './components/profile/profile.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -46,7 +47,7 @@ export function tokenGetter() {
     ViewMyArticleComponent,
     EditArticleComponent,
     NewArticleComponent,
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +55,7 @@ export function tokenGetter() {
     HttpClientModule,
     NgxSpinnerModule,
     FormsModule,
+    BrowserAnimationsModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

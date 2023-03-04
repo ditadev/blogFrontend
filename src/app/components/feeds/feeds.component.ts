@@ -6,11 +6,19 @@ import { BlogPost } from 'src/app/models/blogPost';
 import { Router } from '@angular/router';
 import { PageInfo } from 'src/app/models/pageInfo';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-feeds',
   templateUrl: './feeds.component.html',
-  styleUrls: ['./feeds.component.css']
+  styleUrls: ['./feeds.component.css'],
+  animations: [
+    trigger('disabled', [
+      state('true', style({ opacity: 0.5, pointerEvents: 'none' })),
+      state('false', style({ opacity: 1, pointerEvents: 'auto' })),
+      transition('true <=> false', animate('200ms ease-in-out'))
+    ])
+  ]
 })
 export class FeedsComponent implements OnInit, OnDestroy {
 
@@ -46,7 +54,6 @@ export class FeedsComponent implements OnInit, OnDestroy {
           this.totalPages = response.pageInfo.totalPages;
           this.hasNext = response.pageInfo.hasNext;
           this.hasPrevious = response.pageInfo.hasPrevious;
-          console.log(this.pageInfo);
           this.spinner.hide(); // hide the spinner when API call is successful
         },
         error: (error) => {

@@ -4,12 +4,20 @@ import { ApiService } from 'src/app/services/api.service';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.css']
+  styleUrls: ['./forgot-password.component.css'],
+  animations: [
+    trigger('disabled', [
+      state('true', style({ opacity: 0.5, pointerEvents: 'none' })),
+      state('false', style({ opacity: 1, pointerEvents: 'auto' })),
+      transition('true <=> false', animate('200ms ease-in-out'))
+    ])
+  ]
 })
 export class ForgotPasswordComponent implements  OnDestroy {
 

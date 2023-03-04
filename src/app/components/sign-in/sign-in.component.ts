@@ -5,11 +5,19 @@ import { Login } from 'src/app/models/login';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.css']
+  styleUrls: ['./sign-in.component.css'],
+  animations: [
+    trigger('disabled', [
+      state('true', style({ opacity: 0.5, pointerEvents: 'none' })),
+      state('false', style({ opacity: 1, pointerEvents: 'auto' })),
+      transition('true <=> false', animate('200ms ease-in-out'))
+    ])
+  ]
 })
 export class SignInComponent implements OnInit, OnDestroy {
 

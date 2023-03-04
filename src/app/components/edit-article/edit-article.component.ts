@@ -4,11 +4,19 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { BlogPost } from 'src/app/models/blogPost';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-edit-article',
   templateUrl: './edit-article.component.html',
-  styleUrls: ['./edit-article.component.css']
+  styleUrls: ['./edit-article.component.css'],
+  animations: [
+    trigger('disabled', [
+      state('true', style({ opacity: 0.5, pointerEvents: 'none' })),
+      state('false', style({ opacity: 1, pointerEvents: 'auto' })),
+      transition('true <=> false', animate('200ms ease-in-out'))
+    ])
+  ]
 })
 export class EditArticleComponent implements OnInit, OnDestroy{
 
@@ -28,6 +36,7 @@ export class EditArticleComponent implements OnInit, OnDestroy{
   ) {}
 
   ngOnInit(): void {
+    this._article={} as BlogPost;
     this.spinner.show(); // show the spinner before making API call
     this.getArticle(); 
     console.log("This post id "+this.postId);

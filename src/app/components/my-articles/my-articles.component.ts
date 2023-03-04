@@ -6,11 +6,19 @@ import { BlogPost } from 'src/app/models/blogPost';
 import { Router } from '@angular/router';
 import { PageInfo } from 'src/app/models/pageInfo';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-my-articles',
   templateUrl: './my-articles.component.html',
-  styleUrls: ['./my-articles.component.css']
+  styleUrls: ['./my-articles.component.css'],
+  animations: [
+    trigger('disabled', [
+      state('true', style({ opacity: 0.5, pointerEvents: 'none' })),
+      state('false', style({ opacity: 1, pointerEvents: 'auto' })),
+      transition('true <=> false', animate('200ms ease-in-out'))
+    ])
+  ]
 })
 export class MyArticlesComponent implements OnInit, OnDestroy {
   id!:number;
@@ -54,7 +62,6 @@ export class MyArticlesComponent implements OnInit, OnDestroy {
         this.pageSize = response.pageInfo.pageSize;
         this.hasNext = response.pageInfo.hasNext;
         this.hasPrevious = response.pageInfo.hasPrevious;
-        console.log(this.pageInfo);
         this.spinner.hide(); // hide the spinner when API call is successful
     });
   }

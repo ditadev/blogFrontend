@@ -6,11 +6,19 @@ import { BlogPost } from 'src/app/models/blogPost';
 import { PageInfo } from 'src/app/models/pageInfo';
 import { Location } from '@angular/common';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-article',
   templateUrl: './article.component.html',
-  styleUrls: ['./article.component.css']
+  styleUrls: ['./article.component.css'],
+  animations: [
+    trigger('disabled', [
+      state('true', style({ opacity: 0.5, pointerEvents: 'none' })),
+      state('false', style({ opacity: 1, pointerEvents: 'auto' })),
+      transition('true <=> false', animate('200ms ease-in-out'))
+    ])
+  ]
 })
 export class ArticleComponent implements OnInit, OnDestroy {
   
@@ -30,6 +38,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.articles = {} as BlogPost;
     this.spinner.show(); // show the spinner before making API call
     this.getArticle(); 
   }

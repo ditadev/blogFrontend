@@ -5,11 +5,19 @@ import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { ResetPassword } from 'src/app/models/resetPassword';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-resetpassword',
   templateUrl: './resetpassword.component.html',
-  styleUrls: ['./resetpassword.component.css']
+  styleUrls: ['./resetpassword.component.css'],
+  animations: [
+    trigger('disabled', [
+      state('true', style({ opacity: 0.5, pointerEvents: 'none' })),
+      state('false', style({ opacity: 1, pointerEvents: 'auto' })),
+      transition('true <=> false', animate('200ms ease-in-out'))
+    ])
+  ]
 })
 export class ResetpasswordComponent implements  OnDestroy {
 

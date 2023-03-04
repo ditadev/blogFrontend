@@ -1,5 +1,5 @@
 <app-nav-bar></app-nav-bar>
-<ngx-spinner>
+<ngx-spinner type="ball-spin-clockwise">
     <div class="flex h-screen m-auto items-center justify-center ">
         <div class="w-40 h-40 border-t-4 border-b-4 border-cyan-700 rounded-full animate-spin"></div>
     </div>
@@ -577,9 +577,9 @@
                     </div>
 
                     <div>
-                        <label for="newpassword" class="block text-lg font-medium text-gray-700">New Password</label>
+                        <label for="password" class="block text-lg font-medium text-gray-700">New Password</label>
                         <div class="mt-1">
-                            <input [(ngModel)]="changePasswordRequest.password" id="newpassword" name="newpassword" type="password" required
+                            <input [(ngModel)]="changePasswordRequest.password" id="password" name="password" type="password" required
                                 class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                                 <p *ngIf="changePasswordRequest.password.length<8" class="text-xs text-red-700 text-right italic font-extralight
                                 ">(At least 8 characters)</p>

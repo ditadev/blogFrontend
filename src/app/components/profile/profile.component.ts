@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -12,7 +13,14 @@ import { ApiService } from 'src/app/services/api.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
+  animations: [
+    trigger('disabled', [
+      state('true', style({ opacity: 0.5, pointerEvents: 'none' })),
+      state('false', style({ opacity: 1, pointerEvents: 'auto' })),
+      transition('true <=> false', animate('200ms ease-in-out'))
+    ])
+  ]
 })
 export class ProfileComponent implements OnInit, OnDestroy {
 
@@ -33,7 +41,12 @@ ngOnInit(): void {
   this.author = {} as UpdateAuthor;
   this.emailChange = {} as ChangeEmail;
   this.verifyEmailChange = {} as VerifyChangeEmail;
-  this.changePasswordRequest = {} as ChangePassword;
+  this.changePasswordRequest = {
+    emailAddress: "",
+    oldPassword: "",
+    password: "",
+    confirmPassword: ""
+  };
   this.token="";
   this.getUser()
 }
@@ -44,7 +57,6 @@ constructor(
   private router: Router,
   private spinner: NgxSpinnerService,
 ) {}
-
 
 updateProfileState():void{
   this.state=2;
@@ -75,7 +87,6 @@ getUser():void{
     this.author.lastName=response.data.lastName;
     this.author.username=response.data.username;
     this.author.description=response.data.description;
-    console.log(this.author);
     this.spinner.hide();
   });
 }
