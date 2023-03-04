@@ -14,9 +14,8 @@ export class ForgotPasswordComponent implements  OnDestroy {
 
   _email=this.route.snapshot.paramMap.get('emailAddress')!;
   subscription?: Subscription;
-  message?: string;
+  message:string="";
   code?:number;
-  toast:boolean=false;
 
   constructor(
     private apiService: ApiService,
@@ -30,16 +29,16 @@ export class ForgotPasswordComponent implements  OnDestroy {
       this.code=response.code;
             console.log(this.code);
             if(this.code==0){
-              this.toast=!this.toast;
               this.router.navigate(["resetpassword"]);
               }
-    });
+    },
+    error => {
+      this.message="Error Message"
+     }
+    );
 
   }
 
-  toaster(){
-    this.toast = !this.toast;
-  }
 
   ngOnDestroy(): void {
     if (this.subscription) {

@@ -4,7 +4,6 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { BlogPost } from 'src/app/models/blogPost';
 import { Router } from '@angular/router';
-import { PageInfo } from 'src/app/models/pageInfo';
 
 @Component({
   selector: 'app-view-my-article',
@@ -25,7 +24,6 @@ export class ViewMyArticleComponent implements OnInit, OnDestroy {
     private apiService: ApiService,
     private route: ActivatedRoute,
     private router: Router
-
   ) { }
 
   ngOnInit(): void {

@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { BlogPost } from 'src/app/models/blogPost';
 import { PageInfo } from 'src/app/models/pageInfo';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-article',
@@ -23,7 +24,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
   constructor(
     private apiService: ApiService,
     private route: ActivatedRoute,
-
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -36,6 +37,10 @@ export class ArticleComponent implements OnInit, OnDestroy {
         this.pageInfo = response.pageInfo;
         this.articles=response.data;
     });
+  }
+
+  goBack():void{
+    this.location.back();
   }
 
   ngOnDestroy(): void {

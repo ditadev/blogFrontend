@@ -14,9 +14,8 @@ export class VerificationComponent implements  OnDestroy {
 _email=this.route.snapshot.paramMap.get('emailAddress')!;
 _token=this.route.snapshot.paramMap.get('token')!;
   subscription?: Subscription;
-  message?: string;
+  message:string="";
   code?:number;
-  toast:boolean=false;
 
   constructor(
     private apiService: ApiService,
@@ -25,20 +24,18 @@ _token=this.route.snapshot.paramMap.get('token')!;
   ) {}
 
   verifyUser():any{
-    this.subscription = this.apiService.verifyAuthor(this._email,this._token).subscribe( response => {this.message=response.message;
-      console.log(this.message);
+    this.subscription = this.apiService.verifyAuthor(this._email,this._token).subscribe( response => {
       this.code=response.code;
             console.log(this.code);
             if(this.code==0){
-              this.toast=!this.toast;
               this.router.navigate(["login"]);
             }
-    });
+    },
+    error => {
+      this.message="Error Message"
+     }
+    );
 
-    }
-
-    toaster(){
-      this.toast = !this.toast;
     }
 
     ngOnDestroy(): void {
