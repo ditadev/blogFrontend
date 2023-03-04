@@ -4,6 +4,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
 import { ChangeEmail } from 'src/app/models/changeEmail';
+import { ChangePassword } from 'src/app/models/changePassword';
 import { UpdateAuthor } from 'src/app/models/updateAuthor';
 import { VerifyChangeEmail } from 'src/app/models/verifyEmailChange';
 import { ApiService } from 'src/app/services/api.service';
@@ -19,6 +20,7 @@ state:number=1;
 author!:UpdateAuthor;
 emailChange!:ChangeEmail;
 verifyEmailChange!:VerifyChangeEmail;
+changePasswordRequest!:ChangePassword;
 subscription?: Subscription;
 code!:number;
 message:string="";
@@ -31,6 +33,7 @@ ngOnInit(): void {
   this.author = {} as UpdateAuthor;
   this.emailChange = {} as ChangeEmail;
   this.verifyEmailChange = {} as VerifyChangeEmail;
+  this.changePasswordRequest = {} as ChangePassword;
   this.token="";
   this.getUser()
 }
@@ -43,16 +46,16 @@ constructor(
 ) {}
 
 
-profile():void{
+updateProfileState():void{
   this.state=2;
 }
-changePassword():void{
+changePasswordState():void{
   this.state=3;
 }
-changeEmail():void{
+changeEmailState():void{
   this.state=4;
 }
-changeEmails():void{
+verifyEmailChangeState():void{
   this.state=5;
 }
 back():void{
@@ -77,13 +80,13 @@ getUser():void{
   });
 }
 
-changeEmailw():void{
+changeEmailAddress():void{
   this.spinner.show();
   this.subscription = this.apiService.changeEmail(this.emailChange.oldEmailAddress,this.emailChange.password).subscribe({
     next: (response) => {
       this.code = response.code;
       if (this.code == 0) {
-        this.changeEmails();
+        this.verifyEmailChangeState();
       }
       this.spinner.hide();
     },
@@ -124,6 +127,26 @@ updateAuthor():void{
       this.code = response.code;
       if (this.code == 0) {
         window.location.href = window.location.href;
+      }
+      this.spinner.hide();
+    },
+    error: (error) => {
+      this.spinner.hide();
+      this.message = 'Error Message';
+    },
+    complete: () => {
+      this.spinner.hide();
+    },
+  });
+}
+
+changePassword():void{
+  this.spinner.show();
+  this.subscription = this.apiService.changePassword(this.changePasswordRequest).subscribe({
+    next: (response) => {
+      this.code = response.code;
+      if (this.code == 0) {
+        this.router.navigate(["login"]);
       }
       this.spinner.hide();
     },

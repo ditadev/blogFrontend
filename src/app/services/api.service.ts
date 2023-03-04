@@ -7,6 +7,7 @@ import { BlogPost } from '../models/blogPost';
 import { NewBlogPost } from '../models/newBlogPost';
 import { UpdateAuthor } from '../models/updateAuthor';
 import { VerifyChangeEmail } from '../models/verifyEmailChange';
+import { ChangePassword } from '../models/changePassword';
 
 
 @Injectable({
@@ -81,6 +82,11 @@ export class ApiService {
     updateAuthur(author:UpdateAuthor): Observable<any>{
       const url = `${this.authorUrl}`;
       return this.http.patch(`${url}/UpdateUser`, author, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+    }
+
+    changePassword(passwordRequest:ChangePassword): Observable<any>{
+      const url = `${this.authorUrl}`;
+      return this.http.patch(`${url}/ChangePassword`, passwordRequest, this.httpOptions).pipe(retry(1), catchError(this.handleError));
     }
 
     changeEmail(email: string, password:string): Observable<any>{
