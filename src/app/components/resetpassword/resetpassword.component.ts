@@ -47,9 +47,7 @@ export class ResetpasswordComponent implements  OnDestroy {
     this.apiService.resetPassword(this._resetPassword).subscribe({
       next: (response) => {
         this.message = response.message;
-        console.log(this.message);
         this.code = response.code;
-        console.log(this.code);
         if (this.code == 0) {
           this.router.navigate(["login"]);
         }
@@ -62,9 +60,6 @@ export class ResetpasswordComponent implements  OnDestroy {
     });
   }
   
-
-
-
   ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
