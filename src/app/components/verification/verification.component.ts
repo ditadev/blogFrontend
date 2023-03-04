@@ -42,7 +42,6 @@ _token=this.route.snapshot.paramMap.get('token')!;
     this.subscription = this.apiService.verifyAuthor(this._email, this._token).subscribe({
       next: (response) => {
         this.code = response.code;
-        console.log(this.code);
         if (this.code == 0) {
           this.router.navigate(["login"]);
         }

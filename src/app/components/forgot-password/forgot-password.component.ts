@@ -38,9 +38,7 @@ export class ForgotPasswordComponent implements  OnDestroy {
     this.subscription = this.apiService.forgotPassword(this._email).subscribe({
       next: (response) => {
         this.message = response.message;
-        console.log(this.message);
         this.code = response.code;
-        console.log(this.code);
         if (this.code == 0) {
           this.router.navigate(['resetpassword']);
         }
