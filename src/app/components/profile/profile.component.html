@@ -8,10 +8,10 @@
 </div>
 <div class="h-full background">
     <div class="">
-        <div *ngIf="state==1" class="w-11/12 pt-4 pl-24 flex flex-row flex-wrap items-start justify-start ">
+        <div *ngIf="state==1" class="w-11/12 py-4 mx-4 flex flex-row flex-wrap items-start justify-start ">
 
             <div (click)="updateProfileState()"
-                class="max-w-sm h-64 rounded overflow-hidden mr-12 mt-8 mb-8  shadow-lg">
+                class="max-w-2xl h-64 rounded overflow-hidden mx-8 my-8  shadow-lg">
                 <svg class="ml-4 mt-4 mb-8" width="119" height="90" viewBox="0 0 119 90" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_1036_56590)">
@@ -129,7 +129,7 @@
             </div>
 
             <div (click)="changePasswordState()"
-                class="max-w-sm h-64 rounded overflow-hidden mr-12 mt-8 mb-8  shadow-lg">
+                class="max-w-2xl h-64 rounded overflow-hidden mx-8 my-8  shadow-lg">
                 <svg class="ml-4 mt-4 mb-8" width="178" height="90" viewBox="0 0 178 90" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_1036_56683)">
@@ -277,7 +277,7 @@
                 </div>
             </div>
 
-            <div (click)="changeEmailState()" class="max-w-sm h-64 rounded overflow-hidden mr-12 mt-8 mb-8 shadow-lg">
+            <div (click)="changeEmailState()" class="max-w-2xl h-64 rounded overflow-hidden mx-8 my-8 shadow-lg">
                 <svg class="ml-4 mt-4 mb-8" width="130" height="90" viewBox="0 0 130 100" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_1036_56734)">
@@ -411,7 +411,7 @@
 
         <div *ngIf="state==2" class="mt-12  items-center justify-center">
 
-            <div class="mt-12 px-8 mx-8 ">
+            <div class="mx-8">
                 <div class=" flex-none justify-start">
                     <div class="py-8 justify-start text-3xl font-semibold text-left ">Edit Profile</div>
                 </div>
@@ -490,7 +490,7 @@
         </div>
 
         <div *ngIf="state==3" class="mt-12  items-center justify-center">
-            <div class="mt-12 px-8 mx-8 ">
+            <div class="mx-8">
                 <div class=" flex-none justify-start">
                     <div class="py-8 justify-start text-3xl font-semibold text-left ">Change Email Address</div>
                 </div>
@@ -553,7 +553,7 @@
 
         <div *ngIf="state==4" class="mt-12  items-center justify-center">
 
-            <div class="mt-12 px-8 mx-8 ">
+            <div class="mx-8">
                 <div class=" flex-none justify-start">
                     <div class="py-8 justify-start text-3xl font-semibold text-left ">Change Password</div>
                 </div>
@@ -638,7 +638,7 @@
         </div>
 
         <div *ngIf="state==5" class="mt-12  items-center justify-center">
-            <div class="mt-12 px-8 mx-8 ">
+            <div class="mx-8">
                 <div class=" flex-none justify-start">
                     <div class="py-8 justify-start text-3xl font-semibold text-left ">Verify New Email Address</div>
                 </div>
