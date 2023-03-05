@@ -35,8 +35,8 @@
             </div>
         </div>
         <footer class="pb-4">
-        <div class="flex flex-col items-center pb-4">
-            <!-- Help text -->
+            <div *ngIf="pageInfo.hasNext || pageInfo.hasPrevious" class="flex flex-col items-center pt-4">
+                <!-- Help text -->
             <span class="text-sm text-gray-700 dark:text-gray-400">
                 Page <span class="font-semibold text-gray-900 dark:text-white">{{currentPage}}</span> of <span
                     class="font-semibold text-gray-900 dark:text-white">{{totalPages}}</span>

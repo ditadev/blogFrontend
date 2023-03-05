@@ -5,13 +5,12 @@
     </div>
   </ngx-spinner>
 <div>
-    <div *ngIf="_article.postId==postId && !_showMore">
-        <form class="space-y-8 divide-y divide-gray-200">
+    <div *ngIf="_article.postId==postId && !_showMore" class="mx-4 my-2">
+
+        <form [formGroup]="editArticleForm" (ngSubmit)="onSubmit()" class="space-y-6">
             <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
-                <div class="space-y-6 sm:space-y-5">
-
+                <div class="space-y-6  sm:space-y-5">
                     <div class="space-y-6 sm:space-y-5">
-
                         <div
                             class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                             <label for="cover-photo"
@@ -29,12 +28,11 @@
                                         </svg>
                                         <div class="flex text-sm text-gray-600">
                                             <label for="file-upload"
-                                                class="relative  cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
+                                                class="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
                                                 <input type="file" (change)="onFileSelected($event)" name="CoverImage">
                                             </label>
                                         </div>
-                                        <span class="pl-1 text-sm text-center text-semibold text-red-700"
-                                            ></span>
+                                        <span class="pl-1 text-sm text-center text-semibold text-red-700"></span>
                                         <p class="pl-1 text-sm text-center text-semibold">or drag and drop</p>
                                         <p class="text-xs text-gray-500">JPG, PNG, JPEG up to 10MB</p>
                                     </div>
@@ -42,62 +40,47 @@
                             </div>
                         </div>
 
-
-                        <div
-                            class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                            <label for="about"
-                                class="block pl-3 pr-3 text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Body</label>
-                            <div class="mt-1 sm:col-span-2 sm:mt-0">
-                                <textarea [(ngModel)]="_article.body" id="Body" name="Body" rows="3"
-                                class="block w-full max-w-lg   rounded-md border border-gray-800 shadow-sm focus:border-cyan-500 focus:ring-cyan-500 pl-1 pr-1 pt-3 pb-3 sm:text-sm "></textarea>
-                            </div>
-                        </div>
-                        <div class="space-y-6 pt-8 sm:space-y-5 sm:pt-10">
-
-                            <div class="space-y-6 sm:space-y-5">
-                                <div
-                                    class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                                    <label for="title"
-                                        class="block pl-3 pr-3 text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Title
-                                    </label>
-                                    <div class="mt-1 sm:col-span-2 sm:mt-0">
-                                        <input [(ngModel)]="_article.title" type="text" name="title" id="first-name"
-                                            class="block w-full max-w-lg   rounded-md border border-gray-800 shadow-sm focus:border-cyan-500 focus:ring-cyan-500 pl-1 pr-1 pt-3 pb-3 sm:text-sm ">
-                                    </div>
-                                </div>
-
-                                <div
-                                    class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                                    <label for="summary"
-                                        class="block pl-3 pr-3 text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Summary</label>
-                                    <div class="mt-1 sm:col-span-2 sm:mt-0">
-                                        <textarea [(ngModel)]="_article.summary" type="text" name="summary" id="street-address"
-                                        class="block w-full max-w-lg   rounded-md border border-gray-800 shadow-sm focus:border-cyan-500 focus:ring-cyan-500 pl-1 pr-1 pt-3 pb-3 sm:text-sm "></textarea>
-                                    </div>
-                                </div>
-
-
-                                <div
-                                class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                                <label for="tags"
-                                    class="block pl-3 pr-3 text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Tags</label>
-                                <div class="mt-1 sm:col-span-2 sm:mt-0">
-                                    <input [(ngModel)]="_article.tags" type="text" name="category" id="category"
-                                    class="block w-full max-w-lg   rounded-md border border-cyan-800 shadow-sm focus:border-cyan-500 focus:ring-indigo-500 pl-1 pr-1 pt-3 pb-3 sm:text-sm ">
-                                </div>
-                            </div>
-
-
+                        <div>
+                            <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+                            <div class="mt-1">
+                                <textarea [(ngModel)]="_article.title"  formControlName="title" id="title" type="text" class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-4 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"></textarea>
+                                <p *ngIf="editArticleForm.controls['title'].invalid && editArticleForm.controls['title'].touched" class="text-xs text-red-700 text-right italic font-extralight">(At least 10 characters)</p>
                             </div>
                         </div>
 
+                        <div>
+                            <label for="summary" class="block text-sm font-medium text-gray-700">Summary</label>
+                            <div class="mt-1">
+                                <textarea [(ngModel)]="_article.summary"  formControlName="summary"  id="summary" type="text" class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-4 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"></textarea>
+                                <p *ngIf="editArticleForm.controls['summary'].invalid && editArticleForm.controls['summary'].touched" class="text-xs text-red-700 text-right italic font-extralight">(At least 20 characters)</p>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="body" class="block text-sm font-medium text-gray-700">Body</label>
+                            <div class="mt-1">
+                                <textarea [(ngModel)]="_article.body"  formControlName="body" id="description" type="text" class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-4 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"></textarea>
+                                <p *ngIf="editArticleForm.controls['body'].invalid && editArticleForm.controls['body'].touched" class="text-xs text-red-700 text-right italic font-extralight">(At least 100 characters)</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-1">
+                            <label for="tags" class="block text-sm font-medium text-gray-700">Tags</label>
+                            <div class="mt-1">
+                                <input [(ngModel)]="_article.tags"  formControlName="tags" id="tags" type="text"
+                                required
+                                    class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                    <p *ngIf="editArticleForm.controls['tags'].invalid && editArticleForm.controls['tags'].touched" class="text-xs text-red-700 text-right italic font-extralight">(At least 6 characters)</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </form>
-        <p *ngIf="msg" class="my-2 mx-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oops!</span> one or more fields incorrect</p>
-        <div (click)="updateArticle()"
-            class=" ml-1 mr-3 block w-96 max-w-lg rounded-lg flex divide-x divide-gray-200 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2  focus:ring-offset-gray-900">
+
+        <p *ngIf="msg" class="my-2 mx-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oops!</span> {{message}}!</p>
+        
+        <button [disabled]="editArticleForm.invalid" (click)="onSubmit()"
+        class="mr-3 mt-6 block w-96 max-w-lg rounded-lg flex divide-x divide-gray-200 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2  focus:ring-offset-gray-900">
             <div class="flex w-0 flex-1">
                 <a
                     class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
@@ -110,7 +93,7 @@
                     <span class="ml-3">Save</span>
                 </a>
             </div>
-        </div>
+        </button>
     </div>
 
     <div style="z-index:9;" *ngIf="_showMore" aria-orientation="horizontal" aria-labelledby="confirm-delete"

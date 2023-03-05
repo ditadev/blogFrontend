@@ -40,6 +40,7 @@ export class MyArticlesComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(){
+    this.pageInfo = {} as PageInfo;
     const token = localStorage.getItem("jwt");
     if (token) {
       this.id = this.jwtHelper.decodeToken(token).sub;

@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BlogPost } from 'src/app/models/blogPost';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-article',
@@ -27,19 +28,26 @@ export class EditArticleComponent implements OnInit, OnDestroy{
  selectedFile!: File;
  _showMore:boolean=false;
  msg: string = "";
-
+ message:string="";
+ editArticleForm!: FormGroup;
 
   constructor(
     private apiService: ApiService,
     private route: ActivatedRoute,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this._article={} as BlogPost;
     this.spinner.show(); // show the spinner before making API call
+    this.editArticleForm = this.formBuilder.group({
+      title: ['', [Validators.required, Validators.minLength(10)]],
+      summary: ['', [Validators.required, Validators.minLength(20)]],
+      body: ['', [Validators.required, Validators.minLength(100)]],
+      tags: ['', [Validators.required, Validators.minLength(6)]],
+    });
     this.getArticle(); 
-    console.log("This post id "+this.postId);
   }
 
   closeDialog(){
@@ -51,12 +59,15 @@ export class EditArticleComponent implements OnInit, OnDestroy{
   }
 
   updateArticle(): void {
-    this.spinner.show(); // show the spinner before making API call
+    if (this.editArticleForm.valid) {
+      this._article.title=this.editArticleForm.value.title;
+      this._article.summary=this.editArticleForm.value.summary;
+      this._article.body=this.editArticleForm.value.body;
+      this._article.tags=this.editArticleForm.value.tags;
+      this.spinner.show(); // show the spinner before making API call
     this.subscription = this.apiService.updateArticle(this.selectedFile, this.postId, this._article).subscribe({
       next: (response) => {
-        console.log(response);
         this.msg = response.message;
-        console.log(this._article);
         if (response.code == 0) {
           this.spinner.hide(); // hide the spinner when API call is successful
           this._showMore = !this._showMore;
@@ -64,14 +75,21 @@ export class EditArticleComponent implements OnInit, OnDestroy{
       },
       error: (error) => {
         this.msg = "Required";
+        this.message = "Image Required";
         this.spinner.hide(); // hide the spinner when API call is successful
       },
       complete: () => {
         this.spinner.hide(); // hide the spinner when API call is successful
       }
     });
+  } else {
+    this.message = 'Please fill in all required fields';
+  }
   }
   
+  onSubmit():void{
+    this.updateArticle();
+  }
 
   getArticle(){
     this.spinner.show(); // show the spinner before making API call

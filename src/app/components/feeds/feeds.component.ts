@@ -40,6 +40,7 @@ export class FeedsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.pageInfo = {} as PageInfo;
     this.getArticles();
   }
 

@@ -5,10 +5,10 @@
     </div>
   </ngx-spinner>
 <div class="bg-black"  >
-    <div *ngIf="articles.postId==postId" class="relative overflow-hidden" >
+    <div *ngIf="articles.postId==postId" class="relative overflow-hidden bg-white " >
         <div class="bg-gray-900 pt-10 sm:pt-16 lg:overflow-hidden lg:pt-8 lg:pb-14">
             <div class="mx-auto -mt-20 max-w-7xl lg:px-8">
-                <div  class="relative overflow-hidden rounded-2xl bg-white py-16">
+                <div  class="relative overflow-hidden rounded-sm bg-white py-16">
                     <div class="hidden lg:absolute lg:inset-y-0 lg:block lg:h-full lg:w-full lg:[overflow-anchor:none]">
                         <div class="relative mx-auto h-full max-w-prose text-lg" aria-hidden="true">
                             <svg class="absolute top-12 left-full translate-x-32 transform" width="404" height="384"
@@ -22,7 +22,7 @@
                                 </defs>
                                 <rect width="404" height="384" fill="url(#74b3fd99-0a6f-4271-bef2-e80eeafdf357)" />
                             </svg>
-                            <svg class="absolute top-1/2 right-full -translate-y-1/2 -translate-x-32 transform"
+                            <svg class="absolute right-full -translate-y-1/2 -translate-x-32 transform"
                                 width="404" height="384" fill="none" viewBox="0 0 404 384">
                                 <defs>
                                     <pattern id="f210dbf6-a58d-4871-961e-36d5016a0f49" x="0" y="0" width="20"
@@ -38,7 +38,7 @@
                     <div class="relative px-6 lg:px-8">
                         <div class="mx-auto max-w-prose text-lg">
                             <h1>
-                                <span class="block bg-gradient-to-r from-teal-500 to-indigo-700 bg-clip-text text-transparent sm:pb-5 mt-2 mb-2  text-center text-3xl font-bold leading-8 tracking-tight text-gray-800 sm:text-2xl">Introducing</span>
+                                <span class="block bg-gradient-to-r from-teal-500 to-indigo-700 bg-clip-text text-transparent sm:pb-5 mt-2 mb-2  text-center text-3xl font-bold leading-8 tracking-tight text-gray-800 sm:text-2xl ">Introducing</span>
                                 <span
                                     class="block bg-gradient-to-r from-teal-500 to-cyan-600 bg-clip-text text-transparent sm:pb-5 mt-2 mb-2  text-center text-3xl font-bold leading-8 tracking-tight text-gray-800 sm:text-4xl">{{articles.title}}</span>
                             </h1>
@@ -55,15 +55,16 @@
                             <p class="mt-8 text-xl font-semibold text-center leading-8 text-black">{{articles.summary}}</p>
                         </div>
                         <div class="prose prose-lg prose-indigo mx-auto mt-6 text-gray-800">
-                            <p>{{articles.body}}</p>
-                        </div>
+                            <p class="break-words text-base">{{articles.body}}</p>
+                          </div>
+                          
                     </div>
                 </div>
             </div>
         </div>
         <div (click)="goBack()"
-                class="-mt-px mb-4 rounded-lg flex divide-x divide-gray-200 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2  focus:ring-offset-gray-900">
-                <div  id="confirm-delete" aria-expanded="false" aria-haspopup="true"
+                class="-mt-px my-auto rounded-sm flex divide-x divide-gray-200 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2  focus:ring-offset-gray-900">
+                <button  id="confirm-delete" aria-expanded="false" aria-haspopup="true"
                     class="-ml-px rounded-lg flex w-0 flex-1 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900">
                     <a
                         class="relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
@@ -74,7 +75,7 @@
                         </svg>
                         <span class="ml-3">Go Back</span>
                     </a>
-                </div>
+                </button>
 
             </div>
     </div>

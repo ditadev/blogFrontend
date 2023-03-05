@@ -1,5 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -34,44 +35,63 @@ code!:number;
 message:string="";
 id!:number;
 token!:string;
+updateUserForm!: FormGroup;
+changeEmailForm!: FormGroup;
+verifyEmailChangeForm!: FormGroup;
+changePasswordForm!: FormGroup;
 
 
-
-ngOnInit(): void {
-  this.author = {} as UpdateAuthor;
-  this.emailChange = {} as ChangeEmail;
-  this.verifyEmailChange = {} as VerifyChangeEmail;
-  this.changePasswordRequest = {
-    emailAddress: "",
-    oldPassword: "",
-    password: "",
-    confirmPassword: ""
-  };
-  this.token="";
-  this.getUser()
-}
 
 constructor(
   private apiService: ApiService,
   private jwtHelper: JwtHelperService, 
   private router: Router,
   private spinner: NgxSpinnerService,
+  private formBuilder: FormBuilder
 ) {}
 
-updateProfileState():void{
-  this.state=2;
+ngOnInit(): void {
+  this.author = {} as UpdateAuthor;
+  this.emailChange = {} as ChangeEmail;
+  this.verifyEmailChange = {} as VerifyChangeEmail;
+  this.changePasswordRequest = {} as ChangePassword;
+  this.token="";
+
+  this.getUser()
+
+  this.updateUserForm = this.formBuilder.group({
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
+    userName: ['', [Validators.required, Validators.minLength(3)]],
+    description: ['', [Validators.required, Validators.minLength(100)]]
+  });
+
+  this.changeEmailForm = this.formBuilder.group({
+    oldEmailAddress: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(8)]],
+  });
+
+  this.verifyEmailChangeForm = this.formBuilder.group({
+    token: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6)]],
+    oldEmailAddress: ['', [Validators.required, Validators.email]],
+    newEmailAddress: ['', [Validators.required, Validators.email]],
+  });
+
+  this.changePasswordForm = this.formBuilder.group({
+    emailAddress: ['', [Validators.required, Validators.email]],
+    oldPassword: ['', [Validators.required, Validators.minLength(8)]],
+    password: ['', [Validators.required, Validators.minLength(8)]],
+    confirmPassword: ['', [Validators.required, Validators.minLength(8), this.matchPasswords.bind(this)]],
+  });
 }
-changePasswordState():void{
-  this.state=3;
-}
-changeEmailState():void{
-  this.state=4;
-}
-verifyEmailChangeState():void{
-  this.state=5;
-}
-back():void{
-  window.location.href = window.location.href;
+
+matchPasswords(control: AbstractControl): { [key: string]: boolean } | null {
+  const password = control.parent?.get('password');
+  const confirmPassword = control.parent?.get('confirmPassword');
+  if (password && confirmPassword && password.value !== confirmPassword.value) {
+    return { 'passwordMismatch': true };
+  }
+  return null;
 }
 
 getUser():void{
@@ -92,6 +112,8 @@ getUser():void{
 }
 
 changeEmailAddress():void{
+  if (this.changeEmailForm.valid) {
+    this.emailChange = { ...this.changeEmailForm.value };
   this.spinner.show();
   this.subscription = this.apiService.changeEmail(this.emailChange.oldEmailAddress,this.emailChange.password).subscribe({
     next: (response) => {
@@ -103,15 +125,23 @@ changeEmailAddress():void{
     },
     error: (error) => {
       this.spinner.hide();
-      this.message = 'Error Message';
+      this.message = 'Incorrect email/password';
     },
     complete: () => {
       this.spinner.hide();
     },
   });
 }
+else {
+  this.message = 'Please fill in all required fields';
+}
+}
 
 verifyEmailChanger():void{
+  if (this.changeEmailForm.valid) {
+    this.token=this.verifyEmailChangeForm.value.token;
+    this.verifyEmailChange.newEmailAddress=this.verifyEmailChangeForm.value.newEmailAddress;
+    this.verifyEmailChange.oldEmailAddress=this.verifyEmailChangeForm.value.oldEmailAddress;
   this.spinner.show();
   this.subscription = this.apiService.verifyChangeEmail(this.token,this.verifyEmailChange).subscribe({
     next: (response) => {
@@ -123,15 +153,21 @@ verifyEmailChanger():void{
     },
     error: (error) => {
       this.spinner.hide();
-      this.message = 'Error Message';
+      this.message = 'Check entry and try again';
     },
     complete: () => {
       this.spinner.hide();
     },
   });
 }
+  else {
+    this.message = 'Please fill in all required fields';
+  }
+}
 
 updateAuthor():void{
+  if (this.updateUserForm.valid) {
+    this.author = { ...this.updateUserForm.value };
   this.spinner.show();
   this.subscription = this.apiService.updateAuthur(this.author).subscribe({
     next: (response) => {
@@ -143,15 +179,21 @@ updateAuthor():void{
     },
     error: (error) => {
       this.spinner.hide();
-      this.message = 'Error Message';
+      this.message = 'Username already Exists';
     },
     complete: () => {
       this.spinner.hide();
     },
   });
 }
+else {
+  this.message = 'Please fill in all required fields';
+}
+}
 
 changePassword():void{
+  if (this.changePasswordForm.valid) {
+    this.changePasswordRequest = { ...this.changePasswordForm.value };
   this.spinner.show();
   this.subscription = this.apiService.changePassword(this.changePasswordRequest).subscribe({
     next: (response) => {
@@ -169,6 +211,25 @@ changePassword():void{
       this.spinner.hide();
     },
   });
+}else {
+  this.message = 'Please fill in all required fields';
+}
+}
+
+updateProfileState():void{
+  this.state=2;
+}
+changePasswordState():void{
+  this.state=3;
+}
+changeEmailState():void{
+  this.state=4;
+}
+verifyEmailChangeState():void{
+  this.state=5;
+}
+back():void{
+  window.location.href = window.location.href;
 }
 
 ngOnDestroy(): void {

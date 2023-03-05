@@ -6,6 +6,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-in',
@@ -26,19 +27,28 @@ export class SignInComponent implements OnInit, OnDestroy {
   code?:number;
   jwt!:string;
   message:string="";
+  loginForm!: FormGroup;
+
 
   constructor(
     private apiService: ApiService,
     private jwtHelper: JwtHelperService, 
     private router: Router,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this._login = {} as Login;
+    this.loginForm = this.formBuilder.group({
+      emailAddress: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+    });
   }
 
   login(): void {
+    if (this.loginForm.valid) {
+      this._login = { ...this.loginForm.value };
     this.spinner.show();
     this.subscription = this.apiService.login(this._login).subscribe({
       next: (response) => {
@@ -58,8 +68,13 @@ export class SignInComponent implements OnInit, OnDestroy {
         this.spinner.hide();
       },
     });
+  }else {
+    this.message = 'Please fill in all required fields';
   }
-  
+}
+onSubmit(): void {
+  this.login();
+}
 
   isUserAuthenticated() {
     const token = localStorage.getItem("jwt");

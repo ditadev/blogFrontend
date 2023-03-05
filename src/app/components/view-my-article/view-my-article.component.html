@@ -5,10 +5,10 @@
     </div>
   </ngx-spinner>
 <div class="bg-black">
-    <div *ngIf="articles" class="relative overflow-hidden">
+    <div *ngIf="articles" class="relative overflow-hidden bg-white">
         <div *ngIf="!_showMore" class="bg-gray-900 h pt-10 sm:pt-16 lg:overflow-hidden lg:pt-8 lg:pb-14">
             <div class="mx-auto -mt-20 max-w-7xl lg:px-8">
-                <div class="relative overflow-hidden rounded-2xl bg-white py-16">
+                <div class="relative overflow-hidden rounded-sm bg-white py-16">
                     <div class="hidden lg:absolute lg:inset-y-0 lg:block lg:h-full lg:w-full lg:[overflow-anchor:none]">
                         <div class="relative mx-auto h-full max-w-prose text-lg" aria-hidden="true">
                             <svg class="absolute top-12 left-full translate-x-32 transform" width="404" height="384"
@@ -22,7 +22,7 @@
                                 </defs>
                                 <rect width="404" height="384" fill="url(#74b3fd99-0a6f-4271-bef2-e80eeafdf357)" />
                             </svg>
-                            <svg class="absolute top-1/2 right-full -translate-y-1/2 -translate-x-32 transform"
+                            <svg class="absolute  right-full -translate-y-1/2 -translate-x-32 transform"
                                 width="404" height="384" fill="none" viewBox="0 0 404 384">
                                 <defs>
                                     <pattern id="f210dbf6-a58d-4871-961e-36d5016a0f49" x="0" y="0" width="20"
@@ -60,7 +60,7 @@
                             </p>
                         </div>
                         <div class="prose prose-lg prose-indigo mx-auto mt-6 text-gray-800">
-                            <p>{{articles.body}}</p>
+                            <p class="break-words text-base">{{articles.body}}</p>
                         </div>
                     </div>
                 </div>
@@ -96,8 +96,8 @@
 
 
             <div *ngIf="!_showMore"
-                class="-mt-px mb-4 rounded-lg flex divide-x divide-gray-200 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2  focus:ring-offset-gray-900">
-                <div routerLink="/edit-article/{{articles.postId}}" class="flex w-0 flex-1">
+                class="-mt-px my-auto rounded-sm flex divide-x divide-gray-200 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2  focus:ring-offset-gray-900">
+                <button routerLink="/edit-article/{{articles.postId}}" class="flex w-0 flex-1">
                     <a
                         class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
                         <svg class="-ml-1 mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
@@ -109,8 +109,8 @@
                         </svg>
                         <span class="ml-3">Edit</span>
                     </a>
-                </div>
-                <div (click)="confirmDelete()" id="confirm-delete" aria-expanded="false" aria-haspopup="true"
+                </button>
+                <button (click)="confirmDelete()" id="confirm-delete" aria-expanded="false" aria-haspopup="true"
                     class="-ml-px rounded-lg flex w-0 flex-1 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900">
                     <a
                         class="relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
@@ -123,7 +123,7 @@
                         </svg>
                         <span class="ml-3">Delete</span>
                     </a>
-                </div>
+                </button>
             </div>
         </div>
     </div>

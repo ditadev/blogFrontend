@@ -6,6 +6,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { ResetPassword } from 'src/app/models/resetPassword';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-resetpassword',
@@ -25,11 +26,14 @@ export class ResetpasswordComponent implements  OnDestroy {
   _resetPassword!:ResetPassword;
   message:string="";
   code?:number;
+  resetPasswordForm!: FormGroup;
+
 
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private formBuilder: FormBuilder
   ) {}
 
 
@@ -40,9 +44,27 @@ export class ResetpasswordComponent implements  OnDestroy {
       password: "",
       confirmPassword: ""
     };  
+
+    this.resetPasswordForm = this.formBuilder.group({
+      emailAddress: ['', [Validators.required, Validators.email]],
+      token: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(8), this.matchPasswords.bind(this)]],
+    });
+  }
+
+  matchPasswords(control: AbstractControl): { [key: string]: boolean } | null {
+    const password = control.parent?.get('password');
+    const confirmPassword = control.parent?.get('confirmPassword');
+    if (password && confirmPassword && password.value !== confirmPassword.value) {
+      return { 'passwordMismatch': true };
+    }
+    return null;
   }
 
   resetPassword(): void {
+    if (this.resetPasswordForm.valid) {
+      this._resetPassword = { ...this.resetPasswordForm.value };
     this.spinner.show(); // show the spinner before making API call
     this.apiService.resetPassword(this._resetPassword).subscribe({
       next: (response) => {
@@ -54,10 +76,17 @@ export class ResetpasswordComponent implements  OnDestroy {
         this.spinner.hide(); // hide the spinner when API call is successful
       },
       error: (error) => {
-        this.message = "Error Message";
+        this.message = "Invalid email/token";
         this.spinner.hide(); // hide the spinner when API call is successful
       }
     });
+  }else {
+    this.message = 'Please fill in all required fields';
+  }
+  }
+
+  onSubmit(): void {
+    this.resetPassword();
   }
   
   ngOnDestroy(): void {

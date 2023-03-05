@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { NewBlogPost } from 'src/app/models/newBlogPost';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-new-article',
@@ -24,15 +25,25 @@ export class NewArticleComponent implements OnInit, OnDestroy {
   _article!: NewBlogPost;
   _showMore:boolean=false;
   msg: string = "";
+  newBlogPostForm!: FormGroup;
+  message:string="";
 
   constructor(
     private apiService: ApiService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private formBuilder: FormBuilder
   ) { }
 
 
   ngOnInit(): void {
     this._article = {} as NewBlogPost;
+    this.newBlogPostForm = this.formBuilder.group({
+      title: ['', [Validators.required, Validators.minLength(10)]],
+      summary: ['', [Validators.required, Validators.minLength(20)]],
+      body: ['', [Validators.required, Validators.minLength(100)]],
+      tags: ['', [Validators.required, Validators.minLength(6)]],
+      categoryName: ['', [Validators.required, Validators.minLength(3)]],
+    });
   }
 
   onFileSelected(event: any) {
@@ -40,24 +51,39 @@ export class NewArticleComponent implements OnInit, OnDestroy {
   }
 
   addPost() {
-    this.spinner.show(); // show the spinner before making API call
-    this.subscription=this.apiService.postArticle(this.selectedFile,this._article).subscribe(
-      response=>{
-        console.log(response);
-        this.msg=response.message;
-        if(response.code==0){
-          this._showMore=!this._showMore;
+    if (this.newBlogPostForm.valid) {
+      this._article = { ...this.newBlogPostForm.value };
+      this.spinner.show();
+      this.subscription = this.apiService.postArticle(this.selectedFile, this._article)
+        .subscribe({
+          next: (response) => {
+            console.log(response);
+            this.msg = response.message;
+            if (response.code == 0) {
+              this._showMore = !this._showMore;
+            }
+            this.spinner.hide();
+          },
+          error: (error) => {
+            this.msg = "Required";
+            this.message = "Image Required";
+            this.spinner.hide();
+          },
+          complete: () => {
+            this.spinner.hide();
           }
-          this.spinner.hide(); // show the spinner before making API call
-      },
-      error => {
-        this.msg="Required";
-        this.spinner.hide(); // hide the spinner when API call is successful
-       }
-    )
+        });
+    } else {
+      this.message = 'Please fill in all required fields';
+    }
   }
+
+  onSubmit():void{
+    this.addPost();
+  }
+
   
-  closeDialog(){
+  closeDialog():void{
     this._showMore=!this._showMore;
   }
 

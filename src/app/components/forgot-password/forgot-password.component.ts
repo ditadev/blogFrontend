@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -19,22 +20,35 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     ])
   ]
 })
-export class ForgotPasswordComponent implements  OnDestroy {
+export class ForgotPasswordComponent implements OnDestroy, OnInit {
 
-  _email=this.route.snapshot.paramMap.get('emailAddress')!;
+  _email!: string;
   subscription?: Subscription;
-  message:string="";
-  code?:number;
+  message: string = "";
+  code?: number;
+  forgotPasswordForm!: FormGroup;
+
 
   constructor(
     private apiService: ApiService,
     private route: ActivatedRoute,
     private router: Router,
-    private spinner: NgxSpinnerService
-  ) {}
+    private spinner: NgxSpinnerService,
+    private formBuilder: FormBuilder
+  ) { }
+
+  ngOnInit(): void {
+    this._email = this.route.snapshot.paramMap.get('emailAddress')!;
+    this.forgotPasswordForm = this.formBuilder.group({
+      emailAddress: ['', [Validators.required, Validators.email]],
+    });
+
+  }
 
   forgotPassword(): void {
-    this.spinner.show();
+    if (this.forgotPasswordForm.valid) {
+      this._email = this.forgotPasswordForm.value.emailAddress;
+      this.spinner.show();
     this.subscription = this.apiService.forgotPassword(this._email).subscribe({
       next: (response) => {
         this.message = response.message;
@@ -45,13 +59,18 @@ export class ForgotPasswordComponent implements  OnDestroy {
         this.spinner.hide();
       },
       error: (error) => {
-        this.message = 'Error Message';
+        this.message = 'If email is registered, you will receive a token';
         this.spinner.hide();
       },
     });
+    }else {
+      this.message = 'Please fill in all required fields';
+    }
   }
-  
 
+  onSubmit(): void {
+    this.forgotPassword();
+  }
 
   ngOnDestroy(): void {
     if (this.subscription) {
