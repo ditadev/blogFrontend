@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
-import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { JwtModule } from "@auth0/angular-jwt";
 import { AuthGuard } from './guard/auth-guard.service';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
@@ -54,6 +53,7 @@ export function tokenGetter() {
     AppRoutingModule,
     HttpClientModule,
     NgxSpinnerModule,
+    ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
     JwtModule.forRoot({

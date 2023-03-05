@@ -24,65 +24,75 @@
 
             <div class="mt-8">
                 <div class="mt-6">
-                    <form action="#" method="POST" class="space-y-6">
+                    <form [formGroup]="authorForm" (ngSubmit)="onSubmit()" class="space-y-6">
                         <div>
-                            <label for="firstname" class="block text-sm font-medium text-gray-700">First Name</label>
+                            <label for="firstName" class="block text-sm font-medium text-gray-700">First Name</label>
                             <div class="mt-1">
-                                <input [(ngModel)]="author.firstName" id="firstname" name="firstName" type="text"
-                                    required
+                                <input formControlName="firstName" placeholder="John" id="firstName" type="text"
+                                
                                     class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                    <p *ngIf="authorForm.controls['firstName'].invalid && authorForm.controls['firstName'].touched" class="text-xs text-red-700 text-right italic font-extralight">
+                                        *Field Required
+                                      </p>
                             </div>
                         </div>
                         <div>
                             <label for="lastname" class="block text-sm font-medium text-gray-700">Last Name</label>
                             <div class="mt-1">
-                                <input [(ngModel)]="author.lastName" id="lastname" name="lastName" type="text"
-                                    class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                <input formControlName="lastName" placeholder="Doe" id="lastName" type="text"
+                                class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                <p *ngIf="authorForm.controls['lastName'].invalid && authorForm.controls['lastName'].touched" class="text-xs text-red-700 text-right italic font-extralight">
+                                    *Field Required</p>
                             </div>
                         </div>
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
                             <div class="mt-1">
-                                <input [(ngModel)]="author.emailAddress" id="email" name="email" type="email"
-                                    autocomplete="email" required
-                                    class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                <input formControlName="emailAddress" placeholder="example@mail.com" id="emailAddress" type="email"
+                                autocomplete="email" 
+                                       class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                      >
+                                       <p *ngIf="authorForm.controls['emailAddress'].invalid && authorForm.controls['emailAddress'].touched" class="text-xs text-red-700 text-right italic font-extralight">
+                                    *Please enter a valid email address
+                                </p>
                             </div>
+                            
                         </div>
                         <div>
-                            <label for="username" class="block text-sm font-medium text-gray-700">Username </label>
+                            <label for="userName" class="block text-sm font-medium text-gray-700">Username </label>
                             <div class="mt-1">
-                                <input [(ngModel)]="author.userName" id="username" name="userName" type="text" required
-                                    class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                <input formControlName="userName" placeholder="PhantomWriter12345" id="userName" type="text"
+                                class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                    <p *ngIf="authorForm.controls['userName'].invalid && authorForm.controls['userName'].touched" class="text-xs text-red-700 text-right italic font-extralight">*Username too short</p>
                             </div>
                         </div>
                         <div class="space-y-1">
                             <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                             <div class="mt-1">
-                                <input [(ngModel)]="author.password" id="password" name="password" type="password"
-                                    autocomplete="current-password" required
+                                <input formControlName="password" placeholder="********" id="password" type="password"
+                                autocomplete="current-password" required
                                     class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                    <p *ngIf="author.password.length<8" class="text-xs text-red-700 text-right italic font-extralight
-                                    ">(At least 8 characters)</p>
+                                    <p *ngIf="authorForm.controls['password'].invalid && authorForm.controls['password'].touched" class="text-xs text-red-700 text-right italic font-extralight">(At least 8 characters)</p>
                             </div>
                         </div>
                         <div>
                             <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
                             <div class="mt-1">
-                                <textarea [(ngModel)]="author.description" id="description" name="description" type="text"
-                                required class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-4 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"></textarea>
-                                <p *ngIf="author.description.length<100" class="text-xs text-red-700 text-right italic font-extralight
-                                ">(At least 100 characters)</p>
+                                <textarea formControlName="description" placeholder="Describe yourself in a few words." id="description" type="text" class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-4 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"></textarea>
+                                <p *ngIf="authorForm.controls['description'].invalid && authorForm.controls['description'].touched" class="text-xs text-red-700 text-right italic font-extralight">(At least 100 characters)</p>
                             </div>
                         </div>
+                        <p *ngIf="message" class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oops!</span> {{message}}</p>
                         <div>
-                            <button (click)="register()" type="submit"
+                            <button [disabled]="authorForm.invalid" (click)="onSubmit()" type="submit"
                                 class="block w-full rounded-md bg-gradient-to-r from-teal-500 to-cyan-600 py-3 px-4 font-medium text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900">Register
                             </button>
                         </div>
                     </form>
-                    <p *ngIf="message" class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oops!</span> one or more fields incorrect</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+  

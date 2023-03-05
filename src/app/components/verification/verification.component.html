@@ -18,7 +18,7 @@
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
                             <div class="mt-1">
-                                <input input [(ngModel)]="_email" id="email" name="email" type="email" autocomplete="email" required
+                                <input  [(ngModel)]="_email" id="email" name="email" type="email" autocomplete="email" required
                                     class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                             </div>
                         </div>
@@ -26,13 +26,14 @@
                         <div class="space-y-1">
                             <label for="token" class="block text-sm font-medium text-gray-700">Token</label>
                             <div class="mt-1">
-                                <input input [(ngModel)]="_token" id="token" name="token" type="text" 
+                                <input [(ngModel)]="_token" id="token" name="token" type="text" 
                                     required
                                     class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                                     <p *ngIf="_token.length<6" class="text-xs text-red-700 text-right italic font-extralight
                                     ">(Must be 6 digits)</p>
                             </div>
                         </div>
+                          <p *ngIf="message" class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oops!</span> wrong input!</p>
                         <div>
                             <button (click)="verifyUser()" type="submit"
                             class="block w-full rounded-md bg-gradient-to-r from-teal-500 to-cyan-600 py-3 px-4 font-medium text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900">Verify
@@ -40,7 +41,6 @@
                         </div>
                     </form>
                 </div>
-                <p *ngIf="message" class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oops!</span> wrong input!</p>
             </div>
         </div>
     </div>
