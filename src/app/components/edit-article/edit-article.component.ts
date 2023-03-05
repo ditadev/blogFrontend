@@ -76,7 +76,7 @@ export class EditArticleComponent implements OnInit, OnDestroy{
       error: (error) => {
         this.msg = "Required";
         this.message = "Image Required";
-        this.spinner.hide(); // hide the spinner when API call is successful
+        this.spinner.show(); // hide the spinner when API call is successful
       },
       complete: () => {
         this.spinner.hide(); // hide the spinner when API call is successful

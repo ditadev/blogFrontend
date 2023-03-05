@@ -61,7 +61,7 @@ export class SignInComponent implements OnInit, OnDestroy {
         this.spinner.hide();
       },
       error: (error) => {
-        this.spinner.hide();
+        this.spinner.show();
         this.message = 'Error Message';
       },
       complete: () => {

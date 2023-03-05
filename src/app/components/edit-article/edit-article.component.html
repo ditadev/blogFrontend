@@ -5,8 +5,7 @@
     </div>
   </ngx-spinner>
 <div>
-    <div *ngIf="_article.postId==postId && !_showMore" class="mx-4 my-2">
-
+    <div *ngIf="_article.postId==postId" class="mx-4 my-2">
         <form [formGroup]="editArticleForm" (ngSubmit)="onSubmit()" class="space-y-6">
             <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                 <div class="space-y-6  sm:space-y-5">
@@ -96,10 +95,10 @@
         </button>
     </div>
 
-    <div style="z-index:9;" *ngIf="_showMore" aria-orientation="horizontal" aria-labelledby="confirm-delete"
-    tabindex="-1" class=" flex items-center justify-center h-screen">
-    <div>
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+    <div *ngIf="_showMore" aria-orientation="horizontal" aria-labelledby="confirm-delete"
+    tabindex="-1"class="modal-backdrop">
+    <div class="modal"> 
+        <div class="modal-content">
             <div class="p-6 text-center">
                 <svg
                 xmlns="http://www.w3.org/2000/svg"

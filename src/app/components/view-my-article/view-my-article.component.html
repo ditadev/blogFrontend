@@ -6,7 +6,7 @@
   </ngx-spinner>
 <div class="bg-black">
     <div *ngIf="articles" class="relative overflow-hidden bg-white">
-        <div *ngIf="!_showMore" class="bg-gray-900 h pt-10 sm:pt-16 lg:overflow-hidden lg:pt-8 lg:pb-14">
+        <div class="bg-gray-900 h pt-10 sm:pt-16 lg:overflow-hidden lg:pt-8 lg:pb-14">
             <div class="mx-auto -mt-20 max-w-7xl lg:px-8">
                 <div class="relative overflow-hidden rounded-sm bg-white py-16">
                     <div class="hidden lg:absolute lg:inset-y-0 lg:block lg:h-full lg:w-full lg:[overflow-anchor:none]">
@@ -68,11 +68,42 @@
 
         </div>
 
+        <div 
+        class="-mt-px my-auto rounded-sm flex divide-x divide-gray-200 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2  focus:ring-offset-gray-900">
+        <button routerLink="/edit-article/{{articles.postId}}" class="flex w-0 flex-1">
+            <a
+                class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
+                <svg class="-ml-1 mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
+                    stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125">
+                    </path>
+                </svg>
+                <span class="ml-3">Edit</span>
+            </a>
+        </button>
+        <button (click)="confirmDelete()" id="confirm-delete" aria-expanded="false" aria-haspopup="true"
+            class="-ml-px rounded-lg flex w-0 flex-1 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900">
+            <a
+                class="relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
+                <svg class="-ml-1 mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
+                    stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0">
+                    </path>
+                </svg>
+                <span class="ml-3">Delete</span>
+            </a>
+        </button>
+    </div>
+
         <div>
             <div *ngIf="_showMore" aria-orientation="horizontal" aria-labelledby="confirm-delete"
-                tabindex="-1" class="bg-white flex items-center justify-center h-screen">
-                <div>
-                    <div class="relative rounded-lg shadow dark:bg-gray-700">
+                tabindex="-1"class="modal-backdrop">
+                <div class="modal"> 
+                    <div class="modal-content">
                         <div class="p-6 text-center">
                             <svg aria-hidden="true" class="mx-auto mb-4 text-gray-400 w-14 h-14 dark:text-gray-200"
                                 fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -92,38 +123,27 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>          
+        </div>
 
-
-            <div *ngIf="!_showMore"
-                class="-mt-px my-auto rounded-sm flex divide-x divide-gray-200 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2  focus:ring-offset-gray-900">
-                <button routerLink="/edit-article/{{articles.postId}}" class="flex w-0 flex-1">
-                    <a
-                        class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
-                        <svg class="-ml-1 mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
-                            stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125">
-                            </path>
+        <div *ngIf="deleted" aria-orientation="horizontal" aria-labelledby="confirm-delete"
+        tabindex="-1"class="modal-backdrop">
+        <div class="modal"> 
+            <div class="modal-content">
+                <div class="p-6 text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                            class="mx-auto mb-4 text-gray-400 w-14 h-14 dark:text-gray-200">
+                            <path fill-rule="evenodd"
+                                d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
+                                clip-rule="evenodd" />
                         </svg>
-                        <span class="ml-3">Edit</span>
-                    </a>
-                </button>
-                <button (click)="confirmDelete()" id="confirm-delete" aria-expanded="false" aria-haspopup="true"
-                    class="-ml-px rounded-lg flex w-0 flex-1 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900">
-                    <a
-                        class="relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
-                        <svg class="-ml-1 mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
-                            stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0">
-                            </path>
-                        </svg>
-                        <span class="ml-3">Delete</span>
-                    </a>
-                </button>
+                        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">{{msg}}</h3>
+                        <button routerLink="/my-article" data-modal-hide="popup-modal" type="button"
+                            class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Go
+                            Back
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

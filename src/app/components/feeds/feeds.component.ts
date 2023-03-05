@@ -58,7 +58,7 @@ export class FeedsComponent implements OnInit, OnDestroy {
           this.spinner.hide(); // hide the spinner when API call is successful
         },
         error: (error) => {
-          this.spinner.hide(); // hide the spinner when API call is successful
+          this.spinner.show(); // hide the spinner when API call is successful
         },
         complete: () => {
           this.spinner.hide(); // hide the spinner when API call is successful

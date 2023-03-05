@@ -124,7 +124,7 @@ changeEmailAddress():void{
       this.spinner.hide();
     },
     error: (error) => {
-      this.spinner.hide();
+      this.spinner.show();
       this.message = 'Incorrect email/password';
     },
     complete: () => {
@@ -152,7 +152,7 @@ verifyEmailChanger():void{
       this.spinner.hide();
     },
     error: (error) => {
-      this.spinner.hide();
+      this.spinner.show();
       this.message = 'Check entry and try again';
     },
     complete: () => {
@@ -178,7 +178,7 @@ updateAuthor():void{
       this.spinner.hide();
     },
     error: (error) => {
-      this.spinner.hide();
+      this.spinner.show();
       this.message = 'Username already Exists';
     },
     complete: () => {
@@ -204,7 +204,7 @@ changePassword():void{
       this.spinner.hide();
     },
     error: (error) => {
-      this.spinner.hide();
+      this.spinner.show();
       this.message = 'Error Message';
     },
     complete: () => {
@@ -229,6 +229,7 @@ verifyEmailChangeState():void{
   this.state=5;
 }
 back():void{
+  this.spinner.show();
   window.location.href = window.location.href;
 }
 

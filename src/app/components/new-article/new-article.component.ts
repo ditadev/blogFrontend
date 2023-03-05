@@ -67,7 +67,7 @@ export class NewArticleComponent implements OnInit, OnDestroy {
           error: (error) => {
             this.msg = "Required";
             this.message = "Image Required";
-            this.spinner.hide();
+            this.spinner.show();
           },
           complete: () => {
             this.spinner.hide();

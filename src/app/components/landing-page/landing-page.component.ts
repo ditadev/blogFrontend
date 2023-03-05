@@ -54,7 +54,7 @@ export class LandingPageComponent implements OnDestroy {
       },
       error: (err) => {
         console.log(err);
-        this.spinner.hide(); // hide the spinner on error
+        this.spinner.show(); // hide the spinner on error
       },
       complete: () => {
         this.spinner.hide(); // hide the spinner when API call is completed

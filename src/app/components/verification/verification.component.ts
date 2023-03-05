@@ -58,7 +58,7 @@ _token!:string;
         }
       },
       error: (error) => {
-        this.spinner.hide(); // hide the spinner when API call is successful
+        this.spinner.show(); // hide the spinner when API call is successful
         this.message = "Kindly enter a registered email and a valid token";
       },
       complete: () => {

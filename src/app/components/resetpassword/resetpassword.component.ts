@@ -77,7 +77,7 @@ export class ResetpasswordComponent implements  OnDestroy {
       },
       error: (error) => {
         this.message = "Invalid email/token";
-        this.spinner.hide(); // hide the spinner when API call is successful
+        this.spinner.show(); // hide the spinner when API call is successful
       }
     });
   }else {

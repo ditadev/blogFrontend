@@ -60,7 +60,7 @@ export class ForgotPasswordComponent implements OnDestroy, OnInit {
       },
       error: (error) => {
         this.message = 'If email is registered, you will receive a token';
-        this.spinner.hide();
+        this.spinner.show();
       },
     });
     }else {

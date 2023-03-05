@@ -26,8 +26,10 @@ export class ViewMyArticleComponent implements OnInit, OnDestroy {
   articles!: BlogPost;
   postId: number = parseInt(this._postId);
   _showMore: boolean = false;
+  deleted: boolean = false;
   currentPage = 1;
   pageSize = 10;
+  msg: string = "";
 
   constructor(
     private apiService: ApiService,
@@ -57,10 +59,10 @@ export class ViewMyArticleComponent implements OnInit, OnDestroy {
       .subscribe(
         response => {
           this.spinner.hide(); // hide the spinner when API call is successful
+          this.msg="Article Deleted Successfuly";
+          this._showMore = !this._showMore;
+          this.deleted=!this.deleted;
         });
-    setTimeout(() => {
-      this.router.navigate(["my-article"]);
-    }, 500);
   }
 
   confirmDelete() {
