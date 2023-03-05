@@ -21,50 +21,50 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   ]
 })
 export class MyArticlesComponent implements OnInit, OnDestroy {
-  id!:number;
+  id!: number;
   subscription?: Subscription;
-  articles:BlogPost[]=[];
+  articles: BlogPost[] = [];
   pageInfo!: PageInfo;
-  currentPage!:number;
+  currentPage!: number;
   pageSize = 12;
   totalPages = 0;
-  hasNext!:boolean;
-  hasPrevious!:boolean;
-  selectedArticlePage!:number;
+  hasNext!: boolean;
+  hasPrevious!: boolean;
+  selectedArticlePage!: number;
 
   constructor(
-    private jwtHelper: JwtHelperService, 
-    private apiService:ApiService,
+    private jwtHelper: JwtHelperService,
+    private apiService: ApiService,
     private router: Router,
     private spinner: NgxSpinnerService
-  ) {}
+  ) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.pageInfo = {} as PageInfo;
     const token = localStorage.getItem("jwt");
     if (token) {
       this.id = this.jwtHelper.decodeToken(token).sub;
     } else {
       this.router.navigate(["login"]);
-    } 
-   this.getArticlesByAuthor();
+    }
+    this.getArticlesByAuthor();
   }
 
-  getArticlesByAuthor():void{
+  getArticlesByAuthor(): void {
     this.spinner.show(); // show the spinner before making API call
     this.subscription = this.apiService
-    .getArticlesByAuthor(this.id,this.currentPage,this.pageSize)
-    .subscribe(
-      response => {
-        this.articles = response.data;
-        this.pageInfo = response.pageInfo;
-        this.totalPages = response.pageInfo.totalPages;
-        this.currentPage = response.pageInfo.currentPage;
-        this.pageSize = response.pageInfo.pageSize;
-        this.hasNext = response.pageInfo.hasNext;
-        this.hasPrevious = response.pageInfo.hasPrevious;
-        this.spinner.hide(); // hide the spinner when API call is successful
-    });
+      .getArticlesByAuthor(this.id, this.currentPage, this.pageSize)
+      .subscribe(
+        response => {
+          this.articles = response.data;
+          this.pageInfo = response.pageInfo;
+          this.totalPages = response.pageInfo.totalPages;
+          this.currentPage = response.pageInfo.currentPage;
+          this.pageSize = response.pageInfo.pageSize;
+          this.hasNext = response.pageInfo.hasNext;
+          this.hasPrevious = response.pageInfo.hasPrevious;
+          this.spinner.hide(); // hide the spinner when API call is successful
+        });
   }
 
   isUserAuthenticated() {
@@ -84,14 +84,13 @@ export class MyArticlesComponent implements OnInit, OnDestroy {
       this.getArticlesByAuthor();
     }
   }
-  
+
   nextPage() {
     if (this.currentPage < this.totalPages) {
       this.currentPage++;
       this.getArticlesByAuthor();
     }
   }
-  
 
   ngOnDestroy(): void {
     if (this.subscription) {

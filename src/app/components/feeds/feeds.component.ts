@@ -28,8 +28,8 @@ export class FeedsComponent implements OnInit, OnDestroy {
   currentPage = 1;
   pageSize = 10;
   totalPages = 0;
-  hasNext!:boolean;
-  hasPrevious!:boolean;
+  hasNext!: boolean;
+  hasPrevious!: boolean;
 
 
   constructor(
@@ -58,7 +58,7 @@ export class FeedsComponent implements OnInit, OnDestroy {
           this.spinner.hide(); // hide the spinner when API call is successful
         },
         error: (error) => {
-          this.spinner.show(); // hide the spinner when API call is successful
+          this.spinner.hide(); // hide the spinner when API call is successful
         },
         complete: () => {
           this.spinner.hide(); // hide the spinner when API call is successful

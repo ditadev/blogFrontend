@@ -27,8 +27,8 @@
                                         </svg>
                                         <div class="flex text-sm text-gray-600">
                                             <label for="file-upload"
-                                                class="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
-                                                <input type="file" (change)="onFileSelected($event)" name="CoverImage">
+                                                class="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500 ">
+                                                <input  type="file" (change)="onFileSelected($event)" name="CoverImage">
                                             </label>
                                         </div>
                                         <span class="pl-1 text-sm text-center text-semibold text-red-700"
@@ -116,9 +116,9 @@
                             d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
                             clip-rule="evenodd" />
                     </svg>
-                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">{{msg}}</h3>
+                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-800">{{msg}}</h3>
                     <button routerLink="/my-article" data-modal-hide="popup-modal" type="button"
-                        class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Go
+                    class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 mr-3 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900">Go
                         Back
                     </button>
                 </div>

@@ -20,12 +20,12 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
     ])
   ]
 })
-export class ResetpasswordComponent implements  OnDestroy {
+export class ResetpasswordComponent implements OnDestroy {
 
   subscription?: Subscription;
-  _resetPassword!:ResetPassword;
-  message:string="";
-  code?:number;
+  _resetPassword!: ResetPassword;
+  message: string = "";
+  code?: number;
   resetPasswordForm!: FormGroup;
 
 
@@ -34,16 +34,16 @@ export class ResetpasswordComponent implements  OnDestroy {
     private router: Router,
     private spinner: NgxSpinnerService,
     private formBuilder: FormBuilder
-  ) {}
+  ) { }
 
 
   ngOnInit(): void {
-     this._resetPassword = {
+    this._resetPassword = {
       emailAddress: "",
       token: "",
       password: "",
       confirmPassword: ""
-    };  
+    };
 
     this.resetPasswordForm = this.formBuilder.group({
       emailAddress: ['', [Validators.required, Validators.email]],
@@ -65,30 +65,30 @@ export class ResetpasswordComponent implements  OnDestroy {
   resetPassword(): void {
     if (this.resetPasswordForm.valid) {
       this._resetPassword = { ...this.resetPasswordForm.value };
-    this.spinner.show(); // show the spinner before making API call
-    this.apiService.resetPassword(this._resetPassword).subscribe({
-      next: (response) => {
-        this.message = response.message;
-        this.code = response.code;
-        if (this.code == 0) {
-          this.router.navigate(["login"]);
+      this.spinner.show(); // show the spinner before making API call
+      this.apiService.resetPassword(this._resetPassword).subscribe({
+        next: (response) => {
+          this.message = response.message;
+          this.code = response.code;
+          if (this.code == 0) {
+            this.router.navigate(["login"]);
+          }
+          this.spinner.hide(); // hide the spinner when API call is successful
+        },
+        error: (error) => {
+          this.message = "Invalid email/token";
+          this.spinner.hide(); // hide the spinner when API call is successful
         }
-        this.spinner.hide(); // hide the spinner when API call is successful
-      },
-      error: (error) => {
-        this.message = "Invalid email/token";
-        this.spinner.show(); // hide the spinner when API call is successful
-      }
-    });
-  }else {
-    this.message = 'Please fill in all required fields';
-  }
+      });
+    } else {
+      this.message = 'Please fill in all required fields';
+    }
   }
 
   onSubmit(): void {
     this.resetPassword();
   }
-  
+
   ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();

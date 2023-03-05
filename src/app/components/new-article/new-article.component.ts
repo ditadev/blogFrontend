@@ -23,10 +23,10 @@ export class NewArticleComponent implements OnInit, OnDestroy {
   subscription?: Subscription;
   selectedFile!: File;
   _article!: NewBlogPost;
-  _showMore:boolean=false;
+  _showMore: boolean = false;
   msg: string = "";
   newBlogPostForm!: FormGroup;
-  message:string="";
+  message: string = "";
 
   constructor(
     private apiService: ApiService,
@@ -67,7 +67,7 @@ export class NewArticleComponent implements OnInit, OnDestroy {
           error: (error) => {
             this.msg = "Required";
             this.message = "Image Required";
-            this.spinner.show();
+            this.spinner.hide();
           },
           complete: () => {
             this.spinner.hide();
@@ -78,13 +78,13 @@ export class NewArticleComponent implements OnInit, OnDestroy {
     }
   }
 
-  onSubmit():void{
+  onSubmit(): void {
     this.addPost();
   }
 
-  
-  closeDialog():void{
-    this._showMore=!this._showMore;
+
+  closeDialog(): void {
+    this._showMore = !this._showMore;
   }
 
   ngOnDestroy(): void {

@@ -22,21 +22,21 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class SignInComponent implements OnInit, OnDestroy {
 
-  _login!:Login;
+  _login!: Login;
   subscription?: Subscription;
-  code?:number;
-  jwt!:string;
-  message:string="";
+  code?: number;
+  jwt!: string;
+  message: string = "";
   loginForm!: FormGroup;
 
 
   constructor(
     private apiService: ApiService,
-    private jwtHelper: JwtHelperService, 
+    private jwtHelper: JwtHelperService,
     private router: Router,
     private spinner: NgxSpinnerService,
     private formBuilder: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this._login = {} as Login;
@@ -49,32 +49,32 @@ export class SignInComponent implements OnInit, OnDestroy {
   login(): void {
     if (this.loginForm.valid) {
       this._login = { ...this.loginForm.value };
-    this.spinner.show();
-    this.subscription = this.apiService.login(this._login).subscribe({
-      next: (response) => {
-        this.code = response.code;
-        this.jwt = response.data.accessToken;
-        localStorage.setItem('jwt', this.jwt);
-        if (this.code == 0) {
-          this.router.navigate(['feeds']);
-        }
-        this.spinner.hide();
-      },
-      error: (error) => {
-        this.spinner.show();
-        this.message = 'Error Message';
-      },
-      complete: () => {
-        this.spinner.hide();
-      },
-    });
-  }else {
-    this.message = 'Please fill in all required fields';
+      this.spinner.show();
+      this.subscription = this.apiService.login(this._login).subscribe({
+        next: (response) => {
+          this.code = response.code;
+          this.jwt = response.data.accessToken;
+          localStorage.setItem('jwt', this.jwt);
+          if (this.code == 0) {
+            this.router.navigate(['feeds']);
+          }
+          this.spinner.hide();
+        },
+        error: (error) => {
+          this.spinner.hide();
+          this.message = 'Error Message';
+        },
+        complete: () => {
+          this.spinner.hide();
+        },
+      });
+    } else {
+      this.message = 'Please fill in all required fields';
+    }
   }
-}
-onSubmit(): void {
-  this.login();
-}
+  onSubmit(): void {
+    this.login();
+  }
 
   isUserAuthenticated() {
     const token = localStorage.getItem("jwt");

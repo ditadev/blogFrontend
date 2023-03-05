@@ -62,7 +62,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
           this.spinner.hide();
         },
         error: (error) => {
-          this.spinner.show();
+          this.spinner.hide();
           this.message = "User with email/username already exists";
         },
         complete: () => {

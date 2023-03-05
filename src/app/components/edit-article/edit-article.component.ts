@@ -19,27 +19,27 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
     ])
   ]
 })
-export class EditArticleComponent implements OnInit, OnDestroy{
+export class EditArticleComponent implements OnInit, OnDestroy {
 
   subscription?: Subscription;
   _postId = this.route.snapshot.paramMap.get('postId')!;
-  postId:number=parseInt(this._postId);
- _article!:BlogPost;
- selectedFile!: File;
- _showMore:boolean=false;
- msg: string = "";
- message:string="";
- editArticleForm!: FormGroup;
+  postId: number = parseInt(this._postId);
+  _article!: BlogPost;
+  selectedFile!: File;
+  _showMore: boolean = false;
+  msg: string = "";
+  message: string = "";
+  editArticleForm!: FormGroup;
 
   constructor(
     private apiService: ApiService,
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
     private formBuilder: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this._article={} as BlogPost;
+    this._article = {} as BlogPost;
     this.spinner.show(); // show the spinner before making API call
     this.editArticleForm = this.formBuilder.group({
       title: ['', [Validators.required, Validators.minLength(10)]],
@@ -47,11 +47,11 @@ export class EditArticleComponent implements OnInit, OnDestroy{
       body: ['', [Validators.required, Validators.minLength(100)]],
       tags: ['', [Validators.required, Validators.minLength(6)]],
     });
-    this.getArticle(); 
+    this.getArticle();
   }
 
-  closeDialog(){
-    this._showMore=!this._showMore;
+  closeDialog() {
+    this._showMore = !this._showMore;
   }
 
   onFileSelected(event: any) {
@@ -60,48 +60,48 @@ export class EditArticleComponent implements OnInit, OnDestroy{
 
   updateArticle(): void {
     if (this.editArticleForm.valid) {
-      this._article.title=this.editArticleForm.value.title;
-      this._article.summary=this.editArticleForm.value.summary;
-      this._article.body=this.editArticleForm.value.body;
-      this._article.tags=this.editArticleForm.value.tags;
+      this._article.title = this.editArticleForm.value.title;
+      this._article.summary = this.editArticleForm.value.summary;
+      this._article.body = this.editArticleForm.value.body;
+      this._article.tags = this.editArticleForm.value.tags;
       this.spinner.show(); // show the spinner before making API call
-    this.subscription = this.apiService.updateArticle(this.selectedFile, this.postId, this._article).subscribe({
-      next: (response) => {
-        this.msg = response.message;
-        if (response.code == 0) {
+      this.subscription = this.apiService.updateArticle(this.selectedFile, this.postId, this._article).subscribe({
+        next: (response) => {
+          this.msg = response.message;
+          if (response.code == 0) {
+            this.spinner.hide(); // hide the spinner when API call is successful
+            this._showMore = !this._showMore;
+          }
+        },
+        error: (error) => {
+          this.msg = "Required";
+          this.message = "Image Required";
           this.spinner.hide(); // hide the spinner when API call is successful
-          this._showMore = !this._showMore;
+        },
+        complete: () => {
+          this.spinner.hide(); // hide the spinner when API call is successful
         }
-      },
-      error: (error) => {
-        this.msg = "Required";
-        this.message = "Image Required";
-        this.spinner.show(); // hide the spinner when API call is successful
-      },
-      complete: () => {
-        this.spinner.hide(); // hide the spinner when API call is successful
-      }
-    });
-  } else {
-    this.message = 'Please fill in all required fields';
+      });
+    } else {
+      this.message = 'Please fill in all required fields';
+    }
   }
-  }
-  
-  onSubmit():void{
+
+  onSubmit(): void {
     this.updateArticle();
   }
 
-  getArticle(){
+  getArticle() {
     this.spinner.show(); // show the spinner before making API call
     this.subscription = this.apiService
-    .getArticle(this._postId)
-    .subscribe(
-      response => {
-        this.spinner.hide(); // hide the spinner when API call is successful
-        this._article = response.data;
-    });
+      .getArticle(this._postId)
+      .subscribe(
+        response => {
+          this.spinner.hide(); // hide the spinner when API call is successful
+          this._article = response.data;
+        });
   }
-  
+
 
   ngOnDestroy(): void {
     if (this.subscription) {

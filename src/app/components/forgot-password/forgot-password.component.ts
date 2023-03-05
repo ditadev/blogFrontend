@@ -49,21 +49,21 @@ export class ForgotPasswordComponent implements OnDestroy, OnInit {
     if (this.forgotPasswordForm.valid) {
       this._email = this.forgotPasswordForm.value.emailAddress;
       this.spinner.show();
-    this.subscription = this.apiService.forgotPassword(this._email).subscribe({
-      next: (response) => {
-        this.message = response.message;
-        this.code = response.code;
-        if (this.code == 0) {
-          this.router.navigate(['resetpassword']);
-        }
-        this.spinner.hide();
-      },
-      error: (error) => {
-        this.message = 'If email is registered, you will receive a token';
-        this.spinner.show();
-      },
-    });
-    }else {
+      this.subscription = this.apiService.forgotPassword(this._email).subscribe({
+        next: (response) => {
+          this.message = response.message;
+          this.code = response.code;
+          if (this.code == 0) {
+            this.router.navigate(['resetpassword']);
+          }
+          this.spinner.hide();
+        },
+        error: (error) => {
+          this.message = 'If email is registered, you will receive a token';
+          this.spinner.hide();
+        },
+      });
+    } else {
       this.message = 'Please fill in all required fields';
     }
   }
