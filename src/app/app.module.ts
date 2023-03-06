@@ -24,6 +24,7 @@ import { NewArticleComponent } from './components/new-article/new-article.compon
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ProfileComponent } from './components/profile/profile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FooterComponent } from './components/footer/footer.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -47,6 +48,7 @@ export function tokenGetter() {
     EditArticleComponent,
     NewArticleComponent,
     ProfileComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
