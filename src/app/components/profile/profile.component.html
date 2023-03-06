@@ -4,10 +4,9 @@
         <div class="w-40 h-40 border-t-4 border-b-4 border-cyan-700 rounded-full animate-spin"></div>
     </div>
 </ngx-spinner>
-<div class="flex flex-col items-center justify-start w-full">
-</div>
-<div class="h-full background">
-    <div class="">
+
+<div class="flex flex-col h-screen justify-between bg-white">
+        <div >
         <div *ngIf="state==1" class="w-11/12 py-4 mx-4 flex flex-row flex-wrap items-start justify-start ">
 
             <div (click)="updateProfileState()"
@@ -732,3 +731,5 @@
             </div>
         </div>
     </div>
+    <app-footer class="sticky top-[100vh]"></app-footer>
+</div>

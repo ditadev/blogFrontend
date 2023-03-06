@@ -4,7 +4,9 @@
         <div class="w-40 h-40 border-t-4 border-b-4 border-cyan-700 rounded-full animate-spin"></div>
     </div>
   </ngx-spinner>
-<div>
+
+  <div class="flex flex-col h-screen justify-between bg-white">
+
     <form [formGroup]="searchForm">
         <label for="title" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
         <div class="relative">
@@ -19,7 +21,7 @@
          </p>
     </form>
 
-    <div *ngIf="articles.length==0" aria-orientation="horizontal" aria-labelledby="confirm-delete"
+    <div *ngIf="articles.length==0 && dialog" aria-orientation="horizontal" aria-labelledby="confirm-delete"
     tabindex="-1"class="modal-backdrop">
     <div class="modal w-96 h-auto rounded-xl"> 
       <div class="text-center modal-content">
@@ -36,8 +38,8 @@
       </div>
     </div>
 
-    <div *ngIf="isUserAuthenticated()" class="bg-black">
-        <div *ngFor="let article of articles" class="bg-black rounded-lg pt-2 lg:py-6">
+    <div *ngIf="isUserAuthenticated()" class="bg-white">
+        <div *ngFor="let article of articles" class="bg-white rounded-lg pt-2 lg:py-6">
             <div routerLink="/article/{{article.postId}}"
                 class="relative overflow-hidden rounded-lg bg-gradient-to-r from-teal-500 to-cyan-600 py-3 px-6 font-medium text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900 py-24 px-8 shadow-2xl lg:grid lg:grid-cols-2 lg:gap-x-8 lg:px-16">
                 <div class="absolute inset-0 opacity-50 mix-blend-multiply saturate-0 filter">
@@ -68,9 +70,9 @@
         <footer class="pb-4">
             <div *ngIf="pageInfo.hasNext || pageInfo.hasPrevious" class="flex flex-col items-center pt-4">
                 <!-- Help text -->
-            <span class="text-sm text-gray-700 dark:text-gray-400">
-                Page <span class="font-semibold text-gray-900 dark:text-white">{{currentPage}}</span> of <span
-                    class="font-semibold text-gray-900 dark:text-white">{{totalPages}}</span>
+            <span class="text-sm text-gray-900 dark:text-gray-900">
+                Page <span class="font-semibold text-gray-900 dark:text-gray-900">{{currentPage}}</span> of <span
+                    class="font-semibold text-gray-900 dark:text-gray-900">{{totalPages}}</span>
             </span>
             <div class="inline-flex mt-2 xs:mt-0">
                 <!-- Buttons -->
@@ -98,3 +100,5 @@
         </div>
         </footer>
     </div>
+    <app-footer class="sticky top-[100vh]"></app-footer>
+</div>

@@ -4,7 +4,9 @@
         <div class="w-40 h-40 border-t-4 border-b-4 border-cyan-700 rounded-full animate-spin"></div>
     </div>
   </ngx-spinner>
-<div class="bg-black"  >
+
+  <div class="flex flex-col h-screen justify-between bg-white">
+    <div class="bg-black"  >
     <div *ngIf="articles.postId==postId" class="relative overflow-hidden bg-white " >
         <div class="bg-gray-900 pt-10 sm:pt-16 lg:overflow-hidden lg:pt-8 lg:pb-14">
             <div class="mx-auto -mt-20 max-w-7xl lg:px-8">
@@ -76,7 +78,8 @@
                         <span class="ml-3">Go Back</span>
                     </a>
                 </button>
-
             </div>
     </div>
+</div>
+<app-footer class="sticky top-[100vh]"></app-footer>
 </div>

@@ -31,6 +31,7 @@ export class FeedsComponent implements OnInit, OnDestroy {
   totalPages = 0;
   hasNext!: boolean;
   hasPrevious!: boolean;
+  dialog: boolean=false;
   searchForm!: FormGroup;
   title:string="";
   message:string="";
@@ -86,6 +87,7 @@ export class FeedsComponent implements OnInit, OnDestroy {
           this.hasNext = response.pageInfo.hasNext;
           this.hasPrevious = response.pageInfo.hasPrevious;
           this.spinner.hide(); // hide the spinner when API call is successful
+          this.dialog=!this.dialog;
         },
         error: (error) => {
           this.message="Enter search title";

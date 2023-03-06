@@ -4,7 +4,8 @@
         <div class="w-40 h-40 border-t-4 border-b-4 border-cyan-700 rounded-full animate-spin"></div>
     </div>
   </ngx-spinner>
-<div>
+  <div class="flex flex-col h-screen justify-between bg-white">
+    <div>
     <div *ngIf="_article.postId==postId" class="mx-4 my-2">
         <form [formGroup]="editArticleForm" (ngSubmit)="onSubmit()" class="space-y-6">
             <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
@@ -118,4 +119,6 @@
         </div>
     </div>
 </div>
+</div>
+<app-footer class="sticky top-[100vh]"></app-footer>
 </div>

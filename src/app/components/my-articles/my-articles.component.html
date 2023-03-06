@@ -4,7 +4,8 @@
       <div class="w-40 h-40 border-t-4 border-b-4 border-cyan-700 rounded-full animate-spin"></div>
   </div>
 </ngx-spinner>
-<div *ngIf="isUserAuthenticated()">
+<div class="flex flex-col h-screen justify-between bg-white">
+  <div *ngIf="isUserAuthenticated()">
   <ul role="list"
     class="grid grid-cols-2 mt-4 pl-4 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
     <li *ngFor="let article of articles" class="relative">
@@ -47,9 +48,9 @@
 <footer class="pb-4">
   <div *ngIf="pageInfo.hasNext || pageInfo.hasPrevious" class="flex flex-col items-center pt-4">
     <!-- Help text -->
-    <span class="text-sm text-gray-700 dark:text-gray-700">
-        Page <span class="font-semibold text-gray-900 dark:text-gray-700">{{currentPage}}</span> of <span
-            class="font-semibold text-gray-900 dark:text-gray-700">{{totalPages}}</span>
+    <span class="text-sm text-gray-900 dark:text-gray-900">
+        Page <span class="font-semibold text-gray-900 dark:text-gray-900">{{currentPage}}</span> of <span
+            class="font-semibold text-gray-900 dark:text-gray-900">{{totalPages}}</span>
     </span>
     <div class="inline-flex mt-2 xs:mt-0">
         <!-- Buttons -->
@@ -77,3 +78,6 @@
   </div>
 </footer>
 </div>
+<app-footer class="sticky top-[100vh]"></app-footer>
+</div>
+
