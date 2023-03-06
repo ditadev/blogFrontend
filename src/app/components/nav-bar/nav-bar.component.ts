@@ -3,6 +3,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { ApiService } from 'src/app/services/api.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-nav-bar',
@@ -19,7 +20,8 @@ export class NavBarComponent implements OnInit, OnDestroy{
   constructor(
     private jwtHelper: JwtHelperService, 
     private apiService:ApiService,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService,
   ) {}
 
   ngOnInit(): void {
@@ -32,11 +34,24 @@ export class NavBarComponent implements OnInit, OnDestroy{
       this.id = this.jwtHelper.decodeToken(token).sub;
     } else {
       this.router.navigate(["login"]);
-    }    
-    this.subscription=this.apiService.getUser(this.id).subscribe(response=>{
-      this.name=response.data.username;
+    }
+    this.spinner.show();
+    this.subscription = this.apiService.getUser(this.id).subscribe({
+      next: (response) => {
+        this.spinner.hide();
+        this.name = response.data.username;
+      },
+      error: (error) => {
+        this.spinner.hide();
+        console.error(error);
+        this.router.navigate([""]);
+      },
+      complete: () => {
+        this.spinner.hide();
+      }
     });
   }
+  
 
   showMore(){
     this._showMore=!this._showMore;

@@ -70,6 +70,10 @@ export class ApiService {
       return this.http.get<Article>(url).pipe(retry(1), catchError(this.handleError));
     }
 
+    public searchArticle(title:any,PageNumber:number, PageSize:number):Observable<any>{
+      const url = `${this.articleUrl}/GetPostByTitle/${title}?PageNumber=${PageNumber}&PageSize=${PageSize}`;
+      return this.http.get<Article>(url).pipe(retry(1), catchError(this.handleError));
+    }
 
     deleteArticle(postId: any): Observable<any> {
       const url = `${this.articleUrl}/DeletePost/${postId}`;

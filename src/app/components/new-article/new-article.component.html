@@ -32,7 +32,7 @@
                                             </label>
                                         </div>
                                         <span class="pl-1 text-sm text-center text-semibold text-red-700"
-                                            [innerHtml]='msg'></span>
+                                            [innerHtml]='message'></span>
                                         <p class="pl-1 text-sm text-center text-semibold">or drag and drop</p>
                                         <p class="text-xs text-gray-500">JPG, PNG, JPEG up to 10MB</p>
                                     </div>
@@ -86,7 +86,7 @@
             </div>
         </form>
         
-        <p *ngIf="msg" class="my-2 mx-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oops!</span> {{message}}!</p>
+        <p *ngIf="message" class="my-2 mx-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oops!</span> {{message}}!</p>
 
         <button [disabled]="newBlogPostForm.invalid" (click)="onSubmit()"
             class="mr-3 mt-6 block w-96 max-w-lg rounded-lg flex divide-x divide-gray-200 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2  focus:ring-offset-gray-900">

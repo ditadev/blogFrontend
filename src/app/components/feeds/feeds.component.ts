@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { PageInfo } from 'src/app/models/pageInfo';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-feeds',
@@ -30,18 +31,25 @@ export class FeedsComponent implements OnInit, OnDestroy {
   totalPages = 0;
   hasNext!: boolean;
   hasPrevious!: boolean;
+  searchForm!: FormGroup;
+  title:string="";
+  message:string="";
 
 
   constructor(
     private jwtHelper: JwtHelperService,
     private apiService: ApiService,
     private router: Router,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
     this.pageInfo = {} as PageInfo;
     this.getArticles();
+    this.searchForm = this.formBuilder.group({
+      title: ['', [Validators.required, Validators.minLength(6)]],
+    });
   }
 
   getArticles(): void {
@@ -66,6 +74,29 @@ export class FeedsComponent implements OnInit, OnDestroy {
       });
   }
 
+  searchArticle():void{
+    this.spinner.show(); // show the spinner before making API call
+    this.subscription = this.apiService
+      .searchArticle(this.title,this.currentPage, this.pageSize)
+      .subscribe({
+        next: (response) => {
+          this.articles = response.data;
+          this.pageInfo = response.pageInfo;
+          this.totalPages = response.pageInfo.totalPages;
+          this.hasNext = response.pageInfo.hasNext;
+          this.hasPrevious = response.pageInfo.hasPrevious;
+          this.spinner.hide(); // hide the spinner when API call is successful
+        },
+        error: (error) => {
+          this.message="Enter search title";
+          this.spinner.hide(); // hide the spinner when API call is successful
+        },
+        complete: () => {
+          this.spinner.hide(); // hide the spinner when API call is successful
+        }
+      });
+  }
+
 
   previousPage() {
     if (this.pageInfo.currentPage > 1) {
@@ -81,6 +112,11 @@ export class FeedsComponent implements OnInit, OnDestroy {
     }
   }
 
+  back(): void {
+    this.spinner.show();
+    window.location.href = window.location.href;
+  }
+  
   isUserAuthenticated() {
     const token = localStorage.getItem("jwt");
     if (token && !this.jwtHelper.isTokenExpired(token)) {

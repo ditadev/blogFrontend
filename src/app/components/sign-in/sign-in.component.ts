@@ -29,7 +29,6 @@ export class SignInComponent implements OnInit, OnDestroy {
   message: string = "";
   loginForm!: FormGroup;
 
-
   constructor(
     private apiService: ApiService,
     private jwtHelper: JwtHelperService,
@@ -72,6 +71,7 @@ export class SignInComponent implements OnInit, OnDestroy {
       this.message = 'Please fill in all required fields';
     }
   }
+
   onSubmit(): void {
     this.login();
   }

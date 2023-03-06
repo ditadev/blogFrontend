@@ -39,17 +39,24 @@ export class ViewMyArticleComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.getArticles();
+    this.getArticle();
   }
 
-  getArticles(): void {
-    this.spinner.show(); // show the spinner before making API call
-    this.subscription = this.apiService.getArticle(this.postId).subscribe(
-      response=>{
-        this.articles=response.data;
-        this.spinner.hide(); // hide the spinner when API call is successful
+  getArticle(): void {
+    this.spinner.show();
+    this.subscription = this.apiService.getArticle(this.postId).subscribe({
+      next: (response) => {
+        this.articles = response.data;
+      },
+      error: (error) => {
+        this.spinner.hide();
+        this.router.navigate(['my-articles']);
+        console.log(error);
+      },
+      complete: () => {
+        this.spinner.hide();
       }
-    )
+    });
   }
 
   deleteArticle() {

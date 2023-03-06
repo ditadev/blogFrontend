@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BlogPost } from 'src/app/models/blogPost';
 import { PageInfo } from 'src/app/models/pageInfo';
 import { Location } from '@angular/common';
@@ -33,6 +33,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
   constructor(
     private apiService: ApiService,
     private route: ActivatedRoute,
+    private router: Router,
     private location: Location,
     private spinner: NgxSpinnerService
   ) {}
@@ -44,12 +45,20 @@ export class ArticleComponent implements OnInit, OnDestroy {
   }
 
   getArticle(): void {
-    this.spinner.show(); // show the spinner before making API call
-    this.subscription = this.apiService.getArticle(this.postId).subscribe(
-      response=>{
+    this.spinner.show();
+    this.subscription = this.apiService.getArticle(this.postId).subscribe({
+      next: (response) => {
         this.pageInfo = response.pageInfo;
-        this.articles=response.data;
-        this.spinner.hide(); // hide the spinner when API call is successful
+        this.articles = response.data;
+      },
+      error: (error) => {
+        this.spinner.hide();
+        this.router.navigate(['my-articles']);
+        console.log(error);
+      },
+      complete: () => {
+        this.spinner.hide();
+      }
     });
   }
 
