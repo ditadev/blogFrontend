@@ -42,8 +42,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   verifyEmailChangeForm!: FormGroup;
   changePasswordForm!: FormGroup;
 
-
-
   constructor(
     private apiService: ApiService,
     private jwtHelper: JwtHelperService,

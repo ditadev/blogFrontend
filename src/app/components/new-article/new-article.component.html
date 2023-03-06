@@ -43,7 +43,7 @@
                         <div>
                             <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
                             <div class="mt-1">
-                                <textarea formControlName="title" placeholder="The Rise of Gru." id="title" type="text" class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-4 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"></textarea>
+                                <input formControlName="title" placeholder="The Rise of Gru." id="title" type="text" class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-4 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                                 <p *ngIf="newBlogPostForm.controls['title'].invalid && newBlogPostForm.controls['title'].touched" class="text-xs text-red-700 text-right italic font-extralight">(At least 10 characters)</p>
                             </div>
                         </div>

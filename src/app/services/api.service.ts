@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpEventType, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { catchError, Observable, throwError,retry, map } from 'rxjs';
 import { AuthorResponse } from '../models/author-response';
-import { Article } from '../models/article';
 import { BlogPost } from '../models/blogPost';
 import { NewBlogPost } from '../models/newBlogPost';
 import { UpdateAuthor } from '../models/updateAuthor';
 import { VerifyChangeEmail } from '../models/verifyEmailChange';
 import { ChangePassword } from '../models/changePassword';
+import { Article } from '../models/article';
 
 
 @Injectable({
