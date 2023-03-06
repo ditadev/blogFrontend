@@ -18,7 +18,7 @@
                                     photo</label>
                                 <div class="mt-1 sm:col-span-2 sm:mt-0">
                                     <div
-                                        class="flex max-w-lg justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
+                                        class="flex max-w-lg justify-center rounded-sm border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
                                         <div class="space-y-1 text-center">
                                             <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor"
                                                 fill="none" viewBox="0 0 48 48" aria-hidden="true">
@@ -28,7 +28,7 @@
                                             </svg>
                                             <div class="flex text-sm text-gray-600">
                                                 <label for="file-upload"
-                                                    class="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500 ">
+                                                    class="relative cursor-pointer rounded-sm bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500 ">
                                                     <input type="file" (change)="onFileSelected($event)"
                                                         name="CoverImage">
                                                 </label>
@@ -46,7 +46,7 @@
                                 <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
                                 <div class="mt-1">
                                     <input formControlName="title" placeholder="The Rise of Gru." id="title" type="text"
-                                        class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-4 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                        class="block w-full appearance-none rounded-sm border border-gray-300 px-3 py-4 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                                     <p *ngIf="newBlogPostForm.controls['title'].invalid && newBlogPostForm.controls['title'].touched"
                                         class="text-xs text-red-700 text-right italic font-extralight">(At least 10
                                         characters)</p>
@@ -58,7 +58,7 @@
                                 <div class="mt-1">
                                     <textarea formControlName="summary"
                                         placeholder="The story of Gru and his lovely minions." id="summary" type="text"
-                                        class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-4 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"></textarea>
+                                        class="block w-full appearance-none rounded-sm border border-gray-300 px-3 py-4 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"></textarea>
                                     <p *ngIf="newBlogPostForm.controls['summary'].invalid && newBlogPostForm.controls['summary'].touched"
                                         class="text-xs text-red-700 text-right italic font-extralight">(At least 20
                                         characters)</p>
@@ -71,7 +71,7 @@
                                     <textarea formControlName="body"
                                         placeholder="In no less than 100 characters, express your thoughts."
                                         id="description" type="text"
-                                        class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-4 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"></textarea>
+                                        class="block w-full appearance-none rounded-sm border border-gray-300 px-3 py-4 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"></textarea>
                                     <p *ngIf="newBlogPostForm.controls['body'].invalid && newBlogPostForm.controls['body'].touched"
                                         class="text-xs text-red-700 text-right italic font-extralight">(At least 100
                                         characters)</p>
@@ -82,7 +82,7 @@
                                 <div class="mt-1">
                                     <input formControlName="tags" placeholder="Cartoon,Funny,Laugh" id="tags"
                                         type="text" required
-                                        class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                        class="block w-full appearance-none rounded-sm border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                                     <p *ngIf="newBlogPostForm.controls['tags'].invalid && newBlogPostForm.controls['tags'].touched"
                                         class="text-xs text-red-700 text-right italic font-extralight">(At least 6
                                         characters)</p>
@@ -94,7 +94,7 @@
                                 <div class="mt-1">
                                     <input formControlName="categoryName" placeholder="Animation" id="categoryName"
                                         type="categoryName" required
-                                        class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                        class="block w-full appearance-none rounded-sm border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                                     <p *ngIf="newBlogPostForm.controls['categoryName'].invalid && newBlogPostForm.controls['categoryName'].touched"
                                         class="text-xs text-red-700 text-right italic font-extralight">(At least 3
                                         characters)</p>
@@ -109,18 +109,18 @@
                     class="font-medium">Oops!</span> {{message}}!</p>
 
             <button [disabled]="newBlogPostForm.invalid" (click)="onSubmit()"
-                class="mr-3 mt-6 block w-32 max-w-lg rounded-lg flex divide-x divide-gray-200 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2  focus:ring-offset-gray-900">
+                class="mr-3 mt-6 block w-32 max-w-lg rounded-sm flex divide-x divide-gray-200 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2  focus:ring-offset-gray-900">
                 <div class="flex w-0 flex-1">
                     <a
-                        class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
-                        <svg class="-ml-1 mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
+                        class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-sm border border-transparent py-4 text-sm font-medium text-white hover:text-gray-500">
+                        <svg class="text-white mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
                             stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path
                                 d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"
                                 stroke-linecap="round" stroke-linejoin="round"></path>
                         </svg>
-                        <span class="ml-2">Publish</span>
+                        <span class="text-white text-base">Publish</span>
                     </a>
                 </div>
             </button>

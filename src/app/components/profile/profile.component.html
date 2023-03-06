@@ -418,7 +418,7 @@
                         <div class="mt-1">
                             <input [(ngModel)]="author.username" formControlName="userName"
                                 placeholder="PhantomWriter12345" id="userName" type="text"
-                                class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                class="block w-full appearance-none rounded-sm border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                             <p *ngIf="updateUserForm.controls['userName'].invalid && updateUserForm.controls['userName'].touched"
                                 class="text-xs text-red-700 text-right italic font-extralight">*Username too short</p>
                         </div>
@@ -429,7 +429,7 @@
                         <div class="mt-1">
                             <input [(ngModel)]="author.firstName" formControlName="firstName" placeholder="John"
                                 id="firstName" type="text"
-                                class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                class="block w-full appearance-none rounded-sm border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                             <p *ngIf="updateUserForm.controls['firstName'].invalid && updateUserForm.controls['firstName'].touched"
                                 class="text-xs text-red-700 text-right italic font-extralight">
                                 *Field Required
@@ -442,7 +442,7 @@
                         <div class="mt-1">
                             <input [(ngModel)]="author.lastName" formControlName="lastName" placeholder="Doe"
                                 id="lastName" type="text"
-                                class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                class="block w-full appearance-none rounded-sm border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                             <p *ngIf="updateUserForm.controls['lastName'].invalid && updateUserForm.controls['lastName'].touched"
                                 class="text-xs text-red-700 text-right italic font-extralight">
                                 *Field Required</p>
@@ -454,7 +454,7 @@
                         <div class="mt-1">
                             <textarea [(ngModel)]="author.description" formControlName="description"
                                 placeholder="Describe yourself in a few words." id="description" type="text"
-                                class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-4 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"></textarea>
+                                class="block w-full appearance-none rounded-sm border border-gray-300 px-3 py-4 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"></textarea>
                             <p *ngIf="updateUserForm.controls['description'].invalid && updateUserForm.controls['description'].touched"
                                 class="text-xs text-red-700 text-right italic font-extralight">(At least 100 characters)
                             </p>
@@ -465,30 +465,30 @@
                             class="font-medium">Oops!</span> {{message}}</p>
 
                     <div
-                        class="block w-auto max-w-lg rounded-lg flex divide-x divide-gray-200 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2  focus:ring-offset-gray-900">
+                        class="block w-auto max-w-lg rounded-sm flex divide-x divide-gray-200 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2  focus:ring-offset-gray-900">
                         <button [disabled]="updateUserForm.invalid" (click)="updateAuthor()" class="flex w-0 flex-1">
                             <a
-                                class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
-                                <svg class="-ml-1 mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
+                                class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-white hover:text-gray-500">
+                                <svg class="text-white mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
                                     stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
                                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776">
                                     </path>
                                 </svg>
-                                <span class="ml-3">Save</span>
+                                <span class="text-white text-base">Save</span>
                             </a>
                         </button>
                         <button (click)="back()" class="flex w-0 flex-1">
                             <a
-                                class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
-                                <svg class="-ml-1 mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
+                                class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-white hover:text-gray-500">
+                                <svg class="text-white mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
                                     stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
                                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" stroke-linecap="round"
                                         stroke-linejoin="round"></path>
                                 </svg>
-                                <span class="ml-3">Back</span>
+                                <span class="text-white text-base">Back</span>
                             </a>
                         </button>
                     </div>
@@ -507,7 +507,7 @@
                             Address</label>
                         <input formControlName="oldEmailAddress" placeholder="example@mail.com" id="oldEmailAddress"
                             type="email" autocomplete="email"
-                            class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                            class="block w-full appearance-none rounded-sm border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                         <p *ngIf="changeEmailForm.controls['oldEmailAddress'].invalid && changeEmailForm.controls['oldEmailAddress'].touched"
                             class="text-xs text-red-700 text-right italic font-extralight">
                             *Please enter a valid email address
@@ -519,7 +519,7 @@
                         <div class="mt-1">
                             <input formControlName="password" placeholder="********" id="password" type="password"
                                 autocomplete="current-password" required
-                                class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                class="block w-full appearance-none rounded-sm border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                             <p *ngIf="changeEmailForm.controls['password'].invalid && changeEmailForm.controls['password'].touched"
                                 class="text-xs text-red-700 text-right italic font-extralight">(At least 8 characters)
                             </p>
@@ -530,31 +530,31 @@
 
 
                     <div
-                        class="block w-auto max-w-lg rounded-lg flex divide-x divide-gray-200 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2  focus:ring-offset-gray-900">
+                        class="block w-auto max-w-lg rounded-sm flex divide-x divide-gray-200 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2  focus:ring-offset-gray-900">
                         <button [disabled]="changeEmailForm.invalid" (click)="changeEmailAddress()" type="submit"
                             class="flex w-0 flex-1">
                             <a
-                                class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
-                                <svg class="-ml-1 mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
+                                class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-white hover:text-gray-500">
+                                <svg class="text-white mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
                                     stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
                                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path
                                         d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
                                         stroke-linecap="round" stroke-linejoin="round"></path>
                                 </svg>
-                                <span class="ml-3">Send Verification</span>
+                                <span class="text-white text-base">Send Verification</span>
                             </a>
                         </button>
                         <button (click)="back()" class="flex w-0 flex-1">
                             <a
-                                class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
-                                <svg class="-ml-1 mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
+                                class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-white hover:text-gray-500">
+                                <svg class="text-white mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
                                     stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
                                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" stroke-linecap="round"
                                         stroke-linejoin="round"></path>
                                 </svg>
-                                <span class="ml-3">Back</span>
+                                <span class="text-white text-base">Back</span>
                             </a>
                         </button>
                     </div>
@@ -574,7 +574,7 @@
                         <div class="mt-1">
                             <input formControlName="emailAddress" placeholder="example@mail.com" id="emailAddress"
                                 type="email" autocomplete="email"
-                                class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                class="block w-full appearance-none rounded-sm border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                             <p *ngIf="changePasswordForm.controls['emailAddress'].invalid && changePasswordForm.controls['emailAddress'].touched"
                                 class="text-xs text-red-700 text-right italic font-extralight">
                                 *Please enter a valid email address
@@ -588,7 +588,7 @@
                         <div class="mt-1">
                             <input formControlName="oldPassword" placeholder="********" id="oldPassword" type="password"
                                 autocomplete="current-password" required
-                                class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                class="block w-full appearance-none rounded-sm border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                             <p *ngIf="changePasswordForm.controls['oldPassword'].invalid && changePasswordForm.controls['oldPassword'].touched"
                                 class="text-xs text-red-700 text-right italic font-extralight">(At least 8 characters)
                             </p>
@@ -600,7 +600,7 @@
                         <div class="mt-1">
                             <input formControlName="password" placeholder="********" id="password" type="password"
                                 autocomplete="current-password" required
-                                class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                class="block w-full appearance-none rounded-sm border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                             <p *ngIf="changePasswordForm.controls['password'].invalid && changePasswordForm.controls['password'].touched"
                                 class="text-xs text-red-700 text-right italic font-extralight">(At least 8 characters)
                             </p>
@@ -613,7 +613,7 @@
                         <div class="mt-1">
                             <input formControlName="confirmPassword" placeholder="********" id="confirmPassword"
                                 type="password" required
-                                class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                class="block w-full appearance-none rounded-sm border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                             <p *ngIf="changePasswordForm.controls['confirmPassword'].invalid && changePasswordForm.controls['confirmPassword'].touched"
                                 class="text-xs text-red-700 text-right italic font-extralight">(Password do not match)
                             </p>
@@ -624,31 +624,31 @@
                             class="font-medium">Oops!</span> {{message}}!</p>
 
                     <div
-                        class="block w-auto max-w-lg rounded-lg flex divide-x divide-gray-200 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2  focus:ring-offset-gray-900">
+                        class="block w-auto max-w-lg rounded-sm flex divide-x divide-gray-200 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2  focus:ring-offset-gray-900">
                         <button [disabled]="changePasswordForm.invalid" (click)="changePassword()"
                             class="flex w-0 flex-1">
                             <a
-                                class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
-                                <svg class="-ml-1 mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
+                                class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-white hover:text-gray-500">
+                                <svg class="text-white mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
                                     stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
                                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776">
                                     </path>
                                 </svg>
-                                <span class="ml-3">Save</span>
+                                <span class="text-white text-base">Save</span>
                             </a>
                         </button>
                         <button (click)="back()" class="flex w-0 flex-1">
                             <a
                                 class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
-                                <svg class="-ml-1 mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
+                                <svg class="text-white mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
                                     stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
                                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" stroke-linecap="round"
                                         stroke-linejoin="round"></path>
                                 </svg>
-                                <span class="ml-3">Back</span>
+                                <span class="text-white text-base">Back</span>
                             </a>
                         </button>
                     </div>
@@ -667,7 +667,7 @@
                         <label for="token" class="block text-sm font-medium text-gray-700">Token</label>
                         <div class="mt-1">
                             <input formControlName="token" placeholder="XXXXXX" id="token" type="text" required
-                                class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                class="block w-full appearance-none rounded-sm border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                             <p *ngIf="verifyEmailChangeForm.controls['token'].invalid && verifyEmailChangeForm.controls['token'].touched"
                                 class="text-xs text-red-700 text-right italic font-extralight">(Must be 6 digits)</p>
                         </div>
@@ -678,7 +678,7 @@
                         <div class="mt-1">
                             <input formControlName="oldEmailAddress" placeholder="example@mail.com" id="oldEmailAddress"
                                 type="email" autocomplete="email"
-                                class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                class="block w-full appearance-none rounded-sm border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                             <p *ngIf="verifyEmailChangeForm.controls['oldEmailAddress'].invalid && verifyEmailChangeForm.controls['oldEmailAddress'].touched"
                                 class="text-xs text-red-700 text-right italic font-extralight">
                                 *Please enter a valid email address
@@ -692,7 +692,7 @@
                         <div class="mt-1">
                             <input formControlName="newEmailAddress" placeholder="example@mail.com" id="newEmailAddress"
                                 type="email" autocomplete="email"
-                                class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                class="block w-full appearance-none rounded-sm border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                             <p *ngIf="verifyEmailChangeForm.controls['newEmailAddress'].invalid && verifyEmailChangeForm.controls['newEmailAddress'].touched"
                                 class="text-xs text-red-700 text-right italic font-extralight">
                                 *Please enter a valid email address
@@ -703,31 +703,31 @@
                     <p *ngIf="message" class="mt-2 text-sm text-red-600 dark:text-red-500"><span
                             class="font-medium">Oops!</span> {{message}}!</p>
                     <div
-                        class="block w-auto max-w-lg rounded-lg flex divide-x divide-gray-200 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2  focus:ring-offset-gray-900">
+                        class="block w-auto max-w-lg rounded-sm flex divide-x divide-gray-200 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2  focus:ring-offset-gray-900">
                         <button [disabled]="verifyEmailChangeForm.invalid" (click)="verifyEmailChanger()"
                             class="flex w-0 flex-1">
                             <a
-                                class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
-                                <svg class="-ml-1 mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
+                                class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-white hover:text-gray-500">
+                                <svg class="text-white mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
                                     stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
                                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776">
                                     </path>
                                 </svg>
-                                <span class="ml-3">Save</span>
+                                <span class="text-white text-base">Save</span>
                             </a>
                         </button>
                         <button (click)="back()" class="flex w-0 flex-1">
                             <a
                                 class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
-                                <svg class="-ml-1 mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
+                                <svg class="text-white mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
                                     stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
                                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" stroke-linecap="round"
                                         stroke-linejoin="round"></path>
                                 </svg>
-                                <span class="ml-3">Back</span>
+                                <span class="text-white text-base">Back</span>
                             </a>
                         </button>
                     </div>

@@ -18,7 +18,7 @@
                                     photo</label>
                                 <div class="mt-1 sm:col-span-2 sm:mt-0">
                                     <div
-                                        class="flex max-w-lg justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
+                                        class="flex max-w-lg justify-center rounded-sm border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
                                         <div class="space-y-1 text-center">
                                             <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor"
                                                 fill="none" viewBox="0 0 48 48" aria-hidden="true">
@@ -28,7 +28,7 @@
                                             </svg>
                                             <div class="flex text-sm text-gray-600">
                                                 <label for="file-upload"
-                                                    class="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
+                                                    class="relative cursor-pointer rounded-sm bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
                                                     <input type="file" (change)="onFileSelected($event)"
                                                         name="CoverImage">
                                                 </label>
@@ -45,7 +45,7 @@
                                 <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
                                 <div class="mt-1">
                                     <input [(ngModel)]="_article.title" formControlName="title" id="title" type="text"
-                                        class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-4 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                        class="block w-full appearance-none rounded-sm border border-gray-300 px-3 py-4 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                                     <p *ngIf="editArticleForm.controls['title'].invalid && editArticleForm.controls['title'].touched"
                                         class="text-xs text-red-700 text-right italic font-extralight">(At least 10
                                         characters)</p>
@@ -57,7 +57,7 @@
                                 <div class="mt-1">
                                     <textarea [(ngModel)]="_article.summary" formControlName="summary" id="summary"
                                         type="text"
-                                        class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-4 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"></textarea>
+                                        class="block w-full appearance-none rounded-sm border border-gray-300 px-3 py-4 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"></textarea>
                                     <p *ngIf="editArticleForm.controls['summary'].invalid && editArticleForm.controls['summary'].touched"
                                         class="text-xs text-red-700 text-right italic font-extralight">(At least 20
                                         characters)</p>
@@ -68,7 +68,7 @@
                                 <div class="mt-1">
                                     <textarea [(ngModel)]="_article.body" formControlName="body" id="description"
                                         type="text"
-                                        class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-4 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"></textarea>
+                                        class="block w-full appearance-none rounded-sm border border-gray-300 px-3 py-4 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"></textarea>
                                     <p *ngIf="editArticleForm.controls['body'].invalid && editArticleForm.controls['body'].touched"
                                         class="text-xs text-red-700 text-right italic font-extralight">(At least 100
                                         characters)</p>
@@ -80,7 +80,7 @@
                                 <div class="mt-1">
                                     <input [(ngModel)]="_article.tags" formControlName="tags" id="tags" type="text"
                                         required
-                                        class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                        class="block w-full appearance-none rounded-sm border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                                     <p *ngIf="editArticleForm.controls['tags'].invalid && editArticleForm.controls['tags'].touched"
                                         class="text-xs text-red-700 text-right italic font-extralight">(At least 6
                                         characters)</p>
@@ -95,18 +95,18 @@
                     class="font-medium">Oops!</span> {{message}}!</p>
 
             <button [disabled]="editArticleForm.invalid" (click)="onSubmit()"
-                class="mr-3 mt-6 block w-32 max-w-lg rounded-lg flex divide-x divide-gray-200 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2  focus:ring-offset-gray-900">
+                class="mr-3 mt-6 block w-32 max-w-lg rounded-sm flex divide-x divide-gray-200 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2  focus:ring-offset-gray-900">
                 <div class="flex w-0 flex-1">
                     <a
-                        class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
-                        <svg class="-ml-1 mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
+                        class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-white hover:text-gray-500">
+                        <svg class="text-white mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
                             stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776">
                             </path>
                         </svg>
-                        <span class="ml-2">Save</span>
+                        <span class="text-white text-base">Save</span>
                     </a>
                 </div>
             </button>
