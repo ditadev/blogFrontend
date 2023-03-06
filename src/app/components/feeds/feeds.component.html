@@ -3,102 +3,118 @@
     <div class="flex h-screen m-auto items-center justify-center ">
         <div class="w-40 h-40 border-t-4 border-b-4 border-cyan-700 rounded-full animate-spin"></div>
     </div>
-  </ngx-spinner>
+</ngx-spinner>
 
-  <div class="flex flex-col h-screen justify-between bg-white">
+<div class="flex flex-col h-screen justify-between bg-white">
+    <div class="flex-grow">
 
-    <form [formGroup]="searchForm">
-        <label for="title" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-        <div class="relative">
-            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-            </div>
-            <input [(ngModel)]="title" formControlName="title"  type="search" id="title" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-cyan-800 bg-gray-50 focus:ring-cyan-500 focus:border-cyan-500 dark:bg-gray-700 dark:border-cyan-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500" placeholder="Search by title. E.g The Odd of Joy" required>
-            <button [disabled]="searchForm.invalid" (click)="searchArticle()" type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-cyan-700 hover:bg-cyan-800 focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800">Search</button>
-        </div>
-        <p *ngIf="searchForm.controls['title'].invalid && searchForm.controls['title'].touched" class="text-xs mx-4 text-red-700 text-right italic font-extralight">
-            {{message}}
-         </p>
-    </form>
-
-    <div *ngIf="articles.length==0 && dialog" aria-orientation="horizontal" aria-labelledby="confirm-delete"
-    tabindex="-1"class="modal-backdrop">
-    <div class="modal w-96 h-auto rounded-xl"> 
-      <div class="text-center modal-content">
-          <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-            <path d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" stroke-linecap="round" stroke-linejoin="round"></path>
-          </svg>
-          <h3 class="mt-2 text-lg font-semibold text-gray-900">No article with the name "{{title}}" was found.</h3>
-          <div class="mt-6">
-            <button (click)="back()" type="button" class="inline-flex items-center rounded-md bg-cyan-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-cyan-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600">
-              Return To Feeds
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div *ngIf="isUserAuthenticated()" class="bg-white">
-        <div *ngFor="let article of articles" class="bg-white rounded-lg pt-2 lg:py-6">
-            <div routerLink="/article/{{article.postId}}"
-                class="relative overflow-hidden rounded-lg bg-gradient-to-r from-teal-500 to-cyan-600 py-3 px-6 font-medium text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900 py-24 px-8 shadow-2xl lg:grid lg:grid-cols-2 lg:gap-x-8 lg:px-16">
-                <div class="absolute inset-0 opacity-50 mix-blend-multiply saturate-0 filter">
-                    <img src="http://localhost:5259/static/images/{{article.coverImagePath}}" alt=""
-                        class="h-full w-full object-cover">
+        <div *ngIf="articles.length==0 && dialog==1" aria-orientation="horizontal" aria-labelledby="confirm-delete"
+            tabindex="-1" class="modal-backdrop">
+            <div class="modal w-96 h-auto rounded-xl">
+                <div class="text-center modal-content">
+                    <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        aria-hidden="true">
+                        <path
+                            d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
+                            stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <h3 class="mt-2 text-lg font-semibold text-gray-900">No article with the name "{{title}}" was found.
+                    </h3>
+                    <div class="mt-6">
+                        <button (click)="back()" type="button"
+                            class="inline-flex items-center rounded-md bg-cyan-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-cyan-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600">
+                            Return To Feeds
+                        </button>
+                    </div>
                 </div>
-                <div class="relative lg:col-span-1">
-                    <blockquote class="mt-6 text-white">
-                        <p class="mt-2 text-3xl font-bold tracking-tight text-white sm:text-2xl">{{article.title}}
-                        </p>
-                        <footer class="mt-6">
-                            <p class="flex flex-col font-medium">
-                                <span
-                                    class="text-base  text-gray-200 sm:text-xl lg:text-lg xl:text-xl">{{article.summary}}</span>
-                                <br />
-                                <span class="text-sm font-medium text-white">Author: {{article.authorsName}}</span>
-                                <span class="text-sm font-medium text-white">Category:
-                                    {{article.category.categoryName}}</span>
-                                <span class="text-sm font-medium text-white">Tags: {{article.tags}}</span>
-                                <time class="text-sm font-medium text-white">{{article.dateCreated | date : 'dd/MM/yyyy
-                                    hh:mm a'}}</time>
+            </div>
+        </div>
+
+        <div *ngIf="isUserAuthenticated()" class="bg-white">
+            <form [formGroup]="searchForm">
+                <label for="title" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                    <input [(ngModel)]="title" formControlName="title" type="search" id="title"
+                        class="block w-full p-4 pl-10 text-sm text-gray-900 border border-cyan-800 bg-gray-50 focus:ring-cyan-500 focus:border-cyan-500 dark:bg-gray-700 dark:border-cyan-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500"
+                        placeholder="Search by title. E.g The Odd of Joy" required>
+                    <button [disabled]="title.length<1" (click)="searchArticle()" type="submit"
+                        class="text-white absolute right-2.5 bottom-2.5 bg-cyan-700 hover:bg-cyan-800 focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800">Search</button>
+                </div>
+                <p *ngIf="searchForm.controls['title'].invalid && searchForm.controls['title'].touched"
+                    class="text-xs mx-4 text-red-700 text-right italic font-extralight">
+                    {{message}}
+                </p>
+            </form>
+            <div *ngFor="let article of articles" class="bg-white py-2 px-2 rounded-sm lg:py-2">
+                <div routerLink="/article/{{article.postId}}"
+                    class="relative overflow-hidden rounded-md bg-gradient-to-r from-teal-500 to-cyan-600 font-medium text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900 py-24 shadow-2xl lg:grid lg:grid-cols-2 px-4 lg:gap-x-8 lg:px-16 h-96">
+                    <div class="absolute inset-0 opacity-50 mix-blend-multiply saturate-0 filter">
+                        <img src="http://localhost:5259/static/images/{{article.coverImagePath}}" alt=""
+                            class="h-full w-full object-cover">
+                    </div>
+                    <div class="relative h-full lg:col-span-1">
+                        <blockquote class="mt-6 text-white">
+                            <p class="text-3xl break-normal truncate font-bold tracking-tight text-white sm:text-2xl">
+                                {{article.title}}
                             </p>
-                        </footer>
-                    </blockquote>
+                            <div class="mt-4">
+                                <p class="flex flex-col font-medium">
+                                    <span
+                                        class="text-base break-normal truncate text-gray-200 sm:text-xl lg:text-lg xl:text-xl">{{article.summary}}</span>
+                                    <br />
+                                    <span class="text-sm font-medium break-normal truncate text-white">Author: {{article.authorsName}}</span>
+                                    <span class="text-sm break-normal truncate font-medium text-white">Category:
+                                        {{article.category.categoryName}}</span>
+                                    <span class="text-sm break-normal truncate font-medium text-white">Tags: {{article.tags}}</span>
+                                    <time class="text-sm break-normal truncate font-medium text-white">{{article.dateCreated | date :
+                                        'dd/MM/yyyy
+                                        hh:mm a'}}</time>
+                                </p>
+                            </div>
+                        </blockquote>
+                    </div>
                 </div>
             </div>
         </div>
-        <footer class="pb-4">
-            <div *ngIf="pageInfo.hasNext || pageInfo.hasPrevious" class="flex flex-col items-center pt-4">
+        <div class="py-2 sticky top-[100vh]">
+            <div *ngIf="pageInfo.hasNext || pageInfo.hasPrevious" class="flex flex-col items-center">
                 <!-- Help text -->
-            <span class="text-sm text-gray-900 dark:text-gray-900">
-                Page <span class="font-semibold text-gray-900 dark:text-gray-900">{{currentPage}}</span> of <span
-                    class="font-semibold text-gray-900 dark:text-gray-900">{{totalPages}}</span>
-            </span>
-            <div class="inline-flex mt-2 xs:mt-0">
-                <!-- Buttons -->
-                <button (click)="previousPage()" [disabled]="!hasPrevious"
-                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-l hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                    <svg aria-hidden="true" class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                    Prev
-                </button>
-                <button (click)="nextPage()" [disabled]="!hasNext"
-                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 border-0 border-l border-gray-700 rounded-r hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                    Next
-                    <svg aria-hidden="true" class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                </button>
+                <span class="text-sm text-gray-900 dark:text-gray-900">
+                    Page <span class="font-semibold text-gray-900 dark:text-gray-900">{{currentPage}}</span> of <span
+                        class="font-semibold text-gray-900 dark:text-gray-900">{{totalPages}}</span>
+                </span>
+                <div class="inline-flex mt-2 xs:mt-0">
+                    <!-- Buttons -->
+                    <button (click)="previousPage()" [disabled]="!hasPrevious"
+                        class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-l hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                        <svg aria-hidden="true" class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        Prev
+                    </button>
+                    <button (click)="nextPage()" [disabled]="!hasNext"
+                        class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 border-0 border-l border-gray-700 rounded-r hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                        Next
+                        <svg aria-hidden="true" class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
-        </footer>
     </div>
     <app-footer class="sticky top-[100vh]"></app-footer>
 </div>

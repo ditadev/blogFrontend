@@ -6,11 +6,10 @@
 </ngx-spinner>
 
 <div class="flex flex-col h-screen justify-between bg-white">
-        <div >
+    <div>
         <div *ngIf="state==1" class="w-11/12 py-4 mx-4 flex flex-row flex-wrap items-start justify-start ">
 
-            <div (click)="updateProfileState()"
-                class="max-w-2xl h-64 rounded overflow-hidden mx-8 my-8  shadow-lg">
+            <div (click)="updateProfileState()" class="max-w-2xl h-64 rounded overflow-hidden mx-8 my-8  shadow-lg">
                 <svg class="ml-4 mt-4 mb-8" width="119" height="90" viewBox="0 0 119 90" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_1036_56590)">
@@ -127,8 +126,7 @@
                 </div>
             </div>
 
-            <div (click)="changePasswordState()"
-                class="max-w-2xl h-64 rounded overflow-hidden mx-8 my-8  shadow-lg">
+            <div (click)="changePasswordState()" class="max-w-2xl h-64 rounded overflow-hidden mx-8 my-8  shadow-lg">
                 <svg class="ml-4 mt-4 mb-8" width="178" height="90" viewBox="0 0 178 90" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_1036_56683)">
@@ -418,30 +416,35 @@
                     <div>
                         <label for="userName" class="block text-sm font-medium text-gray-700">Username </label>
                         <div class="mt-1">
-                            <input [(ngModel)]="author.username"  formControlName="userName" placeholder="PhantomWriter12345" id="userName" type="text"
-                            class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                <p *ngIf="updateUserForm.controls['userName'].invalid && updateUserForm.controls['userName'].touched" class="text-xs text-red-700 text-right italic font-extralight">*Username too short</p>
+                            <input [(ngModel)]="author.username" formControlName="userName"
+                                placeholder="PhantomWriter12345" id="userName" type="text"
+                                class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                            <p *ngIf="updateUserForm.controls['userName'].invalid && updateUserForm.controls['userName'].touched"
+                                class="text-xs text-red-700 text-right italic font-extralight">*Username too short</p>
                         </div>
                     </div>
 
                     <div>
                         <label for="firstName" class="block text-sm font-medium text-gray-700">First Name</label>
                         <div class="mt-1">
-                            <input [(ngModel)]="author.firstName"  formControlName="firstName" placeholder="John" id="firstName" type="text"
-                            
+                            <input [(ngModel)]="author.firstName" formControlName="firstName" placeholder="John"
+                                id="firstName" type="text"
                                 class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                <p *ngIf="updateUserForm.controls['firstName'].invalid && updateUserForm.controls['firstName'].touched" class="text-xs text-red-700 text-right italic font-extralight">
-                                    *Field Required
-                                  </p>
+                            <p *ngIf="updateUserForm.controls['firstName'].invalid && updateUserForm.controls['firstName'].touched"
+                                class="text-xs text-red-700 text-right italic font-extralight">
+                                *Field Required
+                            </p>
                         </div>
                     </div>
 
                     <div>
                         <label for="lastname" class="block text-sm font-medium text-gray-700">Last Name</label>
                         <div class="mt-1">
-                            <input [(ngModel)]="author.lastName"  formControlName="lastName" placeholder="Doe" id="lastName" type="text"
-                            class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                            <p *ngIf="updateUserForm.controls['lastName'].invalid && updateUserForm.controls['lastName'].touched" class="text-xs text-red-700 text-right italic font-extralight">
+                            <input [(ngModel)]="author.lastName" formControlName="lastName" placeholder="Doe"
+                                id="lastName" type="text"
+                                class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                            <p *ngIf="updateUserForm.controls['lastName'].invalid && updateUserForm.controls['lastName'].touched"
+                                class="text-xs text-red-700 text-right italic font-extralight">
                                 *Field Required</p>
                         </div>
                     </div>
@@ -449,16 +452,21 @@
                     <div>
                         <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
                         <div class="mt-1">
-                            <textarea [(ngModel)]="author.description"  formControlName="description" placeholder="Describe yourself in a few words." id="description" type="text" class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-4 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"></textarea>
-                            <p *ngIf="updateUserForm.controls['description'].invalid && updateUserForm.controls['description'].touched" class="text-xs text-red-700 text-right italic font-extralight">(At least 100 characters)</p>
+                            <textarea [(ngModel)]="author.description" formControlName="description"
+                                placeholder="Describe yourself in a few words." id="description" type="text"
+                                class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-4 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"></textarea>
+                            <p *ngIf="updateUserForm.controls['description'].invalid && updateUserForm.controls['description'].touched"
+                                class="text-xs text-red-700 text-right italic font-extralight">(At least 100 characters)
+                            </p>
                         </div>
                     </div>
 
-                    <p *ngIf="message" class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oops!</span> {{message}}</p>
+                    <p *ngIf="message" class="mt-2 text-sm text-red-600 dark:text-red-500"><span
+                            class="font-medium">Oops!</span> {{message}}</p>
 
                     <div
                         class="block w-auto max-w-lg rounded-lg flex divide-x divide-gray-200 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2  focus:ring-offset-gray-900">
-                        <button  [disabled]="updateUserForm.invalid" (click)="updateAuthor()" class="flex w-0 flex-1">
+                        <button [disabled]="updateUserForm.invalid" (click)="updateAuthor()" class="flex w-0 flex-1">
                             <a
                                 class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
                                 <svg class="-ml-1 mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
@@ -495,12 +503,13 @@
                 </div>
                 <form [formGroup]="changeEmailForm" class="space-y-6">
                     <div class="mt-1">
-                        <label for="password" class="block text-sm font-medium text-gray-700">Current Email Address</label>
-                        <input formControlName="oldEmailAddress" placeholder="example@mail.com" id="oldEmailAddress" type="email"
-                        autocomplete="email" 
-                               class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                              >
-                               <p *ngIf="changeEmailForm.controls['oldEmailAddress'].invalid && changeEmailForm.controls['oldEmailAddress'].touched" class="text-xs text-red-700 text-right italic font-extralight">
+                        <label for="password" class="block text-sm font-medium text-gray-700">Current Email
+                            Address</label>
+                        <input formControlName="oldEmailAddress" placeholder="example@mail.com" id="oldEmailAddress"
+                            type="email" autocomplete="email"
+                            class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                        <p *ngIf="changeEmailForm.controls['oldEmailAddress'].invalid && changeEmailForm.controls['oldEmailAddress'].touched"
+                            class="text-xs text-red-700 text-right italic font-extralight">
                             *Please enter a valid email address
                         </p>
                     </div>
@@ -509,9 +518,11 @@
                         <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                         <div class="mt-1">
                             <input formControlName="password" placeholder="********" id="password" type="password"
-                            autocomplete="current-password" required
+                                autocomplete="current-password" required
                                 class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                <p *ngIf="changeEmailForm.controls['password'].invalid && changeEmailForm.controls['password'].touched" class="text-xs text-red-700 text-right italic font-extralight">(At least 8 characters)</p>
+                            <p *ngIf="changeEmailForm.controls['password'].invalid && changeEmailForm.controls['password'].touched"
+                                class="text-xs text-red-700 text-right italic font-extralight">(At least 8 characters)
+                            </p>
                         </div>
                     </div>
                     <p *ngIf="message" class="mt-2 text-sm text-red-600 dark:text-red-500"><span
@@ -520,7 +531,8 @@
 
                     <div
                         class="block w-auto max-w-lg rounded-lg flex divide-x divide-gray-200 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2  focus:ring-offset-gray-900">
-                        <button [disabled]="changeEmailForm.invalid" (click)="changeEmailAddress()" type="submit" class="flex w-0 flex-1">
+                        <button [disabled]="changeEmailForm.invalid" (click)="changeEmailAddress()" type="submit"
+                            class="flex w-0 flex-1">
                             <a
                                 class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
                                 <svg class="-ml-1 mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
@@ -560,24 +572,26 @@
                     <div>
                         <label for="emailAddress" class="block text-sm font-medium text-gray-700">Email address</label>
                         <div class="mt-1">
-                            <input formControlName="emailAddress" placeholder="example@mail.com" id="emailAddress" type="email"
-                            autocomplete="email" 
-                                   class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                  >
-                                   <p *ngIf="changePasswordForm.controls['emailAddress'].invalid && changePasswordForm.controls['emailAddress'].touched" class="text-xs text-red-700 text-right italic font-extralight">
+                            <input formControlName="emailAddress" placeholder="example@mail.com" id="emailAddress"
+                                type="email" autocomplete="email"
+                                class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                            <p *ngIf="changePasswordForm.controls['emailAddress'].invalid && changePasswordForm.controls['emailAddress'].touched"
+                                class="text-xs text-red-700 text-right italic font-extralight">
                                 *Please enter a valid email address
                             </p>
                         </div>
-                        
+
                     </div>
 
                     <div class="space-y-1">
                         <label for="oldPassword" class="block text-sm font-medium text-gray-700">Old Password</label>
                         <div class="mt-1">
                             <input formControlName="oldPassword" placeholder="********" id="oldPassword" type="password"
-                            autocomplete="current-password" required
+                                autocomplete="current-password" required
                                 class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                <p *ngIf="changePasswordForm.controls['oldPassword'].invalid && changePasswordForm.controls['oldPassword'].touched" class="text-xs text-red-700 text-right italic font-extralight">(At least 8 characters)</p>
+                            <p *ngIf="changePasswordForm.controls['oldPassword'].invalid && changePasswordForm.controls['oldPassword'].touched"
+                                class="text-xs text-red-700 text-right italic font-extralight">(At least 8 characters)
+                            </p>
                         </div>
                     </div>
 
@@ -585,18 +599,24 @@
                         <label for="password" class="block text-sm font-medium text-gray-700">New Password</label>
                         <div class="mt-1">
                             <input formControlName="password" placeholder="********" id="password" type="password"
-                            autocomplete="current-password" required
+                                autocomplete="current-password" required
                                 class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                <p *ngIf="changePasswordForm.controls['password'].invalid && changePasswordForm.controls['password'].touched" class="text-xs text-red-700 text-right italic font-extralight">(At least 8 characters)</p>
+                            <p *ngIf="changePasswordForm.controls['password'].invalid && changePasswordForm.controls['password'].touched"
+                                class="text-xs text-red-700 text-right italic font-extralight">(At least 8 characters)
+                            </p>
                         </div>
                     </div>
 
                     <div class="space-y-1">
-                        <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+                        <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirm
+                            Password</label>
                         <div class="mt-1">
-                            <input formControlName="confirmPassword" placeholder="********" id="confirmPassword" type="password" required
+                            <input formControlName="confirmPassword" placeholder="********" id="confirmPassword"
+                                type="password" required
                                 class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                <p *ngIf="changePasswordForm.controls['confirmPassword'].invalid && changePasswordForm.controls['confirmPassword'].touched" class="text-xs text-red-700 text-right italic font-extralight">(Password do not match)</p>
+                            <p *ngIf="changePasswordForm.controls['confirmPassword'].invalid && changePasswordForm.controls['confirmPassword'].touched"
+                                class="text-xs text-red-700 text-right italic font-extralight">(Password do not match)
+                            </p>
                         </div>
                     </div>
 
@@ -605,7 +625,8 @@
 
                     <div
                         class="block w-auto max-w-lg rounded-lg flex divide-x divide-gray-200 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2  focus:ring-offset-gray-900">
-                        <button [disabled]="changePasswordForm.invalid" (click)="changePassword()" class="flex w-0 flex-1">
+                        <button [disabled]="changePasswordForm.invalid" (click)="changePassword()"
+                            class="flex w-0 flex-1">
                             <a
                                 class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
                                 <svg class="-ml-1 mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
@@ -647,40 +668,44 @@
                         <div class="mt-1">
                             <input formControlName="token" placeholder="XXXXXX" id="token" type="text" required
                                 class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                <p *ngIf="verifyEmailChangeForm.controls['token'].invalid && verifyEmailChangeForm.controls['token'].touched" class="text-xs text-red-700 text-right italic font-extralight">(Must be 6 digits)</p>
+                            <p *ngIf="verifyEmailChangeForm.controls['token'].invalid && verifyEmailChangeForm.controls['token'].touched"
+                                class="text-xs text-red-700 text-right italic font-extralight">(Must be 6 digits)</p>
                         </div>
                     </div>
                     <div>
-                        <label for="oldEmailAddress" class="block text-sm font-medium text-gray-700">Current Email address</label>
+                        <label for="oldEmailAddress" class="block text-sm font-medium text-gray-700">Current Email
+                            address</label>
                         <div class="mt-1">
-                            <input formControlName="oldEmailAddress" placeholder="example@mail.com" id="oldEmailAddress" type="email"
-                            autocomplete="email" 
-                                   class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                  >
-                                   <p *ngIf="verifyEmailChangeForm.controls['oldEmailAddress'].invalid && verifyEmailChangeForm.controls['oldEmailAddress'].touched" class="text-xs text-red-700 text-right italic font-extralight">
+                            <input formControlName="oldEmailAddress" placeholder="example@mail.com" id="oldEmailAddress"
+                                type="email" autocomplete="email"
+                                class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                            <p *ngIf="verifyEmailChangeForm.controls['oldEmailAddress'].invalid && verifyEmailChangeForm.controls['oldEmailAddress'].touched"
+                                class="text-xs text-red-700 text-right italic font-extralight">
                                 *Please enter a valid email address
                             </p>
                         </div>
-                        
+
                     </div>
                     <div>
-                        <label for="newEmailAddress" class="block text-sm font-medium text-gray-700">New Email address</label>
+                        <label for="newEmailAddress" class="block text-sm font-medium text-gray-700">New Email
+                            address</label>
                         <div class="mt-1">
-                            <input formControlName="newEmailAddress" placeholder="example@mail.com" id="newEmailAddress" type="email"
-                            autocomplete="email" 
-                                   class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                  >
-                                   <p *ngIf="verifyEmailChangeForm.controls['newEmailAddress'].invalid && verifyEmailChangeForm.controls['newEmailAddress'].touched" class="text-xs text-red-700 text-right italic font-extralight">
+                            <input formControlName="newEmailAddress" placeholder="example@mail.com" id="newEmailAddress"
+                                type="email" autocomplete="email"
+                                class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                            <p *ngIf="verifyEmailChangeForm.controls['newEmailAddress'].invalid && verifyEmailChangeForm.controls['newEmailAddress'].touched"
+                                class="text-xs text-red-700 text-right italic font-extralight">
                                 *Please enter a valid email address
                             </p>
                         </div>
-                        
+
                     </div>
                     <p *ngIf="message" class="mt-2 text-sm text-red-600 dark:text-red-500"><span
                             class="font-medium">Oops!</span> {{message}}!</p>
                     <div
                         class="block w-auto max-w-lg rounded-lg flex divide-x divide-gray-200 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2  focus:ring-offset-gray-900">
-                        <button [disabled]="verifyEmailChangeForm.invalid" (click)="verifyEmailChanger()" class="flex w-0 flex-1">
+                        <button [disabled]="verifyEmailChangeForm.invalid" (click)="verifyEmailChanger()"
+                            class="flex w-0 flex-1">
                             <a
                                 class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
                                 <svg class="-ml-1 mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
@@ -710,11 +735,11 @@
             </div>
         </div>
 
-        <div *ngIf="_showMore" aria-orientation="horizontal" aria-labelledby="confirm-delete"
-        tabindex="-1"class="modal-backdrop">
-        <div class="modal"> 
-            <div class="modal-content">
-                <div class="p-6 text-center">
+        <div *ngIf="_showMore" aria-orientation="horizontal" aria-labelledby="confirm-delete" tabindex="-1"
+            class="modal-backdrop">
+            <div class="modal">
+                <div class="modal-content">
+                    <div class="p-6 text-center">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                             class="mx-auto mb-4 text-gray-400 w-14 h-14 dark:text-gray-200">
                             <path fill-rule="evenodd"
@@ -723,7 +748,7 @@
                         </svg>
                         <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-800">{{msg}}</h3>
                         <button (click)="back()" data-modal-hide="popup-modal" type="button"
-                        class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 mr-3 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900">Go
+                            class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 mr-3 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900">Go
                             Back
                         </button>
                     </div>

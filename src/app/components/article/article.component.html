@@ -3,83 +3,94 @@
     <div class="flex h-screen m-auto items-center justify-center ">
         <div class="w-40 h-40 border-t-4 border-b-4 border-cyan-700 rounded-full animate-spin"></div>
     </div>
-  </ngx-spinner>
+</ngx-spinner>
 
-  <div class="flex flex-col h-screen justify-between bg-white">
-    <div class="bg-black"  >
-    <div *ngIf="articles.postId==postId" class="relative overflow-hidden bg-white " >
-        <div class="bg-gray-900 pt-10 sm:pt-16 lg:overflow-hidden lg:pt-8 lg:pb-14">
-            <div class="mx-auto -mt-20 max-w-7xl lg:px-8">
-                <div  class="relative overflow-hidden rounded-sm bg-white py-16">
-                    <div class="hidden lg:absolute lg:inset-y-0 lg:block lg:h-full lg:w-full lg:[overflow-anchor:none]">
-                        <div class="relative mx-auto h-full max-w-prose text-lg" aria-hidden="true">
-                            <svg class="absolute top-12 left-full translate-x-32 transform" width="404" height="384"
-                                fill="none" viewBox="0 0 404 384">
-                                <defs>
-                                    <pattern id="74b3fd99-0a6f-4271-bef2-e80eeafdf357" x="0" y="0" width="20"
-                                        height="20" patternUnits="userSpaceOnUse">
-                                        <rect x="0" y="0" width="4" height="4" class="text-gray-200"
-                                            fill="currentColor" />
-                                    </pattern>
-                                </defs>
-                                <rect width="404" height="384" fill="url(#74b3fd99-0a6f-4271-bef2-e80eeafdf357)" />
-                            </svg>
-                            <svg class="absolute right-full -translate-y-1/2 -translate-x-32 transform"
-                                width="404" height="384" fill="none" viewBox="0 0 404 384">
-                                <defs>
-                                    <pattern id="f210dbf6-a58d-4871-961e-36d5016a0f49" x="0" y="0" width="20"
-                                        height="20" patternUnits="userSpaceOnUse">
-                                        <rect x="0" y="0" width="4" height="4" class="text-gray-200"
-                                            fill="currentColor" />
-                                    </pattern>
-                                </defs>
-                                <rect width="404" height="384" fill="url(#f210dbf6-a58d-4871-961e-36d5016a0f49)" />
-                            </svg>
+<div class="flex flex-col h-screen justify-between bg-white">
+    <div class="flex-grow">
+        <div class="bg-black">
+            <div *ngIf="articles.postId==postId" class="relative overflow-hidden bg-white ">
+                <div class="bg-gray-900 pt-10 sm:pt-16 lg:overflow-hidden lg:pt-8 lg:pb-14">
+                    <div class="mx-auto -mt-20 max-w-7xl lg:px-8">
+                        <div class="relative overflow-hidden rounded-sm bg-white py-16">
+                            <div
+                                class="hidden lg:absolute lg:inset-y-0 lg:block lg:h-full lg:w-full lg:[overflow-anchor:none]">
+                                <div class="relative mx-auto h-full max-w-prose text-lg" aria-hidden="true">
+                                    <svg class="absolute top-12 left-full translate-x-32 transform" width="404"
+                                        height="384" fill="none" viewBox="0 0 404 384">
+                                        <defs>
+                                            <pattern id="74b3fd99-0a6f-4271-bef2-e80eeafdf357" x="0" y="0" width="20"
+                                                height="20" patternUnits="userSpaceOnUse">
+                                                <rect x="0" y="0" width="4" height="4" class="text-gray-200"
+                                                    fill="currentColor" />
+                                            </pattern>
+                                        </defs>
+                                        <rect width="404" height="384"
+                                            fill="url(#74b3fd99-0a6f-4271-bef2-e80eeafdf357)" />
+                                    </svg>
+                                    <svg class="absolute right-full -translate-y-1/2 -translate-x-32 transform"
+                                        width="404" height="384" fill="none" viewBox="0 0 404 384">
+                                        <defs>
+                                            <pattern id="f210dbf6-a58d-4871-961e-36d5016a0f49" x="0" y="0" width="20"
+                                                height="20" patternUnits="userSpaceOnUse">
+                                                <rect x="0" y="0" width="4" height="4" class="text-gray-200"
+                                                    fill="currentColor" />
+                                            </pattern>
+                                        </defs>
+                                        <rect width="404" height="384"
+                                            fill="url(#f210dbf6-a58d-4871-961e-36d5016a0f49)" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="relative px-6 lg:px-8">
+                                <div class="mx-auto max-w-prose text-lg">
+                                    <h1>
+                                        <span
+                                            class="block bg-gradient-to-r from-teal-500 to-indigo-700 bg-clip-text text-transparent sm:pb-5 mt-2 mb-2  text-center text-3xl font-bold leading-8 tracking-tight text-gray-800 sm:text-2xl ">Introducing</span>
+                                        <span
+                                            class="block bg-gradient-to-r from-teal-500 to-cyan-600 bg-clip-text text-transparent sm:pb-5 mt-2 mb-2  text-center text-3xl font-bold leading-8 tracking-tight text-gray-800 sm:text-4xl">{{articles.title}}</span>
+                                    </h1>
+                                    <figure>
+                                        <img class="w-full rounded-lg"
+                                            src="http://localhost:5259/static/images/{{articles.coverImagePath}}" alt=""
+                                            width="1310" height="873">
+                                        <br />
+                                        <figcaption class="text-sm font-medium text-black">By: {{articles.authorsName}}
+                                        </figcaption>
+                                        <figcaption class="text-sm font-medium text-black">
+                                            {{articles.category.categoryName}}</figcaption>
+                                        <figcaption class="text-sm italic font-medium text-black">{{articles.tags}}
+                                        </figcaption>
+                                        <time class="text-sm font-medium text-black">{{articles.dateCreated | date :
+                                            'dd/MM/yyyy hh:mm a'}}</time>
+                                    </figure>
+                                    <p class="mt-8 text-xl font-semibold text-center leading-8 text-black">
+                                        {{articles.summary}}</p>
+                                </div>
+                                <div class="prose prose-lg prose-indigo mx-auto mt-6 text-gray-800">
+                                    <p class="break-words text-base">{{articles.body}}</p>
+                                </div>
+
+                            </div>
                         </div>
-                    </div>
-                    <div class="relative px-6 lg:px-8">
-                        <div class="mx-auto max-w-prose text-lg">
-                            <h1>
-                                <span class="block bg-gradient-to-r from-teal-500 to-indigo-700 bg-clip-text text-transparent sm:pb-5 mt-2 mb-2  text-center text-3xl font-bold leading-8 tracking-tight text-gray-800 sm:text-2xl ">Introducing</span>
-                                <span
-                                    class="block bg-gradient-to-r from-teal-500 to-cyan-600 bg-clip-text text-transparent sm:pb-5 mt-2 mb-2  text-center text-3xl font-bold leading-8 tracking-tight text-gray-800 sm:text-4xl">{{articles.title}}</span>
-                            </h1>
-                            <figure>
-                                <img class="w-full rounded-lg"
-                                src="http://localhost:5259/static/images/{{articles.coverImagePath}}"
-                                    alt="" width="1310" height="873">
-                                    <br/>
-                                    <figcaption class="text-sm font-medium text-black">By: {{articles.authorsName}}</figcaption>
-                                    <figcaption class="text-sm font-medium text-black">{{articles.category.categoryName}}</figcaption>
-                                    <figcaption class="text-sm italic font-medium text-black">{{articles.tags}}</figcaption>
-                                <time class="text-sm font-medium text-black">{{articles.dateCreated | date : 'dd/MM/yyyy hh:mm a'}}</time>
-                            </figure>
-                            <p class="mt-8 text-xl font-semibold text-center leading-8 text-black">{{articles.summary}}</p>
-                        </div>
-                        <div class="prose prose-lg prose-indigo mx-auto mt-6 text-gray-800">
-                            <p class="break-words text-base">{{articles.body}}</p>
-                          </div>
-                          
                     </div>
                 </div>
             </div>
         </div>
         <div (click)="goBack()"
-                class="-mt-px my-auto rounded-sm flex divide-x divide-gray-200 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2  focus:ring-offset-gray-900">
-                <button  id="confirm-delete" aria-expanded="false" aria-haspopup="true"
-                    class="-ml-px rounded-lg flex w-0 flex-1 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900">
-                    <a
-                        class="relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
-                        <svg class="-ml-1 mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none"
-                            stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <path d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg>
-                        <span class="ml-3">Go Back</span>
-                    </a>
-                </button>
-            </div>
+            class="sticky top-[100vh] -mt-px my-auto rounded-sm flex divide-x divide-gray-200 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2  focus:ring-offset-gray-900">
+            <button id="confirm-delete" aria-expanded="false" aria-haspopup="true"
+                class="-ml-px rounded-lg flex w-0 flex-1 bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900">
+                <a
+                    class="relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
+                    <svg class="-ml-1 mr-2 h-5 w-5 " data-darkreader-inline-stroke="" fill="none" stroke="currentColor"
+                        stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" stroke-linecap="round" stroke-linejoin="round">
+                        </path>
+                    </svg>
+                    <span class="ml-3">Go Back</span>
+                </a>
+            </button>
+        </div>
     </div>
-</div>
-<app-footer class="sticky top-[100vh]"></app-footer>
+    <app-footer class="sticky top-[100vh]"></app-footer>
 </div>

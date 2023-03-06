@@ -31,10 +31,11 @@ export class FeedsComponent implements OnInit, OnDestroy {
   totalPages = 0;
   hasNext!: boolean;
   hasPrevious!: boolean;
-  dialog: boolean=false;
+  dialog: number = 0;
   searchForm!: FormGroup;
-  title:string="";
-  message:string="";
+  title: string = "";
+  message: string = "";
+  search: number = 0;
 
 
   constructor(
@@ -49,7 +50,7 @@ export class FeedsComponent implements OnInit, OnDestroy {
     this.pageInfo = {} as PageInfo;
     this.getArticles();
     this.searchForm = this.formBuilder.group({
-      title: ['', [Validators.required, Validators.minLength(1)]],
+      title: ['', [Validators.required, Validators.minLength(2)]],
     });
   }
 
@@ -75,10 +76,11 @@ export class FeedsComponent implements OnInit, OnDestroy {
       });
   }
 
-  searchArticle():void{
+  searchArticle(): void {
     this.spinner.show(); // show the spinner before making API call
+    this.search = 1;
     this.subscription = this.apiService
-      .searchArticle(this.title,this.currentPage, this.pageSize)
+      .searchArticle(this.title, this.currentPage, this.pageSize)
       .subscribe({
         next: (response) => {
           this.articles = response.data;
@@ -87,10 +89,10 @@ export class FeedsComponent implements OnInit, OnDestroy {
           this.hasNext = response.pageInfo.hasNext;
           this.hasPrevious = response.pageInfo.hasPrevious;
           this.spinner.hide(); // hide the spinner when API call is successful
-          this.dialog=!this.dialog;
+          this.dialog = 1;
         },
         error: (error) => {
-          this.message="Enter search title";
+          this.message = "Enter search title";
           this.spinner.hide(); // hide the spinner when API call is successful
         },
         complete: () => {
@@ -99,26 +101,34 @@ export class FeedsComponent implements OnInit, OnDestroy {
       });
   }
 
-
   previousPage() {
     if (this.pageInfo.currentPage > 1) {
       this.currentPage--;
-      this.getArticles();
+      if (this.search == 1) {
+        this.searchArticle();
+      } else {
+        this.getArticles();
+      }
     }
   }
-
+  
   nextPage() {
     if (this.currentPage < this.pageInfo.totalPages) {
       this.currentPage++;
-      this.getArticles();
+      if (this.search == 1) {
+        this.searchArticle();
+      } else {
+        this.getArticles();
+      }
     }
   }
+  
 
   back(): void {
     this.spinner.show();
     window.location.href = window.location.href;
   }
-  
+
   isUserAuthenticated() {
     const token = localStorage.getItem("jwt");
     if (token && !this.jwtHelper.isTokenExpired(token)) {

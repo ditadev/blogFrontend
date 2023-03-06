@@ -2,7 +2,7 @@
     <div class="flex h-screen m-auto items-center justify-center ">
         <div class="w-40 h-40 border-t-4 border-b-4 border-cyan-700 rounded-full animate-spin"></div>
     </div>
-  </ngx-spinner>
+</ngx-spinner>
 <div class="flex min-h-full">
     <div class="relative hidden w-0 flex-1 lg:block flex h-screen ">
         <img class="absolute inset-0 h-full w-full object-cover"
@@ -29,60 +29,71 @@
                             <label for="firstName" class="block text-sm font-medium text-gray-700">First Name</label>
                             <div class="mt-1">
                                 <input formControlName="firstName" placeholder="John" id="firstName" type="text"
-                                
                                     class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                    <p *ngIf="authorForm.controls['firstName'].invalid && authorForm.controls['firstName'].touched" class="text-xs text-red-700 text-right italic font-extralight">
-                                        *Field Required
-                                      </p>
+                                <p *ngIf="authorForm.controls['firstName'].invalid && authorForm.controls['firstName'].touched"
+                                    class="text-xs text-red-700 text-right italic font-extralight">
+                                    *Field Required
+                                </p>
                             </div>
                         </div>
                         <div>
                             <label for="lastname" class="block text-sm font-medium text-gray-700">Last Name</label>
                             <div class="mt-1">
                                 <input formControlName="lastName" placeholder="Doe" id="lastName" type="text"
-                                class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                <p *ngIf="authorForm.controls['lastName'].invalid && authorForm.controls['lastName'].touched" class="text-xs text-red-700 text-right italic font-extralight">
+                                    class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                <p *ngIf="authorForm.controls['lastName'].invalid && authorForm.controls['lastName'].touched"
+                                    class="text-xs text-red-700 text-right italic font-extralight">
                                     *Field Required</p>
                             </div>
                         </div>
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
                             <div class="mt-1">
-                                <input formControlName="emailAddress" placeholder="example@mail.com" id="emailAddress" type="email"
-                                autocomplete="email" 
-                                       class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                      >
-                                       <p *ngIf="authorForm.controls['emailAddress'].invalid && authorForm.controls['emailAddress'].touched" class="text-xs text-red-700 text-right italic font-extralight">
+                                <input formControlName="emailAddress" placeholder="example@mail.com" id="emailAddress"
+                                    type="email" autocomplete="email"
+                                    class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                <p *ngIf="authorForm.controls['emailAddress'].invalid && authorForm.controls['emailAddress'].touched"
+                                    class="text-xs text-red-700 text-right italic font-extralight">
                                     *Please enter a valid email address
                                 </p>
                             </div>
-                            
+
                         </div>
                         <div>
                             <label for="userName" class="block text-sm font-medium text-gray-700">Username </label>
                             <div class="mt-1">
-                                <input formControlName="userName" placeholder="PhantomWriter12345" id="userName" type="text"
-                                class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                    <p *ngIf="authorForm.controls['userName'].invalid && authorForm.controls['userName'].touched" class="text-xs text-red-700 text-right italic font-extralight">*Username too short</p>
+                                <input formControlName="userName" placeholder="PhantomWriter12345" id="userName"
+                                    type="text"
+                                    class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                <p *ngIf="authorForm.controls['userName'].invalid && authorForm.controls['userName'].touched"
+                                    class="text-xs text-red-700 text-right italic font-extralight">*Username too short
+                                </p>
                             </div>
                         </div>
                         <div class="space-y-1">
                             <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                             <div class="mt-1">
                                 <input formControlName="password" placeholder="********" id="password" type="password"
-                                autocomplete="current-password" required
+                                    autocomplete="current-password" required
                                     class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                    <p *ngIf="authorForm.controls['password'].invalid && authorForm.controls['password'].touched" class="text-xs text-red-700 text-right italic font-extralight">(At least 8 characters)</p>
+                                <p *ngIf="authorForm.controls['password'].invalid && authorForm.controls['password'].touched"
+                                    class="text-xs text-red-700 text-right italic font-extralight">(At least 8
+                                    characters)</p>
                             </div>
                         </div>
                         <div>
                             <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
                             <div class="mt-1">
-                                <textarea formControlName="description" placeholder="Describe yourself in a few words." id="description" type="text" class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-4 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"></textarea>
-                                <p *ngIf="authorForm.controls['description'].invalid && authorForm.controls['description'].touched" class="text-xs text-red-700 text-right italic font-extralight">(At least 100 characters)</p>
+                                <textarea formControlName="description" placeholder="Describe yourself in a few words."
+                                    id="description" type="text"
+                                    class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-4 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"></textarea>
+                                <p *ngIf="authorForm.controls['description'].invalid && authorForm.controls['description'].touched"
+                                    class="text-xs text-red-700 text-right italic font-extralight">(At least 100
+                                    characters)</p>
                             </div>
                         </div>
-                        <p *ngIf="message" class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oops!</span> {{message}}</p>
+                        <p *ngIf="message" class="mt-2 text-sm text-red-600 dark:text-red-500"><span
+                                class="font-medium">Oops!</span> {{message}}</p>
                         <div>
                             <button [disabled]="authorForm.invalid" (click)="onSubmit()" type="submit"
                                 class="block w-full rounded-md bg-gradient-to-r from-teal-500 to-cyan-600 py-3 px-4 font-medium text-white shadow hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900">Register
@@ -94,5 +105,3 @@
         </div>
     </div>
 </div>
-
-  

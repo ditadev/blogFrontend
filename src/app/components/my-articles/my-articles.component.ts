@@ -30,6 +30,7 @@ export class MyArticlesComponent implements OnInit, OnDestroy {
   totalPages = 0;
   hasNext!: boolean;
   hasPrevious!: boolean;
+  dialog:number=0;
   selectedArticlePage!: number;
 
   constructor(
@@ -64,6 +65,9 @@ export class MyArticlesComponent implements OnInit, OnDestroy {
           this.hasNext = response.pageInfo.hasNext;
           this.hasPrevious = response.pageInfo.hasPrevious;
           this.spinner.hide(); // hide the spinner when API call is successful
+          if (response.data.length == 0){
+            this.dialog=1;
+          }
         });
   }
 

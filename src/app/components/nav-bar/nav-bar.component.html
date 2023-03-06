@@ -12,7 +12,7 @@
         <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
         </div>
     </div>
-    <div *ngIf="isUserAuthenticated()"  class="-mt-5 flex lg:mt-0 lg:ml-4">
+    <div *ngIf="isUserAuthenticated()" class="-mt-5 flex lg:mt-0 lg:ml-4">
         <span class="hidden sm:block">
             <button (click)="logOut()" type="button"
                 class="inline-flex items-center rounded-md border border-gray-300 bg-white mr-2 px-4 py-2 text-sm font-medium text-gray-700 shadow-sm  hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
@@ -82,7 +82,8 @@
                 </svg>
             </button>
 
-            <div *ngIf="_showMore" class="absolute  right-0 z-10 mt-2 -mr-1 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+            <div *ngIf="_showMore"
+                class="absolute  right-0 z-10 mt-2 -mr-1 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                 role="menu" aria-orientation="vertical" aria-labelledby="mobile-menu-button" tabindex="-1">
                 <a routerLink="/profile" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
                     id="mobile-menu-item-1">Profile</a>
