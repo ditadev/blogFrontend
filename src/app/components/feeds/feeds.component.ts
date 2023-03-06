@@ -48,7 +48,7 @@ export class FeedsComponent implements OnInit, OnDestroy {
     this.pageInfo = {} as PageInfo;
     this.getArticles();
     this.searchForm = this.formBuilder.group({
-      title: ['', [Validators.required, Validators.minLength(6)]],
+      title: ['', [Validators.required, Validators.minLength(1)]],
     });
   }
 
