@@ -7,7 +7,7 @@ import { AuthGuard } from './services/guard/auth-guard.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { LandingPageComponent } from './components/portal/landing-page/landing-page.component';
 import { SignInComponent } from './components/portal/sign-in/sign-in.component';
 import { SignUpComponent } from './components/portal/sign-up/sign-up.component';
 import { VerificationComponent } from './components/portal/verification/verification.component';

@@ -4,7 +4,7 @@ import { ArticleComponent } from './components/web/article/article.component';
 import { EditArticleComponent } from './components/web/edit-article/edit-article.component';
 import { FeedsComponent } from './components/web/feeds/feeds.component';
 import { ForgotPasswordComponent } from './components/portal/forgot-password/forgot-password.component';
-import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { LandingPageComponent } from './components/portal/landing-page/landing-page.component';
 import { MyArticlesComponent } from './components/web/my-articles/my-articles.component';
 import { NewArticleComponent } from './components/web/new-article/new-article.component';
 import { NotFoundComponent } from './components/web/not-found/not-found.component';
