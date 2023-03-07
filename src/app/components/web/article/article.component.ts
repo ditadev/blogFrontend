@@ -85,7 +85,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
         // Get the total height of the content
         const contentHeight = canvas.height;
         // Set the page height to 950 pixels (adjust as needed)
-        const pageHeight = 1550;
+        const pageHeight = 1610;
         // Calculate the number of pages needed to display the content
         const pageCount = Math.ceil(contentHeight / pageHeight);
         // Loop through each page and add it to the PDF document
@@ -95,7 +95,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
           // Create a new canvas for the current page with padding at the top
           const pageCanvas = document.createElement('canvas');
           pageCanvas.width = canvas.width;
-          pageCanvas.height = pageHeight + 30; // add 30 pixels of padding at the top
+          pageCanvas.height = pageHeight - 2; // add 30 pixels of padding at the top
           const context = pageCanvas.getContext('2d');
           if (context) {
             // Fill the canvas with white color to create the padding at the top
