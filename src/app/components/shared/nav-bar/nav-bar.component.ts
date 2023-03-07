@@ -52,6 +52,10 @@ export class NavBarComponent implements OnInit, OnDestroy{
     });
   }
   
+  back(): void {
+    window.location.href = window.location.href;
+    this.router.navigate(['feeds']);
+  }
 
   showMore(){
     this._showMore=!this._showMore;
