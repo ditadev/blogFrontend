@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { BlogPost } from 'src/app/models/blogPost';
+import { BlogPost, Category } from 'src/app/models/blogPost';
 import { Router } from '@angular/router';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -39,6 +39,8 @@ export class ViewMyArticleComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    this.articles = {} as BlogPost;
+    this.articles.category= {} as Category;
     this.getArticle();
   }
 

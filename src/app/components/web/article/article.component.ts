@@ -7,6 +7,8 @@ import { Location } from '@angular/common';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ApiService } from 'src/app/services/http/api.service';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-article',
@@ -29,6 +31,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
   postId:number=parseInt(this._postId);
   currentPage = 1;
   pageSize = 10;
+  
 
   constructor(
     private apiService: ApiService,
@@ -61,6 +64,25 @@ export class ArticleComponent implements OnInit, OnDestroy {
       }
     });
   }
+
+  downloadPDF() {
+    const element = document.getElementById('contentToConvert');
+    if (element) {
+      html2canvas(element, { useCORS: true, allowTaint: true }).then(canvas => {
+        const contentWidth = canvas.width;
+        const contentHeight = canvas.height;
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const position = 0;
+        const imgData = canvas.toDataURL('image/png');
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = pdf.internal.pageSize.getHeight();
+        const ratio = contentHeight / contentWidth;
+        const height = pdfWidth * ratio;
+        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, height);
+        pdf.save('file.pdf');
+      });
+    }
+  }  
 
   goBack():void{
     this.location.back();
