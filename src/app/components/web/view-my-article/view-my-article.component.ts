@@ -1,17 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/services/api.service';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { BlogPost } from 'src/app/models/blogPost';
-import { PageInfo } from 'src/app/models/pageInfo';
-import { Location } from '@angular/common';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { Router } from '@angular/router';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ApiService } from 'src/app/services/http/api.service';
 
 @Component({
-  selector: 'app-article',
-  templateUrl: './article.component.html',
-  styleUrls: ['./article.component.css'],
+  selector: 'app-view-my-article',
+  templateUrl: './view-my-article.component.html',
+  styleUrls: ['./view-my-article.component.css'],
   animations: [
     trigger('disabled', [
       state('true', style({ opacity: 0.5, pointerEvents: 'none' })),
@@ -20,35 +19,33 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     ])
   ]
 })
-export class ArticleComponent implements OnInit, OnDestroy {
-  
+export class ViewMyArticleComponent implements OnInit, OnDestroy {
+
   subscription?: Subscription;
   _postId = this.route.snapshot.paramMap.get('postId')!;
   articles!: BlogPost;
-  pageInfo!:PageInfo;
-  postId:number=parseInt(this._postId);
+  postId: number = parseInt(this._postId);
+  _showMore: boolean = false;
+  deleted: boolean = false;
   currentPage = 1;
   pageSize = 10;
+  msg: string = "";
 
   constructor(
     private apiService: ApiService,
     private route: ActivatedRoute,
     private router: Router,
-    private location: Location,
     private spinner: NgxSpinnerService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.articles = {} as BlogPost;
-    this.spinner.show(); // show the spinner before making API call
-    this.getArticle(); 
+    this.getArticle();
   }
 
   getArticle(): void {
     this.spinner.show();
     this.subscription = this.apiService.getArticle(this.postId).subscribe({
       next: (response) => {
-        this.pageInfo = response.pageInfo;
         this.articles = response.data;
       },
       error: (error) => {
@@ -62,8 +59,21 @@ export class ArticleComponent implements OnInit, OnDestroy {
     });
   }
 
-  goBack():void{
-    this.location.back();
+  deleteArticle() {
+    this.spinner.hide(); // hide the spinner when API call is successful
+    this.subscription = this.apiService
+      .deleteArticle(this.postId)
+      .subscribe(
+        response => {
+          this.spinner.hide(); // hide the spinner when API call is successful
+          this.msg="Article Deleted Successfuly";
+          this._showMore = !this._showMore;
+          this.deleted=!this.deleted;
+        });
+  }
+
+  confirmDelete() {
+    this._showMore = !this._showMore;
   }
 
   ngOnDestroy(): void {

@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpEventType, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { catchError, Observable, throwError,retry, map } from 'rxjs';
-import { AuthorResponse } from '../models/author-response';
-import { BlogPost } from '../models/blogPost';
-import { NewBlogPost } from '../models/newBlogPost';
-import { UpdateAuthor } from '../models/updateAuthor';
-import { VerifyChangeEmail } from '../models/verifyEmailChange';
-import { ChangePassword } from '../models/changePassword';
-import { Article } from '../models/article';
+import { AuthorResponse } from 'src/app/models/author-response';
+import { UpdateAuthor } from 'src/app/models/updateAuthor';
+import { ChangePassword } from 'src/app/models/changePassword';
+import { VerifyChangeEmail } from 'src/app/models/verifyEmailChange';
+import { BlogPost } from 'src/app/models/blogPost';
+import { NewBlogPost } from 'src/app/models/newBlogPost';
+import { Article } from 'src/app/models/article';
+
 
 
 @Injectable({
@@ -70,8 +71,8 @@ export class ApiService {
       return this.http.get<Article>(url).pipe(retry(1), catchError(this.handleError));
     }
 
-    public searchArticle(title:any,PageNumber:number, PageSize:number):Observable<any>{
-      const url = `${this.articleUrl}/GetPostByTitle/${title}?PageNumber=${PageNumber}&PageSize=${PageSize}`;
+    public searchArticle(tag:any,PageNumber:number, PageSize:number):Observable<any>{
+      const url = `${this.articleUrl}/GetPostByTag/${tag}?PageNumber=${PageNumber}&PageSize=${PageSize}`;
       return this.http.get<Article>(url).pipe(retry(1), catchError(this.handleError));
     }
 

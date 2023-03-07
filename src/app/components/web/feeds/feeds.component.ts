@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { ApiService } from 'src/app/services/api.service';
 import { Subscription } from 'rxjs';
 import { BlogPost } from 'src/app/models/blogPost';
 import { Router } from '@angular/router';
@@ -8,6 +7,7 @@ import { PageInfo } from 'src/app/models/pageInfo';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from 'src/app/services/http/api.service';
 
 @Component({
   selector: 'app-feeds',
@@ -33,7 +33,7 @@ export class FeedsComponent implements OnInit, OnDestroy {
   hasPrevious!: boolean;
   dialog: number = 0;
   searchForm!: FormGroup;
-  title: string = "";
+  tag: string = "";
   message: string = "";
   search: number = 0;
 
@@ -50,7 +50,7 @@ export class FeedsComponent implements OnInit, OnDestroy {
     this.pageInfo = {} as PageInfo;
     this.getArticles();
     this.searchForm = this.formBuilder.group({
-      title: ['', [Validators.required, Validators.minLength(2)]],
+      tag: ['', [Validators.required, Validators.minLength(3)]],
     });
   }
 
@@ -80,7 +80,7 @@ export class FeedsComponent implements OnInit, OnDestroy {
     this.spinner.show(); // show the spinner before making API call
     this.search = 1;
     this.subscription = this.apiService
-      .searchArticle(this.title, this.currentPage, this.pageSize)
+      .searchArticle(this.tag, this.currentPage, this.pageSize)
       .subscribe({
         next: (response) => {
           this.articles = response.data;

@@ -9,7 +9,7 @@ import { ChangeEmail } from 'src/app/models/changeEmail';
 import { ChangePassword } from 'src/app/models/changePassword';
 import { UpdateAuthor } from 'src/app/models/updateAuthor';
 import { VerifyChangeEmail } from 'src/app/models/verifyEmailChange';
-import { ApiService } from 'src/app/services/api.service';
+import { ApiService } from 'src/app/services/http/api.service';
 
 @Component({
   selector: 'app-profile',

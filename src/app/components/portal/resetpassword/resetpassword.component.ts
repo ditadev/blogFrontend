@@ -1,12 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Router } from '@angular/router';
-import { ApiService } from 'src/app/services/api.service';
 import { ResetPassword } from 'src/app/models/resetPassword';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from 'src/app/services/http/api.service';
 
 @Component({
   selector: 'app-resetpassword',

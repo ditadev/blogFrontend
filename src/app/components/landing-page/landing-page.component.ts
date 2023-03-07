@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/services/api.service';
 import { Subscription } from 'rxjs';
 import { BlogPost, Category } from 'src/app/models/blogPost';
 import { PageInfo } from 'src/app/models/pageInfo';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { ApiService } from 'src/app/services/http/api.service';
 
 @Component({
   selector: 'app-landing-page',

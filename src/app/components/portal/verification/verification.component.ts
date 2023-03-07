@@ -1,17 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ApiService } from 'src/app/services/api.service';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { ApiService } from 'src/app/services/http/api.service';
 
 @Component({
-  selector: 'app-forgot-password',
-  templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.css'],
+  selector: 'app-verification',
+  templateUrl: './verification.component.html',
+  styleUrls: ['./verification.component.css'],
   animations: [
     trigger('disabled', [
       state('true', style({ opacity: 0.5, pointerEvents: 'none' })),
@@ -20,14 +19,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
     ])
   ]
 })
-export class ForgotPasswordComponent implements OnDestroy, OnInit {
+export class VerificationComponent implements OnDestroy, OnInit {
 
   _email!: string;
+  _token!: string;
   subscription?: Subscription;
   message: string = "";
   code?: number;
-  forgotPasswordForm!: FormGroup;
-
+  verifyAccountForm!: FormGroup;
 
   constructor(
     private apiService: ApiService,
@@ -38,29 +37,32 @@ export class ForgotPasswordComponent implements OnDestroy, OnInit {
   ) { }
 
   ngOnInit(): void {
-    this._email = this.route.snapshot.paramMap.get('emailAddress')!;
-    this.forgotPasswordForm = this.formBuilder.group({
+    this._token = this.route.snapshot.paramMap.get('token')!;
+    this._email = this.route.snapshot.paramMap.get('emailAddress')!
+    this.verifyAccountForm = this.formBuilder.group({
       emailAddress: ['', [Validators.required, Validators.email]],
+      token: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(6)]],
     });
-
   }
 
-  forgotPassword(): void {
-    if (this.forgotPasswordForm.valid) {
-      this._email = this.forgotPasswordForm.value.emailAddress;
-      this.spinner.show();
-      this.subscription = this.apiService.forgotPassword(this._email).subscribe({
+  verifyUser(): void {
+    if (this.verifyAccountForm.valid) {
+      this._email = this.verifyAccountForm.value.emailAddress;
+      this._token = this.verifyAccountForm.value.token;
+      this.spinner.show(); // show the spinner before making API call
+      this.subscription = this.apiService.verifyAuthor(this._email, this._token).subscribe({
         next: (response) => {
-          this.message = response.message;
           this.code = response.code;
           if (this.code == 0) {
-            this.router.navigate(['resetpassword']);
+            this.router.navigate(["login"]);
           }
-          this.spinner.hide();
         },
         error: (error) => {
-          this.message = 'If email is registered, you will receive a token';
-          this.spinner.hide();
+          this.spinner.hide(); // hide the spinner when API call is successful
+          this.message = "Kindly enter a registered email and a valid token";
+        },
+        complete: () => {
+          this.spinner.hide(); // hide the spinner when API call is successful
         },
       });
     } else {
@@ -69,7 +71,7 @@ export class ForgotPasswordComponent implements OnDestroy, OnInit {
   }
 
   onSubmit(): void {
-    this.forgotPassword();
+    this.verifyUser();
   }
 
   ngOnDestroy(): void {

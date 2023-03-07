@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { ApiService } from 'src/app/services/api.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ApiService } from 'src/app/services/http/api.service';
 
 @Component({
   selector: 'app-nav-bar',
