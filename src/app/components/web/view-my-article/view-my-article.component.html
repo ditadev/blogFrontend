@@ -51,18 +51,18 @@
                                         src="http://localhost:5259/static/images/{{articles.coverImagePath}}" alt=""
                                         width="1310" height="873">
                                     <br />
-                                    <figcaption class="text-sm font-medium text-black">By: {{articles.authorsName}}
+                                    <figcaption class="text-sm font-medium text-gray-800">By: {{articles.authorsName}}
                                     </figcaption>
-                                    <figcaption class="text-sm font-medium text-black">
+                                    <figcaption class="text-sm font-medium text-gray-800">
                                         {{articles.category.categoryName}}
                                     </figcaption>
-                                    <figcaption class="text-sm italic font-medium text-black">{{articles.tags}}
+                                    <figcaption class="text-sm italic font-medium text-gray-800">{{articles.tags}}
                                     </figcaption>
-                                    <time class="text-sm font-medium text-black">{{articles.dateCreated | date :
+                                    <time class="text-sm font-medium text-gray-800">{{articles.dateCreated | date :
                                         'dd/MM/yyyy
                                         hh:mm a'}}</time>
                                 </figure>
-                                <p class="mt-8 text-xl font-semibold text-center leading-8 text-black">
+                                <p class="mt-8 text-xl font-semibold text-center leading-8 text-gray-800">
                                     {{articles.summary}}
                                 </p>
                             </div>
