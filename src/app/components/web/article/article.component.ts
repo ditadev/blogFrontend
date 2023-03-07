@@ -81,13 +81,13 @@ export class ArticleComponent implements OnInit, OnDestroy {
       };
       html2canvas(element, options).then((canvas) => {
         const contentHeight = canvas.height;
-        const pageHeight = 1611;
+        const pageHeight = 1800;
         const pageCount = Math.ceil(contentHeight / pageHeight);
         for (let pageIndex = 0; pageIndex < pageCount; pageIndex++) {
           const position = pageIndex * pageHeight * -1;
           const pageCanvas = document.createElement('canvas');
           pageCanvas.width = canvas.width;
-          pageCanvas.height = pageHeight - 2;
+          pageCanvas.height = pageHeight + 8;
           const context = pageCanvas.getContext('2d');
           if (context) {
             context.fillStyle = '#fff';
@@ -110,10 +110,6 @@ export class ArticleComponent implements OnInit, OnDestroy {
       });
     }
   }
-  
-  
-  
-  
 
   goBack():void{
     this.location.back();
