@@ -70,8 +70,7 @@
                                         type="text"
                                         class="block w-full appearance-none rounded-sm border border-gray-300 px-3 py-4 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"></textarea>
                                     <p *ngIf="editArticleForm.controls['body'].invalid && editArticleForm.controls['body'].touched"
-                                        class="text-xs text-red-700 text-right italic font-extralight">(At least 100
-                                        characters)</p>
+                                        class="text-xs text-red-700 text-right italic font-extralight">(100 - 30000 characters)</p>
                                 </div>
                             </div>
 
@@ -91,7 +90,7 @@
                 </div>
             </form>
 
-            <p *ngIf="msg" class="my-2 mx-2 text-sm text-red-600 dark:text-red-500"><span
+            <p *ngIf="message" class="my-2 mx-2 text-sm text-red-600 dark:text-red-500"><span
                     class="font-medium">Oops!</span> {{message}}!</p>
 
             <button [disabled]="editArticleForm.invalid" (click)="onSubmit()"

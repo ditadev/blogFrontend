@@ -40,7 +40,7 @@ export class NewArticleComponent implements OnInit, OnDestroy {
     this.newBlogPostForm = this.formBuilder.group({
       title: ['', [Validators.required, Validators.minLength(10)]],
       summary: ['', [Validators.required, Validators.minLength(20)]],
-      body: ['', [Validators.required, Validators.minLength(100)]],
+      body: ['', [Validators.required,Validators.minLength(100), Validators.maxLength(30000)]],
       tags: ['', [Validators.required, Validators.minLength(6)]],
       categoryName: ['', [Validators.required, Validators.minLength(3)]],
     });

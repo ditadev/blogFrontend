@@ -44,7 +44,7 @@ export class EditArticleComponent implements OnInit, OnDestroy {
     this.editArticleForm = this.formBuilder.group({
       title: ['', [Validators.required, Validators.minLength(10)]],
       summary: ['', [Validators.required, Validators.minLength(20)]],
-      body: ['', [Validators.required, Validators.minLength(100)]],
+      body: ['', [Validators.required,Validators.minLength(100), Validators.maxLength(30000)]],
       tags: ['', [Validators.required, Validators.minLength(6)]],
     });
     this.getArticle();
@@ -74,7 +74,6 @@ export class EditArticleComponent implements OnInit, OnDestroy {
           }
         },
         error: (error) => {
-          this.msg = "Required";
           this.message = "Image Required";
           this.spinner.hide(); // hide the spinner when API call is successful
         },
