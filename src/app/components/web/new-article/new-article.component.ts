@@ -27,6 +27,7 @@ export class NewArticleComponent implements OnInit, OnDestroy {
   msg: string = "";
   newBlogPostForm!: FormGroup;
   message: string = "";
+  filename:string="";
 
   constructor(
     private apiService: ApiService,
@@ -48,6 +49,7 @@ export class NewArticleComponent implements OnInit, OnDestroy {
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
+    this.filename=this.selectedFile.name;
   }
 
   addPost() {

@@ -30,6 +30,8 @@ export class EditArticleComponent implements OnInit, OnDestroy {
   msg: string = "";
   message: string = "";
   editArticleForm!: FormGroup;
+  filename:string="";
+
 
   constructor(
     private apiService: ApiService,
@@ -56,6 +58,7 @@ export class EditArticleComponent implements OnInit, OnDestroy {
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
+    this.filename=this.selectedFile.name;
   }
 
   updateArticle(): void {
